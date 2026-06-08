@@ -13,7 +13,7 @@ type Concept5B = SlideBase & { type: "concept5B"; tag: string; num: string; body
 type FinalSlide = SlideBase & { type: "final"; tagline: string; body: string; image: string };
 type Slide = TitleSlide | ConceptSlide | ConceptB | Concept3Slide | Concept3B | Concept4Slide | Concept4B | Concept5Slide | Concept5B | FinalSlide;
 
-const F = "Golos Text, sans-serif";
+const F = "Manrope, sans-serif";
 const BG = "#0F0E0D";
 const W1 = "#F0EAE0";
 const W2 = "rgba(240,234,224,0.72)";
@@ -135,10 +135,6 @@ export default function Index() {
     </div>
   );
 
-  const Ghost = ({ num, accent, big }: { num: string; accent: string; big?: boolean }) => (
-    <span style={{ fontFamily: F, fontWeight: 600, fontSize: big ? "clamp(52px, 9vw, 116px)" : "clamp(44px, 7.5vw, 96px)", lineHeight: 0.9, color: accent, opacity: 0.12, letterSpacing: "-0.04em", userSelect: "none" }}>{num}</span>
-  );
-
   return (
     <div className="w-screen h-screen overflow-hidden flex items-center justify-center" style={{ background: "#080807" }}>
       <div
@@ -167,7 +163,6 @@ export default function Index() {
               <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", position: "relative" }}>
                 <div style={{ position: "absolute", top: "50%", left: "7%", right: "7%", height: 1, background: "rgba(200,168,130,0.12)" }} />
                 <div style={{ position: "relative", textAlign: "center", padding: "0 12%" }}>
-                  <div style={{ fontFamily: F, fontWeight: 400, fontSize: "clamp(7px, 0.75vw, 10px)", letterSpacing: "0.5em", textTransform: "uppercase", color: s.accent, opacity: 0.45, marginBottom: "clamp(20px, 3vw, 40px)" }}>Концепции праздника</div>
                   <h1 style={{ fontFamily: F, fontWeight: 600, fontSize: "clamp(26px, 5vw, 66px)", lineHeight: 1.1, color: W1, whiteSpace: "pre-line", margin: 0, letterSpacing: "-0.03em" }}>{s.title}</h1>
                   <div style={{ width: 40, height: 1, background: s.accent, opacity: 0.4, margin: "clamp(20px, 3vw, 36px) auto 0" }} />
                 </div>
@@ -183,7 +178,6 @@ export default function Index() {
                 <div style={{ flex: "0 0 55%", display: "flex", flexDirection: "column", justifyContent: "center", padding: "5% 5% 5% 7%", gap: "clamp(10px, 1.5vw, 18px)", borderRight: "1px solid rgba(255,255,255,0.05)" }}>
                   <Tag label={s.tag} accent={s.accent} />
                   <div style={{ display: "flex", alignItems: "baseline", gap: "clamp(8px, 1vw, 14px)" }}>
-                    <Ghost num={s.num} accent={s.accent} big />
                     <h2 style={{ fontFamily: F, fontWeight: 600, fontSize: "clamp(24px, 4vw, 50px)", lineHeight: 1.0, color: W1, margin: 0, letterSpacing: "-0.025em" }}>{s.title}</h2>
                   </div>
                   <p style={{ fontFamily: F, fontWeight: 500, fontSize: "clamp(12px, 1.5vw, 19px)", color: s.accent, lineHeight: 1.4, margin: 0 }}>{s.lead}</p>
@@ -216,7 +210,6 @@ export default function Index() {
                 <div style={{ position: "relative", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", padding: "6% 50% 6% 7%", gap: "clamp(14px, 2vw, 26px)" }}>
                   <Tag label={s.tag} accent={s.accent} />
                   <div style={{ display: "flex", alignItems: "baseline", gap: "clamp(8px, 1vw, 14px)" }}>
-                    <Ghost num={s.num} accent={s.accent} />
                     <h2 style={{ fontFamily: F, fontWeight: 600, fontSize: "clamp(22px, 3.6vw, 46px)", lineHeight: 1.0, color: W1, margin: 0, letterSpacing: "-0.025em" }}>{s.title}</h2>
                   </div>
                   <div style={{ width: 32, height: 1, background: `${s.accent}80` }} />
@@ -239,7 +232,6 @@ export default function Index() {
                 <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", padding: "5% 7% 5% 5%", gap: "clamp(10px, 1.4vw, 17px)" }}>
                   <Tag label={s.tag} accent={s.accent} />
                   <div style={{ display: "flex", alignItems: "baseline", gap: "clamp(6px, 0.8vw, 12px)" }}>
-                    <Ghost num={s.num} accent={s.accent} />
                     <h2 style={{ fontFamily: F, fontWeight: 600, fontSize: "clamp(22px, 3.6vw, 46px)", lineHeight: 1.0, color: W1, margin: 0, letterSpacing: "-0.025em" }}>{s.title}</h2>
                   </div>
                   <p style={{ fontFamily: F, fontWeight: 500, fontSize: "clamp(11px, 1.35vw, 17px)", color: s.accent, lineHeight: 1.4, margin: 0 }}>{s.lead}</p>
@@ -274,8 +266,7 @@ export default function Index() {
                   <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: "clamp(14px, 2vw, 26px)" }}>
                     <Tag label={s.tag} accent={s.accent} />
                     <div style={{ display: "flex", alignItems: "baseline", gap: "clamp(6px, 0.8vw, 12px)" }}>
-                      <Ghost num={s.num} accent={s.accent} />
-                      <h2 style={{ fontFamily: F, fontWeight: 600, fontSize: "clamp(22px, 3.6vw, 46px)", lineHeight: 1.0, color: W1, margin: 0, letterSpacing: "-0.025em" }}>{s.title}</h2>
+                        <h2 style={{ fontFamily: F, fontWeight: 600, fontSize: "clamp(22px, 3.6vw, 46px)", lineHeight: 1.0, color: W1, margin: 0, letterSpacing: "-0.025em" }}>{s.title}</h2>
                     </div>
                     <div style={{ width: 32, height: 1, background: `${s.accent}80` }} />
                     <p style={{ fontFamily: F, fontWeight: 400, fontSize: "clamp(11px, 1.3vw, 16px)", lineHeight: 1.8, color: W2, margin: 0 }}>{s.body}</p>
@@ -298,8 +289,7 @@ export default function Index() {
                     <div style={{ display: "flex", flexDirection: "column", gap: "clamp(10px, 1.4vw, 17px)" }}>
                       <Tag label={s.tag} accent={s.accent} />
                       <div style={{ display: "flex", alignItems: "baseline", gap: "clamp(6px, 0.8vw, 12px)" }}>
-                        <Ghost num={s.num} accent={s.accent} />
-                        <h2 style={{ fontFamily: F, fontWeight: 600, fontSize: "clamp(24px, 4vw, 52px)", lineHeight: 1.0, color: W1, margin: 0, letterSpacing: "-0.025em" }}>{s.title}</h2>
+                            <h2 style={{ fontFamily: F, fontWeight: 600, fontSize: "clamp(24px, 4vw, 52px)", lineHeight: 1.0, color: W1, margin: 0, letterSpacing: "-0.025em" }}>{s.title}</h2>
                       </div>
                     </div>
                     <div style={{ display: "flex", flexDirection: "column", gap: "clamp(10px, 1.4vw, 17px)", paddingBottom: 4 }}>
@@ -324,7 +314,6 @@ export default function Index() {
                 <div style={{ position: "relative", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", padding: "6% 52% 6% 7%", gap: "clamp(14px, 2vw, 26px)" }}>
                   <Tag label={s.tag} accent={s.accent} />
                   <div style={{ display: "flex", alignItems: "baseline", gap: "clamp(6px, 0.8vw, 12px)" }}>
-                    <Ghost num={s.num} accent={s.accent} />
                     <h2 style={{ fontFamily: F, fontWeight: 600, fontSize: "clamp(22px, 3.6vw, 46px)", lineHeight: 1.0, color: W1, margin: 0, letterSpacing: "-0.025em" }}>{s.title}</h2>
                   </div>
                   <div style={{ width: 32, height: 1, background: `${s.accent}80` }} />
@@ -342,7 +331,6 @@ export default function Index() {
                 <div style={{ flex: "0 0 55%", display: "flex", flexDirection: "column", justifyContent: "center", padding: "5% 5% 5% 7%", gap: "clamp(10px, 1.4vw, 17px)", borderRight: "1px solid rgba(255,255,255,0.05)" }}>
                   <Tag label={s.tag} accent={s.accent} />
                   <div style={{ display: "flex", alignItems: "baseline", gap: "clamp(6px, 0.8vw, 12px)" }}>
-                    <Ghost num={s.num} accent={s.accent} big />
                     <h2 style={{ fontFamily: F, fontWeight: 600, fontSize: "clamp(24px, 4vw, 50px)", lineHeight: 1.0, color: W1, margin: 0, letterSpacing: "-0.025em" }}>{s.title}</h2>
                   </div>
                   <div style={{ width: 32, height: 1, background: `${s.accent}80` }} />
@@ -371,7 +359,6 @@ export default function Index() {
                 <div style={{ position: "relative", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", padding: "6% 50% 6% 7%", gap: "clamp(14px, 2vw, 26px)" }}>
                   <Tag label={s.tag} accent={s.accent} />
                   <div style={{ display: "flex", alignItems: "baseline", gap: "clamp(6px, 0.8vw, 12px)" }}>
-                    <Ghost num={s.num} accent={s.accent} />
                     <h2 style={{ fontFamily: F, fontWeight: 600, fontSize: "clamp(22px, 3.6vw, 46px)", lineHeight: 1.0, color: W1, margin: 0, letterSpacing: "-0.025em" }}>{s.title}</h2>
                   </div>
                   <div style={{ width: 32, height: 1, background: `${s.accent}80` }} />
