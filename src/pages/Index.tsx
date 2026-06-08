@@ -1,83 +1,75 @@
 import { useState, useEffect } from "react";
 
-type SlideBase = { id: number; type: string; bg: string; accentBg: string; accent: string; title: string };
+type SlideBase = { id: number; type: string; accent: string; title: string };
 type TitleSlide = SlideBase & { type: "title" };
-type ConceptSlide = SlideBase & { type: "concept"; tag: string; lead: string; paragraphs: string[]; footer: string; image?: string };
-type ConceptB = SlideBase & { type: "conceptB"; tag: string; body: string; image: string };
-type Concept3Slide = SlideBase & { type: "concept3"; tag: string; lead: string; rooms: string[]; footer: string; image: string };
-type Concept3B = SlideBase & { type: "concept3B"; tag: string; body: string; image: string };
-type Concept4Slide = SlideBase & { type: "concept4"; tag: string; lead: string; body: string; footer: string; image: string };
-type Concept4B = SlideBase & { type: "concept4B"; tag: string; body: string; image: string };
-type Concept5Slide = SlideBase & { type: "concept5"; tag: string; para1: string; para2: string; image: string };
-type Concept5B = SlideBase & { type: "concept5B"; tag: string; body: string; image: string };
+type ConceptSlide = SlideBase & { type: "concept"; tag: string; num: string; lead: string; paragraphs: string[]; footer: string; image?: string };
+type ConceptB = SlideBase & { type: "conceptB"; tag: string; num: string; body: string; image: string };
+type Concept3Slide = SlideBase & { type: "concept3"; tag: string; num: string; lead: string; rooms: string[]; footer: string; image: string };
+type Concept3B = SlideBase & { type: "concept3B"; tag: string; num: string; body: string; image: string };
+type Concept4Slide = SlideBase & { type: "concept4"; tag: string; num: string; lead: string; body: string; footer: string; image: string };
+type Concept4B = SlideBase & { type: "concept4B"; tag: string; num: string; body: string; image: string };
+type Concept5Slide = SlideBase & { type: "concept5"; tag: string; num: string; para1: string; para2: string; image: string };
+type Concept5B = SlideBase & { type: "concept5B"; tag: string; num: string; body: string; image: string };
 type FinalSlide = SlideBase & { type: "final"; tagline: string; body: string; image?: string };
 type Slide = TitleSlide | ConceptSlide | ConceptB | Concept3Slide | Concept3B | Concept4Slide | Concept4B | Concept5Slide | Concept5B | FinalSlide;
 
 const F = "Golos Text, sans-serif";
+const PAGE = "#F4F1EC";
+const INK = "#1A1815";
+const MUTED = "#6E6A62";
 
 const slides: Slide[] = [
+  { id: 0, type: "title", accent: "#1A1815", title: "Предложение по концепциям\nДня рождения для Галины" },
   {
-    id: 0, type: "title",
-    bg: "#FDF6F0", accentBg: "#F9E8E0", accent: "#C07A6A",
-    title: "Предложение по концепциям\nДня рождения для Галины",
-  },
-  {
-    id: 1, type: "concept",
-    bg: "#FDF3EE", accentBg: "#F5DDD5", accent: "#BF6D5A",
+    id: 1, type: "concept", accent: "#BF6D5A", num: "01",
     tag: "Вариант 1", title: "Эффект присутствия",
     lead: "Именинница будет знать, что её ждёт сюрприз, но каким именно он будет — нет.",
     paragraphs: [
       "Проживаем заново ключевые события жизни Галины — первая любовь, расставание, победа, первый заработок, потеря — как перформансы.",
       "Каждый вечер завершается ужином, который является «вкусом» того времени. Для проведения используются природные локации невероятной красоты, которые будут только усиливать восприятие.",
     ],
-    footer: "Для этого варианта необходимо провести интервью с именинницей",
+    footer: "Необходимо провести интервью с именинницей",
     image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/bucket/9ceb4b5c-ba80-4ffb-8667-e358b43422d7.jpg",
   },
   {
-    id: 2, type: "conceptB",
-    bg: "#FDF3EE", accentBg: "#F5DDD5", accent: "#BF6D5A",
-    tag: "Вариант 1 · продолжение", title: "Эффект присутствия",
+    id: 2, type: "conceptB", accent: "#BF6D5A", num: "01",
+    tag: "Вариант 1", title: "Эффект присутствия",
     body: "Природные локации становятся декорацией для каждого перформанса. Каждое место подобрано под эмоцию той истории, которую предстоит прожить заново. Воссозданные детали, запахи, музыка — всё работает на один образ: здесь и сейчас, снова.",
     image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/28aa57f0-a78c-4556-b9a1-a6b83823d58e.jpg",
   },
   {
-    id: 3, type: "concept",
-    bg: "#F5F0FA", accentBg: "#E8D8F5", accent: "#8A65B5",
+    id: 3, type: "concept", accent: "#8A65B5", num: "02",
     tag: "Вариант 2", title: "Архетипы женщины",
     lead: "Мама. Женщина. Вселенная. Муза.",
     paragraphs: [
       "Уютное пространство, нежный свет заката, длинный единый стол. На нём — рулон жатой бумаги с фразами и словами именинницы: мыслями, мечтами, воспоминаниями.",
       "Рулон уходит в сценическое пространство, где сидит рассказчик — известный актёр. Пространство дополняется летящими тканевыми полотнами.",
     ],
-    footer: "Для этого варианта необходимо провести интервью с каждым членом семьи",
+    footer: "Необходимо провести интервью с каждым членом семьи",
     image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/bucket/b7f8b29b-b200-4c80-8164-8e5c5b63a557.jpg",
   },
   {
-    id: 4, type: "conceptB",
-    bg: "#F5F0FA", accentBg: "#E8D8F5", accent: "#8A65B5",
-    tag: "Вариант 2 · продолжение", title: "Архетипы женщины",
+    id: 4, type: "conceptB", accent: "#8A65B5", num: "02",
+    tag: "Вариант 2", title: "Архетипы женщины",
     body: "Вокруг стола собирается семья, каждый человек из которой приносит свою историю и свои чувства — каждый описывает именинницу с одной или нескольких граней её личности: как мать, как музу / возлюбленную, наставника и т.д. Они могут прикоснуться к рулону бумаги, добавить свои слова или просто насладиться атмосферой единства и любви. Этот момент становится не только праздником дня рождения именинницы, но и настоящим творческим актом совместного создания.",
     image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/86f13260-c497-4761-a705-148d089f1d56.jpg",
   },
   {
-    id: 5, type: "concept3",
-    bg: "#F5EEE6", accentBg: "#E8D5C0", accent: "#8B6340",
+    id: 5, type: "concept3", accent: "#8B6340", num: "03",
     tag: "Вариант 3", title: "Машина времени",
     lead: "Каждый из нас хоть раз мечтал пережить счастливые мгновения снова.",
     rooms: ["День знакомства пары", "День из жизни каждой из дочерей", "Общий семейный день"],
-    footer: "Для этого варианта важно провести интервью, чтобы узнать все детали событий",
+    footer: "Важно провести интервью, чтобы узнать все детали событий",
     image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/bucket/1b1ab2b5-1f0a-4b49-b2af-81b49ad3bfe4.jpg",
   },
   {
-    id: 6, type: "concept3B",
-    bg: "#F5EEE6", accentBg: "#E8D5C0", accent: "#8B6340",
-    tag: "Вариант 3 · продолжение", title: "Машина времени",
+    id: 6, type: "concept3B", accent: "#8B6340", num: "03",
+    tag: "Вариант 3", title: "Машина времени",
     body: "Каждое пространство воссоздаётся в деталях: музыка, запахи, реквизит. Участники не просто наблюдают — они проживают момент: снова слышат те слова, снова чувствуют то тепло. Это не реконструкция прошлого — это подарок из него.",
     image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/1b8b6b7c-4812-4ae4-8a71-6bd69549a4d0.jpg",
   },
   {
-    id: 7, type: "concept4",
-    bg: "#2C3A2A", accentBg: "#3D5038", accent: "#C8A96E",
+    id: 7, type: "concept4", accent: "#5E7355", num: "04",
     tag: "Вариант 4", title: "Зов Алтая",
     lead: "В современном мире для людей доступны разные способы познания себя, истин, открытия нового и неизведанного.",
     body: "Мы предлагаем пережить эмоции нового опыта через погружение в легенды и обряды / ретриты, на которые богат Алтайский край.",
@@ -85,30 +77,26 @@ const slides: Slide[] = [
     image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/bucket/7aa235f8-930c-4cc9-b3af-ed2bb9cab603.jpg",
   },
   {
-    id: 8, type: "concept4B",
-    bg: "#2C3A2A", accentBg: "#3D5038", accent: "#C8A96E",
-    tag: "Вариант 4 · продолжение", title: "Зов Алтая",
+    id: 8, type: "concept4B", accent: "#5E7355", num: "04",
+    tag: "Вариант 4", title: "Зов Алтая",
     body: "Священный огонь, круг у костра под звёздным небом, горы на горизонте. Шаманские практики и алтайские ретриты открывают то, что невозможно найти в городе — тишину внутри себя. Этот день рождения станет точкой отсчёта нового этапа.",
     image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/73f83ec2-a8ed-4b6f-90d5-90819d7adc56.jpg",
   },
   {
-    id: 9, type: "concept5",
-    bg: "#1A1410", accentBg: "#2E2018", accent: "#D4A85A",
-    tag: "Вариант 5", title: "Режиссёрская\nверсия",
+    id: 9, type: "concept5", accent: "#B5893F", num: "05",
+    tag: "Вариант 5", title: "Режиссёрская версия",
     para1: "Этот день рождения — не просто праздник, а режиссёрская версия жизни, где именинница становится главной героиней собственной истории. Вместо привычного застолья — съёмочная площадка: каждый член семьи получает роль (близкие становятся партнёрами по кадру, второстепенными персонажами или антагонистами, которых нужно «переиграть»).",
     para2: "Смысл не в том, чтобы изобразить чужую жизнь, а чтобы заново прожить свою: взять в руки воображаемый режиссёрский хлопок, сказать «Мотор!» и впустить родных в ту внутреннюю вселенную, где она всегда была главной героиней.",
     image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/bucket/0c639da5-89e4-418d-8a5c-f9eb93f51da1.jpg",
   },
   {
-    id: 10, type: "concept5B",
-    bg: "#1A1410", accentBg: "#2E2018", accent: "#D4A85A",
-    tag: "Вариант 5 · продолжение", title: "Режиссёрская\nверсия",
+    id: 10, type: "concept5B", accent: "#B5893F", num: "05",
+    tag: "Вариант 5", title: "Режиссёрская версия",
     body: "Кульминацией становится финальный кадр — общая семейная сцена, которая больше не выглядит как постановка, потому что в ней впервые все играют не роли, а настоящие чувства. Свет гаснет. Аплодисменты. Занавес.",
     image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/48a538c2-dd58-4811-9fca-f9b800be9336.jpg",
   },
   {
-    id: 11, type: "final",
-    bg: "#F2EDE6", accentBg: "#E0D5C5", accent: "#6B5740",
+    id: 11, type: "final", accent: "#1A1815",
     title: "Дома на колёсах",
     tagline: "Общее предложение для всех концепций",
     body: "Путешествие в домах на колёсах позволит посетить несколько уникальных локаций и не быть привязанными к одному месту. Это добавит приключения и живых впечатлений в сценарий праздника.",
@@ -139,37 +127,55 @@ export default function Index() {
 
   const slide = slides[current];
 
-  const Tag = ({ label, accent }: { label: string; accent: string }) => (
-    <div style={{ display: "flex", alignItems: "center", gap: "clamp(4px, 0.6vw, 8px)" }}>
-      <div style={{ width: "clamp(14px, 1.8vw, 22px)", height: 1, background: accent, opacity: 0.45 }} />
-      <span style={{ fontFamily: F, fontWeight: 400, fontSize: "clamp(9px, 1vw, 13px)", letterSpacing: "0.3em", textTransform: "uppercase", color: accent, opacity: 0.65 }}>{label}</span>
+  const Kicker = ({ label, accent }: { label: string; accent: string }) => (
+    <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+      <span style={{ width: 6, height: 6, borderRadius: "50%", background: accent }} />
+      <span style={{ fontFamily: F, fontWeight: 500, fontSize: "clamp(8px, 0.85vw, 11px)", letterSpacing: "0.32em", textTransform: "uppercase", color: accent }}>{label}</span>
     </div>
   );
 
+  const BigNum = ({ num, accent }: { num: string; accent: string }) => (
+    <span style={{ fontFamily: F, fontWeight: 600, fontSize: "clamp(60px, 11vw, 150px)", lineHeight: 0.8, color: accent, opacity: 0.1, letterSpacing: "-0.04em", userSelect: "none" }}>{num}</span>
+  );
+
+  const Title = ({ text, size }: { text: string; size?: string }) => (
+    <h2 style={{ fontFamily: F, fontWeight: 600, fontSize: size || "clamp(26px, 4.4vw, 56px)", lineHeight: 1.0, color: INK, margin: 0, letterSpacing: "-0.025em", whiteSpace: "pre-line" }}>{text}</h2>
+  );
+
+  const Frame = ({ src, accent, edge = "bottom", pos }: { src: string; accent: string; edge?: "top" | "bottom"; pos?: string }) => (
+    <div style={{ width: "100%", height: "100%", overflow: "hidden", position: "relative" }}>
+      <img src={src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: pos || "center" }} />
+      <div style={{ position: "absolute", [edge]: 0, left: 0, right: 0, height: 4, background: accent } as React.CSSProperties} />
+    </div>
+  );
+
+  const padImg = "clamp(40px,5.5vw,72px)";
+
   return (
-    <div className="w-screen h-screen overflow-hidden flex items-center justify-center" style={{ background: "#E8E2DC" }}>
+    <div className="w-screen h-screen overflow-hidden flex items-center justify-center" style={{ background: "#DCD8D0" }}>
       <div
-        className="relative overflow-hidden shadow-2xl"
+        className="relative overflow-hidden"
         style={{
           width: "min(100vw, calc(100vh * 16 / 9))",
           height: "min(100vh, calc(100vw * 9 / 16))",
           maxWidth: 1280, maxHeight: 720,
-          background: slide.bg,
-          transition: "background 0.6s ease",
-          borderRadius: 2,
+          background: PAGE,
+          boxShadow: "0 30px 80px rgba(0,0,0,0.25)",
         }}
       >
-        {/* Accent blobs */}
-        <div style={{ position: "absolute", top: "-20%", right: "-10%", width: "45%", paddingBottom: "45%", borderRadius: "50%", background: slide.accentBg, opacity: 0.8, filter: "blur(60px)", transition: "background 0.6s ease", pointerEvents: "none" }} />
-        <div style={{ position: "absolute", bottom: "-20%", left: "-8%", width: "35%", paddingBottom: "35%", borderRadius: "50%", background: slide.accentBg, opacity: 0.5, filter: "blur(50px)", transition: "background 0.6s ease", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", inset: "clamp(14px, 2vw, 26px)", border: "1px solid rgba(26,24,21,0.1)", pointerEvents: "none", zIndex: 5 }} />
 
-        {/* Content */}
+        <div style={{ position: "absolute", top: "clamp(22px, 3vw, 40px)", left: "clamp(26px, 3.6vw, 50px)", right: "clamp(26px, 3.6vw, 50px)", display: "flex", justifyContent: "space-between", alignItems: "center", zIndex: 6 }}>
+          <span style={{ fontFamily: F, fontWeight: 500, fontSize: "clamp(7px, 0.75vw, 10px)", letterSpacing: "0.25em", textTransform: "uppercase", color: MUTED }}>Галина · День рождения</span>
+          <span style={{ fontFamily: F, fontWeight: 500, fontSize: "clamp(7px, 0.75vw, 10px)", letterSpacing: "0.25em", color: MUTED }}>{String(current + 1).padStart(2, "0")} — {String(slides.length).padStart(2, "0")}</span>
+        </div>
+
         <div
-          className="relative h-full flex flex-col"
+          className="relative h-full"
           style={{
             opacity: animating ? 0 : 1,
-            transform: animating ? `translateX(${dir === "next" ? "18px" : "-18px"})` : "translateX(0)",
-            transition: "opacity 0.28s ease, transform 0.28s ease",
+            transform: animating ? `translateY(${dir === "next" ? "10px" : "-10px"})` : "translateY(0)",
+            transition: "opacity 0.3s ease, transform 0.3s ease",
           }}
         >
 
@@ -177,11 +183,13 @@ export default function Index() {
           {slide.type === "title" && (() => {
             const s = slide as TitleSlide;
             return (
-              <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "2% 10%" }}>
-                <h1 style={{ fontFamily: F, fontWeight: 300, fontSize: "clamp(22px, 4.5vw, 58px)", lineHeight: 1.2, color: s.accent, whiteSpace: "pre-line", margin: 0, textAlign: "center", marginBottom: "clamp(12px, 2.5vw, 32px)", letterSpacing: "-0.01em" }}>
-                  {s.title}
-                </h1>
-                <div style={{ width: "clamp(30px, 5vw, 60px)", height: 1, background: `${s.accent}44` }} />
+              <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", padding: "0 clamp(50px, 9vw, 130px)" }}>
+                <span style={{ fontFamily: F, fontWeight: 500, fontSize: "clamp(8px, 0.9vw, 12px)", letterSpacing: "0.4em", textTransform: "uppercase", color: MUTED, marginBottom: "clamp(20px, 3vw, 40px)" }}>Концепции праздника</span>
+                <h1 style={{ fontFamily: F, fontWeight: 600, fontSize: "clamp(26px, 5vw, 70px)", lineHeight: 1.05, color: INK, whiteSpace: "pre-line", margin: 0, letterSpacing: "-0.03em" }}>{s.title}</h1>
+                <div style={{ display: "flex", alignItems: "center", gap: 14, marginTop: "clamp(24px, 3.5vw, 46px)" }}>
+                  <div style={{ width: "clamp(40px, 7vw, 90px)", height: 2, background: INK }} />
+                  <span style={{ fontFamily: F, fontWeight: 500, fontSize: "clamp(8px, 0.85vw, 11px)", letterSpacing: "0.2em", textTransform: "uppercase", color: MUTED }}>5 концепций</span>
+                </div>
               </div>
             );
           })()}
@@ -190,30 +198,23 @@ export default function Index() {
           {slide.type === "concept" && (() => {
             const s = slide as ConceptSlide;
             return (
-              <div style={{ flex: 1, display: "flex", overflow: "hidden" }}>
-                <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", padding: "4% 4% 3% 6%", gap: "clamp(8px, 1.4vw, 16px)" }}>
-                  <Tag label={s.tag} accent={s.accent} />
-                  <h2 style={{ fontFamily: F, fontWeight: 300, fontSize: "clamp(24px, 4vw, 52px)", lineHeight: 1.05, color: s.accent, margin: 0, letterSpacing: "-0.01em" }}>
-                    {s.title}
-                  </h2>
-                  <p style={{ fontFamily: F, fontWeight: 400, fontSize: "clamp(12px, 1.55vw, 19px)", color: s.accent, opacity: 0.8, lineHeight: 1.45, margin: 0 }}>
-                    {s.lead}
-                  </p>
-                  <div style={{ display: "flex", flexDirection: "column", gap: "clamp(5px, 0.9vw, 11px)" }}>
+              <div style={{ width: "100%", height: "100%", display: "grid", gridTemplateColumns: "1fr 0.85fr" }}>
+                <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "clamp(50px,7vw,90px) clamp(30px,4vw,55px) clamp(50px,7vw,90px) clamp(50px,8vw,110px)", gap: "clamp(10px, 1.4vw, 16px)", position: "relative" }}>
+                  <div style={{ position: "absolute", top: "clamp(40px,6vw,80px)", right: "clamp(20px,3vw,40px)" }}><BigNum num={s.num} accent={s.accent} /></div>
+                  <Kicker label={s.tag} accent={s.accent} />
+                  <Title text={s.title} />
+                  <p style={{ fontFamily: F, fontWeight: 500, fontSize: "clamp(12px, 1.5vw, 19px)", color: INK, lineHeight: 1.4, margin: "clamp(4px,0.6vw,8px) 0 0" }}>{s.lead}</p>
+                  <div style={{ width: 34, height: 2, background: s.accent, margin: "clamp(4px,0.6vw,8px) 0" }} />
+                  <div style={{ display: "flex", flexDirection: "column", gap: "clamp(7px, 1vw, 12px)" }}>
                     {s.paragraphs.map((p, i) => (
-                      <p key={i} style={{ fontFamily: F, fontWeight: 300, fontSize: "clamp(10px, 1.25vw, 15px)", lineHeight: 1.65, color: "#4A3F3A", margin: 0 }}>{p}</p>
+                      <p key={i} style={{ fontFamily: F, fontWeight: 400, fontSize: "clamp(10px, 1.2vw, 14px)", lineHeight: 1.65, color: MUTED, margin: 0 }}>{p}</p>
                     ))}
                   </div>
-                  <div style={{ display: "flex", alignItems: "center", paddingTop: "clamp(6px, 0.8vw, 10px)", borderTop: `1px solid ${s.accent}18`, marginTop: "auto" }}>
-                    <span style={{ fontFamily: F, fontWeight: 300, fontSize: "clamp(10px, 1.2vw, 14px)", color: s.accent, opacity: 0.65 }}>{s.footer}</span>
-                  </div>
+                  <span style={{ fontFamily: F, fontWeight: 500, fontSize: "clamp(8px, 0.9vw, 11px)", color: s.accent, marginTop: "clamp(6px,1vw,12px)" }}>↳ {s.footer}</span>
                 </div>
-                {s.image && (
-                  <div style={{ flex: "0 0 40%", position: "relative", overflow: "hidden" }}>
-                    <img src={s.image} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center" }} />
-                    <div style={{ position: "absolute", inset: 0, background: `linear-gradient(to right, ${s.bg} 0%, transparent 25%)` }} />
-                  </div>
-                )}
+                <div style={{ padding: `${padImg} ${padImg} ${padImg} 0` }}>
+                  {s.image && <Frame src={s.image} accent={s.accent} />}
+                </div>
               </div>
             );
           })()}
@@ -222,18 +223,16 @@ export default function Index() {
           {slide.type === "conceptB" && (() => {
             const s = slide as ConceptB;
             return (
-              <div style={{ flex: 1, position: "relative", overflow: "hidden" }}>
-                <img src={s.image} alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center", filter: "brightness(1.05)" }} />
-                <div style={{ position: "absolute", inset: 0, background: `linear-gradient(to right, ${s.bg}F8 0%, ${s.bg}DC 42%, ${s.bg}40 65%, transparent 100%)` }} />
-                <div style={{ position: "relative", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", padding: "5% 52% 5% 6%", gap: "clamp(12px, 2vw, 24px)" }}>
-                  <Tag label={s.tag} accent={s.accent} />
-                  <h2 style={{ fontFamily: F, fontWeight: 300, fontSize: "clamp(22px, 3.8vw, 48px)", lineHeight: 1.05, color: s.accent, margin: 0, letterSpacing: "-0.01em" }}>
-                    {s.title}
-                  </h2>
-                  <div style={{ width: "clamp(24px, 3.5vw, 44px)", height: 1, background: `${s.accent}44` }} />
-                  <p style={{ fontFamily: F, fontWeight: 300, fontSize: "clamp(11px, 1.3vw, 15px)", lineHeight: 1.75, color: "#3A2E24", margin: 0 }}>
-                    {s.body}
-                  </p>
+              <div style={{ width: "100%", height: "100%", display: "grid", gridTemplateColumns: "0.85fr 1fr" }}>
+                <div style={{ padding: `${padImg} 0 ${padImg} ${padImg}` }}>
+                  <Frame src={s.image} accent={s.accent} edge="top" />
+                </div>
+                <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "clamp(50px,7vw,90px) clamp(50px,8vw,110px) clamp(50px,7vw,90px) clamp(30px,4vw,55px)", gap: "clamp(14px, 2vw, 22px)", position: "relative" }}>
+                  <div style={{ position: "absolute", top: "clamp(40px,6vw,80px)", right: "clamp(40px,5vw,70px)" }}><BigNum num={s.num} accent={s.accent} /></div>
+                  <Kicker label={s.tag} accent={s.accent} />
+                  <Title text={s.title} size="clamp(24px, 4vw, 48px)" />
+                  <div style={{ width: 34, height: 2, background: s.accent }} />
+                  <p style={{ fontFamily: F, fontWeight: 400, fontSize: "clamp(11px, 1.35vw, 16px)", lineHeight: 1.75, color: MUTED, margin: 0, maxWidth: "92%" }}>{s.body}</p>
                 </div>
               </div>
             );
@@ -243,34 +242,28 @@ export default function Index() {
           {slide.type === "concept3" && (() => {
             const s = slide as Concept3Slide;
             return (
-              <div style={{ flex: 1, display: "flex", overflow: "hidden" }}>
-                <div style={{ flex: "0 0 42%", position: "relative", overflow: "hidden" }}>
-                  <img src={s.image} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center" }} />
-                  <div style={{ position: "absolute", inset: 0, background: `linear-gradient(to left, ${s.bg} 0%, transparent 25%)` }} />
+              <div style={{ width: "100%", height: "100%", display: "grid", gridTemplateColumns: "0.8fr 1fr" }}>
+                <div style={{ padding: `${padImg} 0 ${padImg} ${padImg}` }}>
+                  <Frame src={s.image} accent={s.accent} />
                 </div>
-                <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", padding: "4% 6% 3% 4%", gap: "clamp(6px, 1.1vw, 13px)" }}>
-                  <Tag label={s.tag} accent={s.accent} />
-                  <h2 style={{ fontFamily: F, fontWeight: 300, fontSize: "clamp(22px, 3.8vw, 48px)", lineHeight: 1.05, color: s.accent, margin: 0, letterSpacing: "-0.01em" }}>
-                    {s.title}
-                  </h2>
-                  <p style={{ fontFamily: F, fontWeight: 400, fontSize: "clamp(11px, 1.35vw, 17px)", color: s.accent, opacity: 0.8, lineHeight: 1.4, margin: 0 }}>
-                    {s.lead}
-                  </p>
-                  <p style={{ fontFamily: F, fontWeight: 300, fontSize: "clamp(10px, 1.2vw, 14px)", lineHeight: 1.65, color: "#4A3F3A", margin: 0 }}>
+                <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "clamp(46px,6vw,82px) clamp(50px,8vw,110px) clamp(46px,6vw,82px) clamp(30px,4vw,55px)", gap: "clamp(8px, 1.2vw, 14px)", position: "relative" }}>
+                  <div style={{ position: "absolute", top: "clamp(38px,5vw,70px)", right: "clamp(40px,5vw,70px)" }}><BigNum num={s.num} accent={s.accent} /></div>
+                  <Kicker label={s.tag} accent={s.accent} />
+                  <Title text={s.title} size="clamp(24px, 4vw, 48px)" />
+                  <p style={{ fontFamily: F, fontWeight: 500, fontSize: "clamp(11px, 1.4vw, 17px)", color: INK, lineHeight: 1.4, margin: 0 }}>{s.lead}</p>
+                  <div style={{ width: 34, height: 2, background: s.accent }} />
+                  <p style={{ fontFamily: F, fontWeight: 400, fontSize: "clamp(10px, 1.15vw, 13px)", lineHeight: 1.65, color: MUTED, margin: 0 }}>
                     Кажется, что такое бывает только в фильмах, но мы постараемся воспроизвести все тонкости этих прекрасных мгновений, чтобы участникам удалось почувствовать трепет и эмоции тех событий.
                   </p>
-                  <div style={{ display: "flex", flexDirection: "column", gap: "clamp(4px, 0.7vw, 10px)" }}>
-                    <span style={{ fontFamily: F, fontWeight: 300, fontSize: "clamp(8px, 0.9vw, 11px)", letterSpacing: "0.2em", textTransform: "uppercase", color: s.accent, opacity: 0.55 }}>3 пространства</span>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "clamp(5px,0.7vw,8px)", marginTop: 4 }}>
                     {s.rooms.map((r, i) => (
-                      <div key={i} style={{ display: "flex", alignItems: "center", gap: "clamp(6px, 0.8vw, 10px)" }}>
-                        <div style={{ width: "clamp(4px, 0.5vw, 6px)", height: "clamp(4px, 0.5vw, 6px)", borderRadius: "50%", background: s.accent, opacity: 0.4, flexShrink: 0 }} />
-                        <span style={{ fontFamily: F, fontWeight: 300, fontSize: "clamp(10px, 1.25vw, 15px)", color: "#4A3F3A" }}>{r}</span>
+                      <div key={i} style={{ display: "flex", alignItems: "baseline", gap: 10 }}>
+                        <span style={{ fontFamily: F, fontWeight: 600, fontSize: "clamp(8px,0.85vw,11px)", color: s.accent }}>{String(i + 1).padStart(2, "0")}</span>
+                        <span style={{ fontFamily: F, fontWeight: 400, fontSize: "clamp(10px, 1.2vw, 14px)", color: INK }}>{r}</span>
                       </div>
                     ))}
                   </div>
-                  <div style={{ display: "flex", alignItems: "center", paddingTop: "clamp(6px, 0.8vw, 10px)", borderTop: `1px solid ${s.accent}18`, marginTop: "auto" }}>
-                    <span style={{ fontFamily: F, fontWeight: 300, fontSize: "clamp(10px, 1.2vw, 14px)", color: s.accent, opacity: 0.65 }}>{s.footer}</span>
-                  </div>
+                  <span style={{ fontFamily: F, fontWeight: 500, fontSize: "clamp(8px, 0.9vw, 11px)", color: s.accent, marginTop: "clamp(6px,1vw,12px)" }}>↳ {s.footer}</span>
                 </div>
               </div>
             );
@@ -280,18 +273,16 @@ export default function Index() {
           {slide.type === "concept3B" && (() => {
             const s = slide as Concept3B;
             return (
-              <div style={{ flex: 1, position: "relative", overflow: "hidden" }}>
-                <img src={s.image} alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center", filter: "brightness(1.05)" }} />
-                <div style={{ position: "absolute", inset: 0, background: `linear-gradient(to right, ${s.bg}F8 0%, ${s.bg}DC 40%, ${s.bg}30 62%, transparent 100%)` }} />
-                <div style={{ position: "relative", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", padding: "5% 52% 5% 6%", gap: "clamp(12px, 2vw, 24px)" }}>
-                  <Tag label={s.tag} accent={s.accent} />
-                  <h2 style={{ fontFamily: F, fontWeight: 300, fontSize: "clamp(22px, 3.8vw, 48px)", lineHeight: 1.05, color: s.accent, margin: 0, letterSpacing: "-0.01em" }}>
-                    {s.title}
-                  </h2>
-                  <div style={{ width: "clamp(24px, 3.5vw, 44px)", height: 1, background: `${s.accent}44` }} />
-                  <p style={{ fontFamily: F, fontWeight: 300, fontSize: "clamp(11px, 1.35vw, 16px)", lineHeight: 1.75, color: "#3A2E24", margin: 0 }}>
-                    {s.body}
-                  </p>
+              <div style={{ width: "100%", height: "100%", display: "grid", gridTemplateColumns: "1fr 0.85fr" }}>
+                <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "clamp(50px,7vw,90px) clamp(30px,4vw,55px) clamp(50px,7vw,90px) clamp(50px,8vw,110px)", gap: "clamp(14px, 2vw, 22px)", position: "relative" }}>
+                  <div style={{ position: "absolute", top: "clamp(40px,6vw,80px)", right: "clamp(20px,3vw,40px)" }}><BigNum num={s.num} accent={s.accent} /></div>
+                  <Kicker label={s.tag} accent={s.accent} />
+                  <Title text={s.title} size="clamp(24px, 4vw, 48px)" />
+                  <div style={{ width: 34, height: 2, background: s.accent }} />
+                  <p style={{ fontFamily: F, fontWeight: 400, fontSize: "clamp(11px, 1.35vw, 16px)", lineHeight: 1.75, color: MUTED, margin: 0 }}>{s.body}</p>
+                </div>
+                <div style={{ padding: `${padImg} ${padImg} ${padImg} 0` }}>
+                  <Frame src={s.image} accent={s.accent} />
                 </div>
               </div>
             );
@@ -301,22 +292,18 @@ export default function Index() {
           {slide.type === "concept4" && (() => {
             const s = slide as Concept4Slide;
             return (
-              <div style={{ flex: 1, position: "relative", overflow: "hidden" }}>
-                <img src={s.image} alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center" }} />
-                <div style={{ position: "absolute", inset: 0, background: "linear-gradient(160deg, rgba(20,28,18,0.82) 0%, rgba(20,28,18,0.6) 45%, rgba(20,28,18,0.1) 100%)" }} />
-                <div style={{ position: "relative", height: "100%", display: "flex" }}>
-                  <div style={{ width: "55%", display: "flex", flexDirection: "column", justifyContent: "center", padding: "5% 4% 5% 6%", gap: "clamp(10px, 1.6vw, 20px)" }}>
-                    <Tag label={s.tag} accent={s.accent} />
-                    <h2 style={{ fontFamily: F, fontWeight: 300, fontSize: "clamp(26px, 4.2vw, 54px)", lineHeight: 1.05, color: s.accent, margin: 0, letterSpacing: "-0.01em" }}>
-                      {s.title}
-                    </h2>
-                    <div style={{ width: "clamp(24px, 3.5vw, 44px)", height: 1, background: `${s.accent}55` }} />
-                    <p style={{ fontFamily: F, fontWeight: 400, fontSize: "clamp(12px, 1.5vw, 18px)", color: s.accent, opacity: 0.8, lineHeight: 1.45, margin: 0 }}>{s.lead}</p>
-                    <p style={{ fontFamily: F, fontWeight: 300, fontSize: "clamp(11px, 1.3vw, 16px)", lineHeight: 1.7, color: "#D0C8B8", margin: 0 }}>{s.body}</p>
-                    <div style={{ display: "flex", alignItems: "center", paddingTop: "clamp(6px, 0.8vw, 10px)", borderTop: "1px solid rgba(200,169,110,0.2)", marginTop: "auto" }}>
-                      <span style={{ fontFamily: F, fontWeight: 300, fontSize: "clamp(10px, 1.2vw, 14px)", color: s.accent, opacity: 0.6 }}>{s.footer}</span>
-                    </div>
-                  </div>
+              <div style={{ width: "100%", height: "100%", display: "grid", gridTemplateColumns: "1fr 0.9fr" }}>
+                <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "clamp(50px,7vw,90px) clamp(30px,4vw,55px) clamp(50px,7vw,90px) clamp(50px,8vw,110px)", gap: "clamp(10px, 1.4vw, 16px)", position: "relative" }}>
+                  <div style={{ position: "absolute", top: "clamp(40px,6vw,80px)", right: "clamp(20px,3vw,40px)" }}><BigNum num={s.num} accent={s.accent} /></div>
+                  <Kicker label={s.tag} accent={s.accent} />
+                  <Title text={s.title} />
+                  <p style={{ fontFamily: F, fontWeight: 500, fontSize: "clamp(12px, 1.5vw, 18px)", color: INK, lineHeight: 1.4, margin: "clamp(4px,0.6vw,8px) 0 0" }}>{s.lead}</p>
+                  <div style={{ width: 34, height: 2, background: s.accent, margin: "clamp(4px,0.6vw,8px) 0" }} />
+                  <p style={{ fontFamily: F, fontWeight: 400, fontSize: "clamp(10px, 1.2vw, 14px)", lineHeight: 1.65, color: MUTED, margin: 0 }}>{s.body}</p>
+                  <span style={{ fontFamily: F, fontWeight: 500, fontSize: "clamp(8px, 0.9vw, 11px)", color: s.accent, marginTop: "clamp(6px,1vw,12px)" }}>↳ {s.footer}</span>
+                </div>
+                <div style={{ padding: `${padImg} ${padImg} ${padImg} 0` }}>
+                  <Frame src={s.image} accent={s.accent} />
                 </div>
               </div>
             );
@@ -326,20 +313,16 @@ export default function Index() {
           {slide.type === "concept4B" && (() => {
             const s = slide as Concept4B;
             return (
-              <div style={{ flex: 1, position: "relative", overflow: "hidden" }}>
-                <img src={s.image} alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center", filter: "brightness(1.05)" }} />
-                <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to left, rgba(44,58,42,0.97) 0%, rgba(44,58,42,0.85) 38%, rgba(44,58,42,0.2) 62%, transparent 100%)" }} />
-                <div style={{ position: "relative", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "flex-end", padding: "5% 6% 5% 52%" }}>
-                  <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: "clamp(12px, 2vw, 24px)" }}>
-                    <Tag label={s.tag} accent={s.accent} />
-                    <h2 style={{ fontFamily: F, fontWeight: 300, fontSize: "clamp(22px, 3.8vw, 48px)", lineHeight: 1.05, color: s.accent, margin: 0, whiteSpace: "pre-line", letterSpacing: "-0.01em" }}>
-                      {s.title}
-                    </h2>
-                    <div style={{ width: "clamp(24px, 3.5vw, 44px)", height: 1, background: `${s.accent}44` }} />
-                    <p style={{ fontFamily: F, fontWeight: 300, fontSize: "clamp(11px, 1.35vw, 16px)", lineHeight: 1.75, color: "#D8CEB8", margin: 0 }}>
-                      {s.body}
-                    </p>
-                  </div>
+              <div style={{ width: "100%", height: "100%", display: "grid", gridTemplateColumns: "0.9fr 1fr" }}>
+                <div style={{ padding: `${padImg} 0 ${padImg} ${padImg}` }}>
+                  <Frame src={s.image} accent={s.accent} edge="top" />
+                </div>
+                <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "clamp(50px,7vw,90px) clamp(50px,8vw,110px) clamp(50px,7vw,90px) clamp(30px,4vw,55px)", gap: "clamp(14px, 2vw, 22px)", position: "relative" }}>
+                  <div style={{ position: "absolute", top: "clamp(40px,6vw,80px)", right: "clamp(40px,5vw,70px)" }}><BigNum num={s.num} accent={s.accent} /></div>
+                  <Kicker label={s.tag} accent={s.accent} />
+                  <Title text={s.title} size="clamp(24px, 4vw, 48px)" />
+                  <div style={{ width: 34, height: 2, background: s.accent }} />
+                  <p style={{ fontFamily: F, fontWeight: 400, fontSize: "clamp(11px, 1.35vw, 16px)", lineHeight: 1.75, color: MUTED, margin: 0 }}>{s.body}</p>
                 </div>
               </div>
             );
@@ -349,24 +332,18 @@ export default function Index() {
           {slide.type === "concept5" && (() => {
             const s = slide as Concept5Slide;
             return (
-              <div style={{ flex: 1, display: "flex", overflow: "hidden" }}>
-                <div style={{ flex: "0 0 52%", display: "flex", flexDirection: "column", justifyContent: "center", padding: "4% 5% 4% 6%", gap: "clamp(10px, 1.5vw, 18px)", background: "#FAF6F0" }}>
-                  <Tag label={s.tag} accent="#8B6840" />
-                  <h2 style={{ fontFamily: F, fontWeight: 300, fontSize: "clamp(24px, 4vw, 50px)", lineHeight: 1.05, color: "#6B4A28", margin: 0, whiteSpace: "pre-line", letterSpacing: "-0.01em" }}>
-                    {s.title}
-                  </h2>
-                  <div style={{ width: "clamp(24px, 3.5vw, 44px)", height: 1, background: "#8B684066" }} />
-                  <p style={{ fontFamily: F, fontWeight: 300, fontSize: "clamp(10px, 1.2vw, 14px)", lineHeight: 1.7, color: "#4A3A2A", margin: 0 }}>{s.para1}</p>
-                  <p style={{ fontFamily: F, fontWeight: 300, fontSize: "clamp(10px, 1.2vw, 14px)", lineHeight: 1.7, color: "#4A3A2A", margin: 0 }}>{s.para2}</p>
-                  <div style={{ display: "flex", alignItems: "center", gap: "clamp(5px, 0.7vw, 9px)", marginTop: "auto", paddingTop: "clamp(5px, 0.7vw, 9px)", borderTop: "1px solid #8B684022" }}>
-                    <div style={{ width: "clamp(16px, 2vw, 24px)", height: 2, background: "#8B6840", opacity: 0.4 }} />
-                    <span style={{ fontFamily: F, fontWeight: 300, fontSize: "clamp(8px, 0.85vw, 11px)", letterSpacing: "0.3em", textTransform: "uppercase", color: "#8B6840", opacity: 0.5 }}>Мотор!</span>
-                    <div style={{ width: "clamp(16px, 2vw, 24px)", height: 2, background: "#8B6840", opacity: 0.4 }} />
-                  </div>
+              <div style={{ width: "100%", height: "100%", display: "grid", gridTemplateColumns: "1fr 0.85fr" }}>
+                <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "clamp(50px,7vw,90px) clamp(30px,4vw,55px) clamp(50px,7vw,90px) clamp(50px,8vw,110px)", gap: "clamp(10px, 1.3vw, 15px)", position: "relative" }}>
+                  <div style={{ position: "absolute", top: "clamp(34px,5vw,68px)", right: "clamp(20px,3vw,40px)" }}><BigNum num={s.num} accent={s.accent} /></div>
+                  <Kicker label={s.tag} accent={s.accent} />
+                  <Title text={s.title} size="clamp(24px, 4vw, 50px)" />
+                  <div style={{ width: 34, height: 2, background: s.accent }} />
+                  <p style={{ fontFamily: F, fontWeight: 400, fontSize: "clamp(10px, 1.15vw, 14px)", lineHeight: 1.65, color: MUTED, margin: 0 }}>{s.para1}</p>
+                  <p style={{ fontFamily: F, fontWeight: 400, fontSize: "clamp(10px, 1.15vw, 14px)", lineHeight: 1.65, color: MUTED, margin: 0 }}>{s.para2}</p>
+                  <span style={{ fontFamily: F, fontWeight: 600, fontSize: "clamp(8px, 0.9vw, 11px)", letterSpacing: "0.3em", textTransform: "uppercase", color: s.accent, marginTop: "clamp(4px,0.6vw,8px)" }}>Мотор!</span>
                 </div>
-                <div style={{ flex: 1, position: "relative", overflow: "hidden" }}>
-                  <img src={s.image} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 30%", filter: "brightness(1.1)" }} />
-                  <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, #FAF6F0 0%, transparent 15%)" }} />
+                <div style={{ padding: `${padImg} ${padImg} ${padImg} 0` }}>
+                  <Frame src={s.image} accent={s.accent} pos="center 30%" />
                 </div>
               </div>
             );
@@ -376,18 +353,16 @@ export default function Index() {
           {slide.type === "concept5B" && (() => {
             const s = slide as Concept5B;
             return (
-              <div style={{ flex: 1, position: "relative", overflow: "hidden" }}>
-                <img src={s.image} alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center", filter: "brightness(0.9)" }} />
-                <div style={{ position: "absolute", inset: 0, background: "linear-gradient(160deg, rgba(18,14,10,0.88) 0%, rgba(18,14,10,0.65) 45%, rgba(18,14,10,0.15) 100%)" }} />
-                <div style={{ position: "relative", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", padding: "5% 50% 5% 6%", gap: "clamp(12px, 2vw, 24px)" }}>
-                  <Tag label={s.tag} accent="#D4A85A" />
-                  <h2 style={{ fontFamily: F, fontWeight: 300, fontSize: "clamp(22px, 3.8vw, 48px)", lineHeight: 1.05, color: "#D4A85A", margin: 0, whiteSpace: "pre-line", letterSpacing: "-0.01em" }}>
-                    {s.title}
-                  </h2>
-                  <div style={{ width: "clamp(24px, 3.5vw, 44px)", height: 1, background: "#D4A85A44" }} />
-                  <p style={{ fontFamily: F, fontWeight: 300, fontSize: "clamp(11px, 1.35vw, 16px)", lineHeight: 1.75, color: "#E8DDD0", margin: 0 }}>
-                    {s.body}
-                  </p>
+              <div style={{ width: "100%", height: "100%", display: "grid", gridTemplateColumns: "0.85fr 1fr" }}>
+                <div style={{ padding: `${padImg} 0 ${padImg} ${padImg}` }}>
+                  <Frame src={s.image} accent={s.accent} edge="top" />
+                </div>
+                <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "clamp(50px,7vw,90px) clamp(50px,8vw,110px) clamp(50px,7vw,90px) clamp(30px,4vw,55px)", gap: "clamp(14px, 2vw, 22px)", position: "relative" }}>
+                  <div style={{ position: "absolute", top: "clamp(40px,6vw,80px)", right: "clamp(40px,5vw,70px)" }}><BigNum num={s.num} accent={s.accent} /></div>
+                  <Kicker label={s.tag} accent={s.accent} />
+                  <Title text={s.title} size="clamp(24px, 4vw, 48px)" />
+                  <div style={{ width: 34, height: 2, background: s.accent }} />
+                  <p style={{ fontFamily: F, fontWeight: 400, fontSize: "clamp(11px, 1.35vw, 16px)", lineHeight: 1.75, color: MUTED, margin: 0 }}>{s.body}</p>
                 </div>
               </div>
             );
@@ -397,20 +372,15 @@ export default function Index() {
           {slide.type === "final" && (() => {
             const s = slide as FinalSlide;
             return (
-              <div style={{ flex: 1, position: "relative", overflow: "hidden" }}>
-                {s.image && (
-                  <img src={s.image} alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center", filter: "brightness(1.15)" }} />
-                )}
-                <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(242,237,230,0.96) 0%, rgba(242,237,230,0.85) 38%, rgba(242,237,230,0.3) 62%, transparent 100%)" }} />
-                <div style={{ position: "relative", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", padding: "6% 52% 6% 7%", gap: "clamp(12px, 2vw, 26px)" }}>
-                  <Tag label={s.tagline} accent={s.accent} />
-                  <h2 style={{ fontFamily: F, fontWeight: 300, fontSize: "clamp(26px, 4.5vw, 58px)", lineHeight: 1.05, color: s.accent, margin: 0, letterSpacing: "-0.01em" }}>
-                    {s.title}
-                  </h2>
-                  <div style={{ width: "clamp(28px, 4vw, 50px)", height: 1, background: `${s.accent}55` }} />
-                  <p style={{ fontFamily: F, fontWeight: 300, fontSize: "clamp(12px, 1.45vw, 17px)", lineHeight: 1.75, color: "#3A2E24", margin: 0 }}>
-                    {s.body}
-                  </p>
+              <div style={{ width: "100%", height: "100%", display: "grid", gridTemplateColumns: "1fr 1fr" }}>
+                <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "clamp(50px,7vw,90px) clamp(30px,4vw,55px) clamp(50px,7vw,90px) clamp(50px,8vw,110px)", gap: "clamp(14px, 2vw, 22px)" }}>
+                  <Kicker label={s.tagline} accent={s.accent} />
+                  <h2 style={{ fontFamily: F, fontWeight: 600, fontSize: "clamp(30px, 5vw, 62px)", lineHeight: 1.0, color: INK, margin: 0, letterSpacing: "-0.03em" }}>{s.title}</h2>
+                  <div style={{ width: 34, height: 2, background: INK }} />
+                  <p style={{ fontFamily: F, fontWeight: 400, fontSize: "clamp(11px, 1.35vw, 16px)", lineHeight: 1.75, color: MUTED, margin: 0 }}>{s.body}</p>
+                </div>
+                <div style={{ padding: `${padImg} ${padImg} ${padImg} 0` }}>
+                  {s.image && <Frame src={s.image} accent={INK} />}
                 </div>
               </div>
             );
@@ -418,13 +388,20 @@ export default function Index() {
 
         </div>
 
-        {/* Arrow buttons */}
-        {current > 0 && (
-          <button onClick={() => goTo(current - 1)} style={{ position: "absolute", left: "clamp(8px, 1.5vw, 18px)", top: "50%", transform: "translateY(-50%)", background: `${slide.accent}18`, border: "none", borderRadius: "50%", width: "clamp(28px, 4vw, 48px)", height: "clamp(28px, 4vw, 48px)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: slide.accent, fontSize: "clamp(12px, 1.8vw, 22px)", zIndex: 10 }}>‹</button>
-        )}
-        {current < slides.length - 1 && (
-          <button onClick={() => goTo(current + 1)} style={{ position: "absolute", right: "clamp(8px, 1.5vw, 18px)", top: "50%", transform: "translateY(-50%)", background: `${slide.accent}18`, border: "none", borderRadius: "50%", width: "clamp(28px, 4vw, 48px)", height: "clamp(28px, 4vw, 48px)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: slide.accent, fontSize: "clamp(12px, 1.8vw, 22px)", zIndex: 10 }}>›</button>
-        )}
+        {/* Нижняя навигация */}
+        <div style={{ position: "absolute", bottom: "clamp(20px, 2.8vw, 38px)", left: "clamp(26px, 3.6vw, 50px)", right: "clamp(26px, 3.6vw, 50px)", display: "flex", alignItems: "center", justifyContent: "space-between", zIndex: 6 }}>
+          {current > 0 ? (
+            <button onClick={() => goTo(current - 1)} style={{ background: "none", border: "none", cursor: "pointer", fontFamily: F, fontWeight: 500, fontSize: "clamp(8px, 0.85vw, 11px)", letterSpacing: "0.15em", textTransform: "uppercase", color: MUTED, padding: 0 }}>← Назад</button>
+          ) : <span />}
+          <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+            {slides.map((_, i) => (
+              <button key={i} onClick={() => goTo(i)} style={{ width: i === current ? 22 : 8, height: 2, background: i === current ? slide.accent : "rgba(26,24,21,0.2)", border: "none", padding: 0, cursor: "pointer", transition: "all 0.3s ease" }} />
+            ))}
+          </div>
+          {current < slides.length - 1 ? (
+            <button onClick={() => goTo(current + 1)} style={{ background: "none", border: "none", cursor: "pointer", fontFamily: F, fontWeight: 500, fontSize: "clamp(8px, 0.85vw, 11px)", letterSpacing: "0.15em", textTransform: "uppercase", color: INK, padding: 0 }}>Далее →</button>
+          ) : <span />}
+        </div>
 
       </div>
     </div>
