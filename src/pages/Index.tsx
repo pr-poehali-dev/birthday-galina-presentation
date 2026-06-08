@@ -105,7 +105,7 @@ const slides: Slide[] = [
     title: "Дома на колёсах",
     tagline: "Общее предложение для всех концепций",
     body: "Путешествие в домах на колёсах позволит посетить несколько уникальных мест и не быть привязанным к одной локации. Каждая концепция раскрывается по-новому — через смену пейзажей, атмосферу в пути и свободу выбора следующей точки.",
-    image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/e76cd04b-8aa8-48f6-83c0-0bdf60f3c2c3.jpg",
+    image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/87e4e508-d6a4-49c5-b8cc-a4e49ad7cfcc.jpg",
   },
 ];
 
@@ -321,10 +321,8 @@ export default function Index() {
               <div style={{ flex: 1, position: "relative", overflow: "hidden" }}>
                 {/* Full-bleed image */}
                 <img src={s.image} alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 30%" }} />
-                {/* Film-noir overlay */}
-                <div style={{ position: "absolute", inset: 0, background: "linear-gradient(160deg, rgba(10,8,6,0.65) 0%, rgba(10,8,6,0.52) 45%, rgba(10,8,6,0.12) 100%)" }} />
-                {/* Vignette */}
-                <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at center, transparent 45%, rgba(0,0,0,0.3) 100%)" }} />
+                {/* Overlay */}
+                <div style={{ position: "absolute", inset: 0, background: "linear-gradient(160deg, rgba(10,8,6,0.78) 0%, rgba(10,8,6,0.55) 40%, rgba(10,8,6,0.08) 100%)" }} />
 
                 {/* Clapperboard accent — декоративная деталь */}
                 <div style={{ position: "absolute", top: "6%", right: "5%", display: "flex", alignItems: "center", gap: "clamp(5px, 0.7vw, 9px)", opacity: 0.45 }}>
