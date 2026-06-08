@@ -1,426 +1,265 @@
 import { useState, useEffect } from "react";
 import Icon from "@/components/ui/icon";
 
-const slides = [
+type Variant = { num: string; name: string };
+type Card = { num: string; name: string; accent: string; bg: string };
+
+type SlideBase = { id: number; type: string; bg: string; accentBg: string; accent: string; title: string };
+type TitleSlide = SlideBase & { type: "title"; tag: string; subtitle: string; decor: string; variants: Variant[] };
+type ConceptSlide = SlideBase & { type: "concept"; num: string; tag: string; lead: string; body: string; note: string; footer: string };
+type FinalSlide = SlideBase & { type: "final"; subtitle: string; cards: Card[] };
+type Slide = TitleSlide | ConceptSlide | FinalSlide;
+
+const slides: Slide[] = [
   {
     id: 0,
     type: "title",
-    bg: "from-pastel-rose via-pastel-lavender to-pastel-peach",
-    accent: "#C084A0",
-    label: "",
+    bg: "#FDF6F0",
+    accentBg: "#F9E8E0",
+    accent: "#C07A6A",
+    tag: "",
     title: "День рождения\nГалины",
-    subtitle: "Концепции праздника",
-    decor: "🌸",
+    subtitle: "Варианты концепций · Август / Сентябрь",
+    decor: "✦",
+    variants: [
+      { num: "01", name: "Эффект присутствия" },
+      { num: "02", name: "Архетипы женщины" },
+    ],
   },
   {
     id: 1,
     type: "concept",
-    bg: "from-pastel-rose to-pastel-cream",
-    accent: "#D4749A",
-    label: "Концепция 1",
-    title: "Розовый сад",
-    subtitle: "Элегантный праздник в стиле французского розария",
-    details: [
-      "Живые розы и пионы в пастельных тонах",
-      "Белые деревянные арки с цветочными гирляндами",
-      "Меню из лёгких блюд прованской кухни",
-      "Музыкальный квартет с классическими мелодиями",
-    ],
-    mood: "Нежность · Романтика · Изысканность",
-    decor: "🌹",
+    bg: "#FDF3EE",
+    accentBg: "#F5DDD5",
+    accent: "#BF6D5A",
+    num: "01",
+    tag: "Вариант 1",
+    title: "Эффект присутствия",
+    lead: "Именинница будет знать, что её ждёт сюрприз, но каким именно он будет — нет.",
+    body: "Проживаем заново ключевые события жизни Галины — первая любовь, расставание, победа, первый заработок, потеря — как перформансы. Каждый вечер завершается ужином, который является «вкусом» того времени.",
+    note: "Для проведения используются природные локации невероятной красоты, которые будут только усиливать восприятие.",
+    footer: "Для этого варианта необходимо провести интервью с именинницей",
   },
   {
     id: 2,
     type: "concept",
-    bg: "from-pastel-lavender to-pastel-cream",
-    accent: "#9B7EC8",
-    label: "Концепция 2",
-    title: "Лавандовые поля",
-    subtitle: "Праздник вдохновлённый летним Провансом",
-    details: [
-      "Фиолетово-белая флористика с лавандой",
-      "Ароматические свечи и диффузоры с лавандой",
-      "Фотозона с корзинами сухоцветов",
-      "Авторские лавандовые десерты",
-    ],
-    mood: "Спокойствие · Уют · Аромат",
-    decor: "💜",
+    bg: "#F5F0FA",
+    accentBg: "#E8D8F5",
+    accent: "#8A65B5",
+    num: "02",
+    tag: "Вариант 2",
+    title: "Архетипы женщины",
+    lead: "Мама. Женщина. Вселенная. Муза.",
+    body: "Длинный единый стол в центре пространства — на нём рулон жатой бумаги с фразами и словами именинницы. На возвышении — рассказчик (известный актёр), в руках которого конец рулона. Пространство дополняется летящими тканевыми полотнами.",
+    note: "Вокруг стола собирается семья. Каждый описывает именинницу с одной или нескольких граней её личности: как мать, как музу, как наставника. Они могут прикоснуться к рулону, добавить свои слова — и это становится настоящим творческим актом.",
+    footer: "Для этого варианта необходимо провести интервью с каждым членом семьи",
   },
   {
     id: 3,
-    type: "concept",
-    bg: "from-pastel-peach to-pastel-cream",
-    accent: "#D4845A",
-    label: "Концепция 3",
-    title: "Персиковый закат",
-    subtitle: "Тёплый вечер в оттенках персика и золота",
-    details: [
-      "Декор в тонах персика, коралла и золота",
-      "Терракотовая посуда и льняные скатерти",
-      "Фуршетные столы с фруктами и сырами",
-      "Живой джаз или акустическая гитара",
-    ],
-    mood: "Теплота · Радость · Золотой час",
-    decor: "🍑",
-  },
-  {
-    id: 4,
-    type: "concept",
-    bg: "from-pastel-mint to-pastel-cream",
-    accent: "#5AAA8A",
-    label: "Концепция 4",
-    title: "Утро в саду",
-    subtitle: "Брunch-вечеринка в свежем утреннем стиле",
-    details: [
-      "Зелёный декор с суккулентами и зеленью",
-      "Бранч-меню с панкейками и смузи",
-      "Ботанические принты в оформлении",
-      "Мастер-класс по флористике для гостей",
-    ],
-    mood: "Свежесть · Природа · Вдохновение",
-    decor: "🌿",
-  },
-  {
-    id: 5,
-    type: "concept",
-    bg: "from-pastel-sky to-pastel-cream",
-    accent: "#5A8AC8",
-    label: "Концепция 5",
-    title: "Небесный бал",
-    subtitle: "Торжественный вечер в небесно-голубых тонах",
-    details: [
-      "Голубые и белые воздушные шары и ткани",
-      "Хрустальный декор и зеркальные поверхности",
-      "Гала-ужин с дресс-кодом «белое и голубое»",
-      "Фейерверк или световое шоу в финале",
-    ],
-    mood: "Торжество · Сияние · Волшебство",
-    decor: "✨",
-  },
-  {
-    id: 6,
     type: "final",
-    bg: "from-pastel-rose via-pastel-lavender to-pastel-peach",
-    accent: "#C084A0",
-    label: "Итог",
+    bg: "#FDF6F0",
+    accentBg: "#F9E8E0",
+    accent: "#C07A6A",
     title: "Выбираем\nконцепцию",
     subtitle: "Каждая идея создана с любовью для особенного дня Галины",
-    decor: "🎂",
+    cards: [
+      { num: "01", name: "Эффект присутствия", accent: "#BF6D5A", bg: "#F5DDD5" },
+      { num: "02", name: "Архетипы женщины", accent: "#8A65B5", bg: "#E8D8F5" },
+    ],
   },
-];
-
-const conceptColors = [
-  { dot: "#D4749A", name: "Розовый сад" },
-  { dot: "#9B7EC8", name: "Лавандовые поля" },
-  { dot: "#D4845A", name: "Персиковый закат" },
-  { dot: "#5AAA8A", name: "Утро в саду" },
-  { dot: "#5A8AC8", name: "Небесный бал" },
 ];
 
 export default function Index() {
   const [current, setCurrent] = useState(0);
   const [animating, setAnimating] = useState(false);
-  const [direction, setDirection] = useState<"next" | "prev">("next");
+  const [dir, setDir] = useState<"next" | "prev">("next");
 
   const goTo = (idx: number) => {
-    if (animating || idx === current) return;
-    setDirection(idx > current ? "next" : "prev");
+    if (animating || idx === current || idx < 0 || idx >= slides.length) return;
+    setDir(idx > current ? "next" : "prev");
     setAnimating(true);
     setTimeout(() => {
       setCurrent(idx);
       setAnimating(false);
-    }, 320);
+    }, 300);
   };
 
-  const next = () => goTo(Math.min(current + 1, slides.length - 1));
-  const prev = () => goTo(Math.max(current - 1, 0));
-
   useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      if (e.key === "ArrowRight" || e.key === "ArrowDown") next();
-      if (e.key === "ArrowLeft" || e.key === "ArrowUp") prev();
+    const h = (e: KeyboardEvent) => {
+      if (e.key === "ArrowRight" || e.key === "ArrowDown") goTo(current + 1);
+      if (e.key === "ArrowLeft" || e.key === "ArrowUp") goTo(current - 1);
     };
-    window.addEventListener("keydown", handler);
-    return () => window.removeEventListener("keydown", handler);
+    window.addEventListener("keydown", h);
+    return () => window.removeEventListener("keydown", h);
   }, [current, animating]);
 
   const slide = slides[current];
 
   return (
-    <div className="w-screen h-screen overflow-hidden bg-gray-100 flex items-center justify-center font-body">
-      {/* Slide container — 16:9 */}
+    <div
+      className="w-screen h-screen overflow-hidden flex items-center justify-center"
+      style={{ background: "#E8E2DC" }}
+    >
       <div
-        className="relative bg-white shadow-2xl"
+        className="relative overflow-hidden shadow-2xl"
         style={{
           width: "min(100vw, calc(100vh * 16 / 9))",
           height: "min(100vh, calc(100vw * 9 / 16))",
-          maxWidth: "1280px",
-          maxHeight: "720px",
+          maxWidth: 1280,
+          maxHeight: 720,
+          background: slide.bg,
+          transition: "background 0.6s ease",
+          borderRadius: 2,
         }}
       >
-        {/* Background gradient */}
+        {/* Accent blobs */}
         <div
-          className={`absolute inset-0 bg-gradient-to-br ${slide.bg} transition-all duration-700`}
-        />
-
-        {/* Decorative circles */}
-        <div
-          className="absolute top-[-10%] right-[-8%] w-[40%] aspect-square rounded-full opacity-20 blur-3xl"
-          style={{ background: slide.accent }}
-        />
-        <div
-          className="absolute bottom-[-15%] left-[-5%] w-[35%] aspect-square rounded-full opacity-15 blur-3xl"
-          style={{ background: slide.accent }}
-        />
-
-        {/* Subtle dot grid */}
-        <div
-          className="absolute inset-0 opacity-[0.04]"
           style={{
-            backgroundImage: `radial-gradient(circle, #666 1px, transparent 1px)`,
-            backgroundSize: "32px 32px",
+            position: "absolute", top: "-20%", right: "-10%",
+            width: "45%", paddingBottom: "45%", borderRadius: "50%",
+            background: slide.accentBg, opacity: 0.8, filter: "blur(60px)",
+            transition: "background 0.6s ease", pointerEvents: "none",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute", bottom: "-20%", left: "-8%",
+            width: "35%", paddingBottom: "35%", borderRadius: "50%",
+            background: slide.accentBg, opacity: 0.5, filter: "blur(50px)",
+            transition: "background 0.6s ease", pointerEvents: "none",
           }}
         />
 
-        {/* Content */}
+        {/* Main content */}
         <div
-          className={`relative h-full flex flex-col transition-all duration-300 ${
-            animating
-              ? direction === "next"
-                ? "opacity-0 translate-x-4"
-                : "opacity-0 -translate-x-4"
-              : "opacity-100 translate-x-0"
-          }`}
+          className="relative h-full flex flex-col"
+          style={{
+            opacity: animating ? 0 : 1,
+            transform: animating ? `translateX(${dir === "next" ? "18px" : "-18px"})` : "translateX(0)",
+            transition: "opacity 0.28s ease, transform 0.28s ease",
+          }}
         >
-          {/* Header bar */}
-          <div className="flex items-center justify-between px-[5%] pt-[3.5%]">
-            <div className="flex items-center gap-2">
-              <span className="text-[1.1vw] font-body font-light tracking-widest uppercase" style={{ color: slide.accent }}>
-                День рождения Галины
-              </span>
-            </div>
-            <div className="flex items-center gap-[0.6vw]">
+          {/* Top bar */}
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "3% 5% 0" }}>
+            <span style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(8px, 1vw, 13px)", letterSpacing: "0.25em", textTransform: "uppercase", color: slide.accent, opacity: 0.65 }}>
+              День рождения Галины
+            </span>
+            <div style={{ display: "flex", gap: "clamp(4px, 0.6vw, 8px)", alignItems: "center" }}>
               {slides.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => goTo(i)}
-                  className="rounded-full transition-all duration-300"
-                  style={{
-                    width: i === current ? "2vw" : "0.6vw",
-                    height: "0.6vw",
-                    minWidth: i === current ? 20 : 6,
-                    minHeight: 6,
-                    background: i === current ? slide.accent : `${slide.accent}55`,
-                  }}
-                />
+                <button key={i} onClick={() => goTo(i)} style={{ width: i === current ? "clamp(16px, 2vw, 24px)" : "clamp(5px, 0.6vw, 8px)", height: "clamp(5px, 0.6vw, 8px)", borderRadius: 99, background: i === current ? slide.accent : `${slide.accent}44`, border: "none", cursor: "pointer", transition: "all 0.3s ease", padding: 0 }} />
               ))}
             </div>
           </div>
 
-          {/* Main content */}
-          {slide.type === "title" && (
-            <div className="flex-1 flex flex-col items-center justify-center text-center px-[10%]">
-              <div className="text-[6vw] mb-[1.5vw]">{slide.decor}</div>
-              <h1
-                className="font-display italic font-light leading-tight mb-[2vw]"
-                style={{
-                  fontSize: "clamp(32px, 7vw, 90px)",
-                  color: slide.accent,
-                  lineHeight: 1.1,
-                  whiteSpace: "pre-line",
-                }}
-              >
-                {slide.title}
-              </h1>
-              <div
-                className="w-[8vw] h-px mb-[2vw]"
-                style={{ background: `${slide.accent}66` }}
-              />
-              <p
-                className="font-body font-light tracking-[0.3em] uppercase"
-                style={{ fontSize: "clamp(10px, 1.4vw, 18px)", color: `${slide.accent}CC` }}
-              >
-                {slide.subtitle}
-              </p>
-
-              {/* Concept preview dots */}
-              <div className="flex gap-[2vw] mt-[4vw]">
-                {conceptColors.map((c, i) => (
+          {/* TITLE */}
+          {slide.type === "title" && (() => { const s = slide as TitleSlide; return (
+            <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "2% 8%", gap: "4%" }}>
+              <div style={{ flex: "0 0 50%" }}>
+                <div style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(8px, 1vw, 12px)", letterSpacing: "0.3em", textTransform: "uppercase", color: s.accent, opacity: 0.55, marginBottom: "clamp(8px, 1.5vw, 20px)" }}>
+                  Варианты концепций
+                </div>
+                <h1 style={{ fontFamily: "Cormorant, serif", fontStyle: "italic", fontWeight: 300, fontSize: "clamp(30px, 6.5vw, 82px)", lineHeight: 1.05, color: s.accent, whiteSpace: "pre-line", margin: 0, marginBottom: "clamp(10px, 2vw, 28px)" }}>
+                  {s.title}
+                </h1>
+                <div style={{ width: "clamp(24px, 4vw, 50px)", height: 1, background: `${s.accent}44`, marginBottom: "clamp(8px, 1.5vw, 20px)" }} />
+                <p style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(9px, 1.1vw, 14px)", color: s.accent, opacity: 0.55, letterSpacing: "0.08em", margin: 0 }}>
+                  {s.subtitle}
+                </p>
+              </div>
+              <div style={{ flex: "0 0 42%", display: "flex", flexDirection: "column", gap: "clamp(8px, 1.5vw, 18px)" }}>
+                {s.variants.map((v, i) => (
                   <button
                     key={i}
                     onClick={() => goTo(i + 1)}
-                    className="flex flex-col items-center gap-[0.5vw] group"
+                    style={{ display: "flex", alignItems: "center", gap: "clamp(8px, 1.5vw, 18px)", padding: "clamp(10px, 1.8vw, 22px) clamp(12px, 2vw, 24px)", background: s.accentBg, border: `1px solid ${s.accent}22`, borderRadius: 8, cursor: "pointer", transition: "all 0.2s ease", textAlign: "left" }}
+                    onMouseEnter={e => (e.currentTarget.style.borderColor = `${s.accent}55`)}
+                    onMouseLeave={e => (e.currentTarget.style.borderColor = `${s.accent}22`)}
                   >
-                    <div
-                      className="rounded-full transition-transform group-hover:scale-110"
-                      style={{
-                        width: "clamp(8px, 1.2vw, 14px)",
-                        height: "clamp(8px, 1.2vw, 14px)",
-                        background: c.dot,
-                      }}
-                    />
-                    <span
-                      className="font-body font-light opacity-60 group-hover:opacity-100 transition-opacity"
-                      style={{ fontSize: "clamp(7px, 0.9vw, 11px)", color: c.dot }}
-                    >
-                      {i + 1}
-                    </span>
+                    <span style={{ fontFamily: "Cormorant, serif", fontStyle: "italic", fontSize: "clamp(20px, 3vw, 38px)", color: s.accent, opacity: 0.35, lineHeight: 1, flexShrink: 0 }}>{v.num}</span>
+                    <span style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 400, fontSize: "clamp(10px, 1.3vw, 16px)", color: s.accent }}>{v.name}</span>
+                    <Icon name="ArrowRight" size={14} style={{ marginLeft: "auto", color: s.accent, opacity: 0.35 }} />
                   </button>
                 ))}
               </div>
             </div>
-          )}
+          ); })()}
 
-          {slide.type === "concept" && (
-            <div className="flex-1 flex px-[6%] pb-[4%] gap-[4%]">
-              {/* Left */}
-              <div className="flex flex-col justify-center w-[48%]">
-                <span
-                  className="font-body font-light tracking-[0.3em] uppercase mb-[1.5vw] block"
-                  style={{ fontSize: "clamp(9px, 1vw, 13px)", color: `${slide.accent}99` }}
-                >
-                  {slide.label}
-                </span>
-                <div className="text-[3.5vw] mb-[1.5vw]">{slide.decor}</div>
-                <h2
-                  className="font-display italic font-light leading-tight mb-[1.5vw]"
-                  style={{
-                    fontSize: "clamp(24px, 5.5vw, 72px)",
-                    color: slide.accent,
-                    lineHeight: 1.05,
-                  }}
-                >
-                  {slide.title}
+          {/* CONCEPT */}
+          {slide.type === "concept" && (() => { const s = slide as ConceptSlide; return (
+            <div style={{ flex: 1, display: "flex", padding: "1.5% 6% 1.5%", gap: "4%" }}>
+              <div style={{ flex: "0 0 37%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "clamp(4px, 0.6vw, 8px)", marginBottom: "clamp(8px, 1.5vw, 18px)" }}>
+                  <div style={{ width: "clamp(14px, 1.8vw, 22px)", height: 1, background: s.accent, opacity: 0.45 }} />
+                  <span style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(8px, 0.9vw, 12px)", letterSpacing: "0.3em", textTransform: "uppercase", color: s.accent, opacity: 0.65 }}>{s.tag}</span>
+                </div>
+                <div style={{ fontFamily: "Cormorant, serif", fontStyle: "italic", fontSize: "clamp(50px, 8vw, 100px)", lineHeight: 0.85, color: s.accent, opacity: 0.08, userSelect: "none", marginBottom: "clamp(-24px, -2.5vw, -14px)" }}>
+                  {s.num}
+                </div>
+                <h2 style={{ fontFamily: "Cormorant, serif", fontStyle: "italic", fontWeight: 300, fontSize: "clamp(22px, 4vw, 52px)", lineHeight: 1.05, color: s.accent, margin: 0, marginBottom: "clamp(8px, 1.5vw, 18px)", position: "relative" }}>
+                  {s.title}
                 </h2>
-                <p
-                  className="font-body font-light leading-relaxed mb-[2.5vw]"
-                  style={{ fontSize: "clamp(10px, 1.3vw, 17px)", color: "#6B5C5C" }}
-                >
-                  {slide.subtitle}
+                <p style={{ fontFamily: "Cormorant, serif", fontStyle: "italic", fontSize: "clamp(11px, 1.45vw, 18px)", color: s.accent, opacity: 0.8, lineHeight: 1.45, margin: 0 }}>
+                  {s.lead}
                 </p>
-                <div
-                  className="inline-block px-[1.5vw] py-[0.6vw] rounded-full"
-                  style={{
-                    background: `${slide.accent}18`,
-                    fontSize: "clamp(8px, 1vw, 13px)",
-                    color: slide.accent,
-                    fontFamily: "Golos Text",
-                    fontWeight: 300,
-                    letterSpacing: "0.08em",
-                  }}
-                >
-                  {slide.mood}
+              </div>
+              <div style={{ width: 1, background: `${s.accent}18`, flexShrink: 0, margin: "4% 0" }} />
+              <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", gap: "clamp(10px, 1.8vw, 20px)" }}>
+                <p style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(10px, 1.2vw, 15px)", lineHeight: 1.75, color: "#4A3F3A", margin: 0 }}>
+                  {s.body}
+                </p>
+                <div style={{ padding: "clamp(8px, 1.2vw, 14px) clamp(10px, 1.5vw, 18px)", background: s.accentBg, borderLeft: `3px solid ${s.accent}55`, borderRadius: "0 6px 6px 0" }}>
+                  <p style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(9px, 1.1vw, 14px)", lineHeight: 1.65, color: "#4A3F3A", margin: 0 }}>
+                    {s.note}
+                  </p>
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: "clamp(5px, 0.7vw, 9px)", paddingTop: "clamp(4px, 0.6vw, 8px)", borderTop: `1px solid ${s.accent}15` }}>
+                  <Icon name="Info" size={12} style={{ color: s.accent, opacity: 0.45, flexShrink: 0 }} />
+                  <span style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(8px, 0.9vw, 11px)", color: s.accent, opacity: 0.55, letterSpacing: "0.03em" }}>
+                    {s.footer}
+                  </span>
                 </div>
               </div>
-
-              {/* Right — details */}
-              <div className="flex flex-col justify-center w-[48%] gap-[1.8vw]">
-                {slide.details?.map((d, i) => (
-                  <div key={i} className="flex items-start gap-[1.2vw]">
-                    <div
-                      className="shrink-0 rounded-full mt-[0.4vw]"
-                      style={{
-                        width: "clamp(4px, 0.5vw, 7px)",
-                        height: "clamp(4px, 0.5vw, 7px)",
-                        background: slide.accent,
-                        opacity: 0.6,
-                      }}
-                    />
-                    <p
-                      className="font-body font-light leading-snug"
-                      style={{ fontSize: "clamp(10px, 1.25vw, 16px)", color: "#6B5C5C" }}
-                    >
-                      {d}
-                    </p>
-                  </div>
-                ))}
-              </div>
             </div>
-          )}
+          ); })()}
 
-          {slide.type === "final" && (
-            <div className="flex-1 flex flex-col items-center justify-center text-center px-[10%]">
-              <div className="text-[5vw] mb-[2vw]">{slide.decor}</div>
-              <h2
-                className="font-display italic font-light leading-tight mb-[2.5vw]"
-                style={{
-                  fontSize: "clamp(28px, 5.5vw, 70px)",
-                  color: slide.accent,
-                  whiteSpace: "pre-line",
-                  lineHeight: 1.1,
-                }}
-              >
-                {slide.title}
+          {/* FINAL */}
+          {slide.type === "final" && (() => { const s = slide as FinalSlide; return (
+            <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "2% 10%", gap: "clamp(12px, 2.5vw, 32px)" }}>
+              <h2 style={{ fontFamily: "Cormorant, serif", fontStyle: "italic", fontWeight: 300, fontSize: "clamp(26px, 5.5vw, 68px)", lineHeight: 1.05, color: s.accent, textAlign: "center", whiteSpace: "pre-line", margin: 0 }}>
+                {s.title}
               </h2>
-              <p
-                className="font-body font-light mb-[3vw]"
-                style={{ fontSize: "clamp(10px, 1.3vw, 17px)", color: "#6B5C5C", maxWidth: "60%" }}
-              >
-                {slide.subtitle}
+              <p style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(9px, 1.1vw, 14px)", color: s.accent, opacity: 0.55, textAlign: "center", margin: 0, letterSpacing: "0.05em" }}>
+                {s.subtitle}
               </p>
-
-              <div className="flex gap-[1.5vw] flex-wrap justify-center">
-                {conceptColors.map((c, i) => (
+              <div style={{ display: "flex", gap: "clamp(10px, 2vw, 24px)", marginTop: "clamp(4px, 0.8vw, 10px)" }}>
+                {s.cards.map((c, i) => (
                   <button
                     key={i}
                     onClick={() => goTo(i + 1)}
-                    className="flex items-center gap-[0.7vw] px-[1.5vw] py-[0.7vw] rounded-full border transition-all hover:shadow-md"
-                    style={{
-                      borderColor: `${c.dot}44`,
-                      background: `${c.dot}14`,
-                    }}
+                    style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", padding: "clamp(12px, 2vw, 24px) clamp(16px, 2.5vw, 30px)", background: c.bg, border: `1px solid ${c.accent}22`, borderRadius: 10, cursor: "pointer", transition: "all 0.2s", minWidth: "clamp(110px, 15vw, 180px)", textAlign: "left" }}
+                    onMouseEnter={e => (e.currentTarget.style.borderColor = `${c.accent}55`)}
+                    onMouseLeave={e => (e.currentTarget.style.borderColor = `${c.accent}22`)}
                   >
-                    <div
-                      className="rounded-full shrink-0"
-                      style={{
-                        width: "clamp(6px, 0.8vw, 10px)",
-                        height: "clamp(6px, 0.8vw, 10px)",
-                        background: c.dot,
-                      }}
-                    />
-                    <span
-                      className="font-body font-light"
-                      style={{ fontSize: "clamp(9px, 1vw, 13px)", color: c.dot }}
-                    >
-                      {c.name}
-                    </span>
+                    <span style={{ fontFamily: "Cormorant, serif", fontStyle: "italic", fontSize: "clamp(18px, 2.5vw, 32px)", color: c.accent, opacity: 0.35, lineHeight: 1, marginBottom: "clamp(4px, 0.6vw, 8px)" }}>{c.num}</span>
+                    <span style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 400, fontSize: "clamp(9px, 1.1vw, 14px)", color: c.accent }}>{c.name}</span>
                   </button>
                 ))}
               </div>
             </div>
-          )}
+          ); })()}
 
-          {/* Footer navigation */}
-          <div className="flex items-center justify-between px-[5%] pb-[3%]">
-            <button
-              onClick={prev}
-              disabled={current === 0}
-              className="flex items-center gap-[0.8vw] transition-all disabled:opacity-20 hover:opacity-70"
-              style={{ color: slide.accent }}
-            >
-              <Icon name="ChevronLeft" size={16} />
-              <span className="font-body font-light tracking-wider" style={{ fontSize: "clamp(9px, 1vw, 12px)" }}>
-                Назад
-              </span>
+          {/* Bottom nav */}
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 5% 3%" }}>
+            <button onClick={() => goTo(current - 1)} disabled={current === 0} style={{ display: "flex", alignItems: "center", gap: "clamp(4px, 0.6vw, 8px)", background: "none", border: "none", cursor: current === 0 ? "default" : "pointer", opacity: current === 0 ? 0.2 : 0.55, color: slide.accent, transition: "opacity 0.2s", padding: 0 }}>
+              <Icon name="ChevronLeft" size={14} />
+              <span style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(8px, 0.9vw, 11px)", letterSpacing: "0.15em", textTransform: "uppercase" }}>Назад</span>
             </button>
-
-            <span
-              className="font-body font-light tracking-widest"
-              style={{ fontSize: "clamp(8px, 0.9vw, 11px)", color: `${slide.accent}77` }}
-            >
+            <span style={{ fontFamily: "Cormorant, serif", fontSize: "clamp(9px, 1vw, 13px)", color: slide.accent, opacity: 0.4, letterSpacing: "0.15em" }}>
               {current + 1} / {slides.length}
             </span>
-
-            <button
-              onClick={next}
-              disabled={current === slides.length - 1}
-              className="flex items-center gap-[0.8vw] transition-all disabled:opacity-20 hover:opacity-70"
-              style={{ color: slide.accent }}
-            >
-              <span className="font-body font-light tracking-wider" style={{ fontSize: "clamp(9px, 1vw, 12px)" }}>
-                Далее
-              </span>
-              <Icon name="ChevronRight" size={16} />
+            <button onClick={() => goTo(current + 1)} disabled={current === slides.length - 1} style={{ display: "flex", alignItems: "center", gap: "clamp(4px, 0.6vw, 8px)", background: "none", border: "none", cursor: current === slides.length - 1 ? "default" : "pointer", opacity: current === slides.length - 1 ? 0.2 : 0.55, color: slide.accent, transition: "opacity 0.2s", padding: 0 }}>
+              <span style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(8px, 0.9vw, 11px)", letterSpacing: "0.15em", textTransform: "uppercase" }}>Далее</span>
+              <Icon name="ChevronRight" size={14} />
             </button>
           </div>
         </div>
