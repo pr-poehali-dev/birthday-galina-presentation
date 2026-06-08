@@ -7,7 +7,7 @@ type ConceptSlide = SlideBase & { type: "concept"; tag: string; lead: string; pa
 type Concept3Slide = SlideBase & { type: "concept3"; tag: string; lead: string; rooms: string[]; footer: string; image: string };
 type Concept4Slide = SlideBase & { type: "concept4"; tag: string; lead: string; body: string; footer: string; image: string };
 type Concept5Slide = SlideBase & { type: "concept5"; tag: string; para1: string; para2: string; image: string };
-type FinalSlide = SlideBase & { type: "final"; tagline: string; body: string };
+type FinalSlide = SlideBase & { type: "final"; tagline: string; body: string; image?: string };
 type Slide = TitleSlide | ConceptSlide | Concept3Slide | Concept4Slide | Concept5Slide | FinalSlide;
 
 const slides: Slide[] = [
@@ -105,6 +105,7 @@ const slides: Slide[] = [
     title: "Дома на колёсах",
     tagline: "Общее предложение для всех концепций",
     body: "Путешествие в домах на колёсах позволит посетить несколько уникальных мест и не быть привязанным к одной локации. Каждая концепция раскрывается по-новому — через смену пейзажей, атмосферу в пути и свободу выбора следующей точки.",
+    image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/e76cd04b-8aa8-48f6-83c0-0bdf60f3c2c3.jpg",
   },
 ];
 
@@ -385,18 +386,17 @@ export default function Index() {
                   </p>
                 </div>
 
-                {/* Right — декоративная иконка/визуал */}
-                <div style={{ flex: "0 0 38%", display: "flex", alignItems: "center", justifyContent: "center", position: "relative" }}>
-                  {/* Blob */}
-                  <div style={{ position: "absolute", width: "70%", paddingBottom: "70%", borderRadius: "50%", background: s.accentBg, opacity: 0.6, filter: "blur(40px)" }} />
-                  {/* Emoji van */}
-                  <div style={{ position: "relative", textAlign: "center" }}>
-                    <div style={{ fontSize: "clamp(60px, 8vw, 100px)", lineHeight: 1, marginBottom: "clamp(8px, 1.2vw, 16px)" }}>🚐</div>
-                    <div style={{ fontFamily: "Cormorant, serif", fontStyle: "italic", fontSize: "clamp(13px, 1.6vw, 20px)", color: s.accent, opacity: 0.5, letterSpacing: "0.1em" }}>
+                {/* Right — фото кемпера */}
+                {s.image && (
+                  <div style={{ flex: "0 0 45%", position: "relative", overflow: "hidden" }}>
+                    <img src={s.image} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center" }} />
+                    <div style={{ position: "absolute", inset: 0, background: `linear-gradient(to right, ${s.bg} 0%, transparent 20%)` }} />
+                    {/* Подпись */}
+                    <div style={{ position: "absolute", bottom: "6%", right: "6%", fontFamily: "Cormorant, serif", fontStyle: "italic", fontSize: "clamp(11px, 1.4vw, 17px)", color: "#F2EDE6", opacity: 0.7, letterSpacing: "0.08em" }}>
                       свобода пути
                     </div>
                   </div>
-                </div>
+                )}
               </div>
             );
           })()}
