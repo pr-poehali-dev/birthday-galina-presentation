@@ -104,7 +104,7 @@ const slides: Slide[] = [
     accent: "#6B5740",
     title: "Дома на колёсах",
     tagline: "Общее предложение для всех концепций",
-    body: "Путешествие в домах на колёсах позволит посетить несколько уникальных локаций и не быть привязанными к одному месту. Каждая концепция раскрывается по-новому — через смену пейзажей и атмосферу в пути.",
+    body: "Путешествие в домах на колёсах позволит посетить несколько уникальных локаций и не быть привязанными к одному месту. Это добавит приключения и живых впечатлений в каждый сценарий праздника.",
     image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/87e4e508-d6a4-49c5-b8cc-a4e49ad7cfcc.jpg",
   },
 ];
@@ -362,39 +362,32 @@ export default function Index() {
           {slide.type === "final" && (() => {
             const s = slide as FinalSlide;
             return (
-              <div style={{ flex: 1, display: "flex", overflow: "hidden" }}>
-                {/* Left — большой текст */}
-                <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", padding: "6% 5% 6% 7%", gap: "clamp(12px, 2vw, 26px)" }}>
+              <div style={{ flex: 1, position: "relative", overflow: "hidden" }}>
+                {/* Фото на весь фон */}
+                {s.image && (
+                  <img src={s.image} alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center", filter: "brightness(1.15)" }} />
+                )}
+                {/* Лёгкий оверлей только слева под текст */}
+                <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(242,237,230,0.96) 0%, rgba(242,237,230,0.85) 38%, rgba(242,237,230,0.3) 62%, transparent 100%)" }} />
+
+                {/* Текст — левая треть */}
+                <div style={{ position: "relative", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", padding: "6% 52% 6% 7%", gap: "clamp(12px, 2vw, 26px)" }}>
                   {/* Tag */}
                   <div style={{ display: "flex", alignItems: "center", gap: "clamp(4px, 0.6vw, 8px)" }}>
-                    <div style={{ width: "clamp(14px, 1.8vw, 22px)", height: 1, background: s.accent, opacity: 0.45 }} />
-                    <span style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(9px, 1vw, 13px)", letterSpacing: "0.3em", textTransform: "uppercase", color: s.accent, opacity: 0.6 }}>{s.tagline}</span>
+                    <div style={{ width: "clamp(14px, 1.8vw, 22px)", height: 1, background: s.accent, opacity: 0.5 }} />
+                    <span style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(9px, 1vw, 13px)", letterSpacing: "0.3em", textTransform: "uppercase", color: s.accent, opacity: 0.65 }}>{s.tagline}</span>
                   </div>
 
-                  {/* Big title */}
-                  <h2 style={{ fontFamily: "Cormorant, serif", fontStyle: "italic", fontWeight: 300, fontSize: "clamp(36px, 6.5vw, 82px)", lineHeight: 1.0, color: s.accent, margin: 0, whiteSpace: "pre-line" }}>
+                  <h2 style={{ fontFamily: "Cormorant, serif", fontStyle: "italic", fontWeight: 300, fontSize: "clamp(32px, 5.8vw, 74px)", lineHeight: 1.0, color: s.accent, margin: 0, whiteSpace: "pre-line" }}>
                     {s.title}
                   </h2>
 
-                  <div style={{ width: "clamp(30px, 5vw, 60px)", height: 1, background: `${s.accent}44` }} />
+                  <div style={{ width: "clamp(28px, 4vw, 50px)", height: 1, background: `${s.accent}55` }} />
 
-                  {/* Body */}
-                  <p style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(12px, 1.5vw, 18px)", lineHeight: 1.75, color: "#4A3F3A", margin: 0, maxWidth: "85%" }}>
+                  <p style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(12px, 1.45vw, 17px)", lineHeight: 1.75, color: "#3A2E24", margin: 0 }}>
                     {s.body}
                   </p>
                 </div>
-
-                {/* Right — фото кемпера */}
-                {s.image && (
-                  <div style={{ flex: "0 0 45%", position: "relative", overflow: "hidden" }}>
-                    <img src={s.image} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center", filter: "brightness(1.2)" }} />
-                    <div style={{ position: "absolute", inset: 0, background: `linear-gradient(to right, ${s.bg} 0%, transparent 20%)` }} />
-                    {/* Подпись */}
-                    <div style={{ position: "absolute", bottom: "6%", right: "6%", fontFamily: "Cormorant, serif", fontStyle: "italic", fontSize: "clamp(11px, 1.4vw, 17px)", color: "#F2EDE6", opacity: 0.7, letterSpacing: "0.08em" }}>
-                      свобода пути
-                    </div>
-                  </div>
-                )}
               </div>
             );
           })()}
