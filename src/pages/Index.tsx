@@ -49,7 +49,7 @@ const slides: Slide[] = [
     tag: "Вариант 1 · продолжение",
     title: "Эффект присутствия",
     quote: "",
-    body: "Природные локации становятся декорацией для каждого перформанса: заросший луг, берег реки, лесная поляна. Каждое место подобрано под эмоцию той истории, которую предстоит прожить заново. Воссозданные детали, запахи — всё работает на один образ: здесь и сейчас, снова.",
+    body: "Природные локации становятся декорацией для каждого перформанса. Каждое место подобрано под эмоцию той истории, которую предстоит прожить заново. Воссозданные детали, запахи, музыка — всё работает на один образ: здесь и сейчас, снова.",
     image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/28aa57f0-a78c-4556-b9a1-a6b83823d58e.jpg",
   },
   // Концепция 2
@@ -79,7 +79,7 @@ const slides: Slide[] = [
     title: "Архетипы женщины",
     quote: "",
     body: "Вокруг стола собирается семья, каждый человек из которой приносит свою историю и свои чувства — каждый описывает именинницу с одной или нескольких граней её личности: как мать, как музу / возлюбленную, наставника и т.д. Они могут прикоснуться к рулону бумаги, добавить свои слова или просто насладиться атмосферой единства и любви. Этот момент становится не только праздником дня рождения именинницы, но и настоящим творческим актом совместного создания.",
-    image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/2ea64b04-fa78-489f-a5d7-97c1c45bee9e.jpg",
+    image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/776643e1-ba56-4c18-b6dd-94ad808a6df3.jpg",
   },
   // Концепция 3
   {
@@ -526,26 +526,6 @@ export default function Index() {
 
         </div>
 
-        {/* Navigation */}
-        <div style={{ position: "absolute", bottom: "clamp(10px, 2.2vh, 20px)", left: "50%", transform: "translateX(-50%)", display: "flex", alignItems: "center", gap: "clamp(6px, 1.2vw, 14px)", zIndex: 10 }}>
-          {slides.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => goTo(i)}
-              style={{
-                width: i === current ? "clamp(18px, 2.5vw, 30px)" : "clamp(5px, 0.7vw, 8px)",
-                height: "clamp(5px, 0.7vw, 8px)",
-                borderRadius: "clamp(3px, 0.4vw, 4px)",
-                background: i === current ? slide.accent : `${slide.accent}44`,
-                border: "none",
-                cursor: "pointer",
-                padding: 0,
-                transition: "all 0.3s ease",
-              }}
-            />
-          ))}
-        </div>
-
         {/* Arrow buttons */}
         {current > 0 && (
           <button
@@ -563,11 +543,6 @@ export default function Index() {
             ›
           </button>
         )}
-
-        {/* Slide counter */}
-        <div style={{ position: "absolute", top: "clamp(10px, 2vh, 18px)", right: "clamp(12px, 2vw, 22px)", fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(8px, 0.9vw, 11px)", letterSpacing: "0.2em", color: slide.accent, opacity: 0.4, zIndex: 10 }}>
-          {String(current + 1).padStart(2, "0")} / {String(slides.length).padStart(2, "0")}
-        </div>
 
       </div>
     </div>
