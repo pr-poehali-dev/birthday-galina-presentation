@@ -387,7 +387,7 @@ export default function Index() {
                 {/* Right — фото кемпера */}
                 {s.image && (
                   <div style={{ flex: "0 0 45%", position: "relative", overflow: "hidden" }}>
-                    <img src={s.image} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center" }} />
+                    <img src={s.image} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center", filter: "brightness(1.2)" }} />
                     <div style={{ position: "absolute", inset: 0, background: `linear-gradient(to right, ${s.bg} 0%, transparent 20%)` }} />
                     {/* Подпись */}
                     <div style={{ position: "absolute", bottom: "6%", right: "6%", fontFamily: "Cormorant, serif", fontStyle: "italic", fontSize: "clamp(11px, 1.4vw, 17px)", color: "#F2EDE6", opacity: 0.7, letterSpacing: "0.08em" }}>
