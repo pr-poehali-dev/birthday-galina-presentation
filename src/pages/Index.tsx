@@ -21,7 +21,7 @@ const slides: Slide[] = [
     accentBg: "#F9E8E0",
     accent: "#C07A6A",
     title: "Предложение по концепциям\nДня рождения для Галины",
-    subtitle: "Август / Сентябрь",
+    subtitle: "",
   },
   // Концепция 1
   {
@@ -48,9 +48,9 @@ const slides: Slide[] = [
     accent: "#BF6D5A",
     tag: "Вариант 1 · продолжение",
     title: "Эффект присутствия",
-    quote: "Жить — значит снова и снова выбирать себя",
-    body: "Природные локации становятся декорацией для каждого перформанса: заросший луг, берег реки, лесная поляна. Каждое место подобрано под эмоцию той истории, которую предстоит прожить заново. Воссозданные детали, запахи, музыка тех лет — всё работает на один образ: здесь и сейчас, снова.",
-    image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/f5cfa9ef-07d3-42ab-b447-74c870a2f7a8.jpg",
+    quote: "",
+    body: "Природные локации становятся декорацией для каждого перформанса: заросший луг, берег реки, лесная поляна. Каждое место подобрано под эмоцию той истории, которую предстоит прожить заново. Воссозданные детали, запахи — всё работает на один образ: здесь и сейчас, снова.",
+    image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/28aa57f0-a78c-4556-b9a1-a6b83823d58e.jpg",
   },
   // Концепция 2
   {
@@ -64,7 +64,7 @@ const slides: Slide[] = [
     lead: "Мама. Женщина. Вселенная. Муза.",
     paragraphs: [
       "Уютное пространство, нежный свет заката, длинный единый стол. На нём — рулон жатой бумаги с фразами и словами именинницы: мыслями, мечтами, воспоминаниями.",
-      "Рулон уходит в сценическое пространство, где сидит рассказчик — известный актёр. Вокруг стола собирается семья: каждый описывает Галину как мать, музу, наставника — и прикасаясь к рулону, добавляет своё слово.",
+      "Рулон уходит в сценическое пространство, где сидит рассказчик — известный актёр. Пространство дополняется летящими тканевыми полотнами.",
     ],
     footer: "Для этого варианта необходимо провести интервью с каждым членом семьи",
     image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/bucket/b7f8b29b-b200-4c80-8164-8e5c5b63a557.jpg",
@@ -77,9 +77,9 @@ const slides: Slide[] = [
     accent: "#8A65B5",
     tag: "Вариант 2 · продолжение",
     title: "Архетипы женщины",
-    quote: "Каждое слово — живая нить между людьми",
-    body: "Летящие тканевые полотна, свечи, тихая музыка. Слова на рулоне — это не просто текст, а совместное творческое полотно семьи. В финале рулон сворачивается и остаётся у именинницы как артефакт этого дня — живой документ любви и памяти.",
-    image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/d432a221-797f-44a6-9a01-b192726f0500.jpg",
+    quote: "",
+    body: "Вокруг стола собирается семья, каждый человек из которой приносит свою историю и свои чувства — каждый описывает именинницу с одной или нескольких граней её личности: как мать, как музу / возлюбленную, наставника и т.д. Они могут прикоснуться к рулону бумаги, добавить свои слова или просто насладиться атмосферой единства и любви. Этот момент становится не только праздником дня рождения именинницы, но и настоящим творческим актом совместного создания.",
+    image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/2ea64b04-fa78-489f-a5d7-97c1c45bee9e.jpg",
   },
   // Концепция 3
   {
@@ -107,8 +107,8 @@ const slides: Slide[] = [
     accent: "#8B6340",
     tag: "Вариант 3 · продолжение",
     title: "Машина времени",
-    body: "Каждое пространство воссоздаётся в деталях: музыка, запахи, реквизит той эпохи. Участники не просто наблюдают — они проживают момент: снова слышат те слова, снова чувствуют то тепло. Это не реконструкция прошлого — это подарок из него.",
-    image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/e99d2ad3-0f83-4959-aba2-1155eac9854f.jpg",
+    body: "Каждое пространство воссоздаётся в деталях: музыка, запахи, реквизит. Участники не просто наблюдают — они проживают момент: снова слышат те слова, снова чувствуют то тепло. Это не реконструкция прошлого — это подарок из него.",
+    image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/1b8b6b7c-4812-4ae4-8a71-6bd69549a4d0.jpg",
   },
   // Концепция 4
   {
@@ -235,9 +235,6 @@ export default function Index() {
             const s = slide as TitleSlide;
             return (
               <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "2% 10%" }}>
-                <div style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(8px, 1vw, 12px)", letterSpacing: "0.35em", textTransform: "uppercase", color: s.accent, opacity: 0.5, marginBottom: "clamp(12px, 2vw, 26px)" }}>
-                  {s.subtitle}
-                </div>
                 <h1 style={{ fontFamily: "Cormorant, serif", fontStyle: "italic", fontWeight: 300, fontSize: "clamp(30px, 6.5vw, 84px)", lineHeight: 1.1, color: s.accent, whiteSpace: "pre-line", margin: 0, textAlign: "center", marginBottom: "clamp(12px, 2.5vw, 32px)" }}>
                   {s.title}
                 </h1>
@@ -300,9 +297,11 @@ export default function Index() {
                   <h2 style={{ fontFamily: "Cormorant, serif", fontStyle: "italic", fontWeight: 300, fontSize: "clamp(26px, 4.5vw, 58px)", lineHeight: 1.0, color: s.accent, margin: 0 }}>
                     {s.title}
                   </h2>
-                  <p style={{ fontFamily: "Cormorant, serif", fontStyle: "italic", fontSize: "clamp(13px, 1.7vw, 21px)", color: s.accent, opacity: 0.75, lineHeight: 1.35, margin: 0 }}>
-                    «{s.quote}»
-                  </p>
+                  {s.quote && (
+                    <p style={{ fontFamily: "Cormorant, serif", fontStyle: "italic", fontSize: "clamp(13px, 1.7vw, 21px)", color: s.accent, opacity: 0.75, lineHeight: 1.35, margin: 0 }}>
+                      «{s.quote}»
+                    </p>
+                  )}
                   <div style={{ width: "clamp(24px, 3.5vw, 44px)", height: 1, background: `${s.accent}44` }} />
                   <p style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(11px, 1.3vw, 15px)", lineHeight: 1.75, color: "#3A2E24", margin: 0 }}>
                     {s.body}
