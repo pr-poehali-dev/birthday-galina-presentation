@@ -1,14 +1,17 @@
 import { useState, useEffect } from "react";
 
-type Card = { num: string; name: string; accent: string; bg: string };
 type SlideBase = { id: number; type: string; bg: string; accentBg: string; accent: string; title: string };
 type TitleSlide = SlideBase & { type: "title"; subtitle: string };
 type ConceptSlide = SlideBase & { type: "concept"; tag: string; lead: string; paragraphs: string[]; footer: string; image?: string };
+type ConceptB = SlideBase & { type: "conceptB"; tag: string; quote: string; body: string; image: string };
 type Concept3Slide = SlideBase & { type: "concept3"; tag: string; lead: string; rooms: string[]; footer: string; image: string };
+type Concept3B = SlideBase & { type: "concept3B"; tag: string; body: string; image: string };
 type Concept4Slide = SlideBase & { type: "concept4"; tag: string; lead: string; body: string; footer: string; image: string };
+type Concept4B = SlideBase & { type: "concept4B"; tag: string; body: string; image: string };
 type Concept5Slide = SlideBase & { type: "concept5"; tag: string; para1: string; para2: string; image: string };
+type Concept5B = SlideBase & { type: "concept5B"; tag: string; body: string; image: string };
 type FinalSlide = SlideBase & { type: "final"; tagline: string; body: string; image?: string };
-type Slide = TitleSlide | ConceptSlide | Concept3Slide | Concept4Slide | Concept5Slide | FinalSlide;
+type Slide = TitleSlide | ConceptSlide | ConceptB | Concept3Slide | Concept3B | Concept4Slide | Concept4B | Concept5Slide | Concept5B | FinalSlide;
 
 const slides: Slide[] = [
   {
@@ -17,9 +20,10 @@ const slides: Slide[] = [
     bg: "#FDF6F0",
     accentBg: "#F9E8E0",
     accent: "#C07A6A",
-    title: "День рождения\nГалины",
-    subtitle: "Варианты концепций · Август / Сентябрь",
+    title: "Предложение по концепциям\nДня рождения для Галины",
+    subtitle: "Август / Сентябрь",
   },
+  // Концепция 1
   {
     id: 1,
     type: "concept",
@@ -38,6 +42,19 @@ const slides: Slide[] = [
   },
   {
     id: 2,
+    type: "conceptB",
+    bg: "#FDF3EE",
+    accentBg: "#F5DDD5",
+    accent: "#BF6D5A",
+    tag: "Вариант 1 · продолжение",
+    title: "Эффект присутствия",
+    quote: "Жить — значит снова и снова выбирать себя",
+    body: "Природные локации становятся декорацией для каждого перформанса: заросший луг, берег реки, лесная поляна. Каждое место подобрано под эмоцию той истории, которую предстоит прожить заново. Воссозданные детали, запахи, музыка тех лет — всё работает на один образ: здесь и сейчас, снова.",
+    image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/f5cfa9ef-07d3-42ab-b447-74c870a2f7a8.jpg",
+  },
+  // Концепция 2
+  {
+    id: 3,
     type: "concept",
     bg: "#F5F0FA",
     accentBg: "#E8D8F5",
@@ -46,16 +63,27 @@ const slides: Slide[] = [
     title: "Архетипы женщины",
     lead: "Мама. Женщина. Вселенная. Муза.",
     paragraphs: [
-      "Представьте себе уютное пространство, где нежный свет заката окутывает атмосферу теплом и уютом. В центре этого пространства длинный единый стол, словно приглашение к общению и единству.",
-      "На столе расстелен рулон жатой бумаги, который словно живет своей жизнью. На поверхности нанесены фразы и слова именинницы — искренние мысли, мечты и воспоминания. Каждое слово словно оживает, рассказывая историю о её жизни.",
-      "Рулон бумаги продолжает свой путь за пределами стола, уходит в сценическое пространство. На возвышении сидит мужчина — рассказчик (известный актёр). Пространство дополняется летящими тканевыми полотнами.",
-      "Вокруг стола собирается семья — каждый описывает именинницу как мать, музу, наставника. Они прикасаются к рулону, добавляют свои слова — и это становится настоящим творческим актом совместного создания.",
+      "Уютное пространство, нежный свет заката, длинный единый стол. На нём — рулон жатой бумаги с фразами и словами именинницы: мыслями, мечтами, воспоминаниями.",
+      "Рулон уходит в сценическое пространство, где сидит рассказчик — известный актёр. Вокруг стола собирается семья: каждый описывает Галину как мать, музу, наставника — и прикасаясь к рулону, добавляет своё слово.",
     ],
     footer: "Для этого варианта необходимо провести интервью с каждым членом семьи",
     image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/bucket/b7f8b29b-b200-4c80-8164-8e5c5b63a557.jpg",
   },
   {
-    id: 3,
+    id: 4,
+    type: "conceptB",
+    bg: "#F5F0FA",
+    accentBg: "#E8D8F5",
+    accent: "#8A65B5",
+    tag: "Вариант 2 · продолжение",
+    title: "Архетипы женщины",
+    quote: "Каждое слово — живая нить между людьми",
+    body: "Летящие тканевые полотна, свечи, тихая музыка. Слова на рулоне — это не просто текст, а совместное творческое полотно семьи. В финале рулон сворачивается и остаётся у именинницы как артефакт этого дня — живой документ любви и памяти.",
+    image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/d432a221-797f-44a6-9a01-b192726f0500.jpg",
+  },
+  // Концепция 3
+  {
+    id: 5,
     type: "concept3",
     bg: "#F5EEE6",
     accentBg: "#E8D5C0",
@@ -72,7 +100,19 @@ const slides: Slide[] = [
     image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/bucket/1b1ab2b5-1f0a-4b49-b2af-81b49ad3bfe4.jpg",
   },
   {
-    id: 4,
+    id: 6,
+    type: "concept3B",
+    bg: "#F5EEE6",
+    accentBg: "#E8D5C0",
+    accent: "#8B6340",
+    tag: "Вариант 3 · продолжение",
+    title: "Машина времени",
+    body: "Каждое пространство воссоздаётся в деталях: музыка, запахи, реквизит той эпохи. Участники не просто наблюдают — они проживают момент: снова слышат те слова, снова чувствуют то тепло. Это не реконструкция прошлого — это подарок из него.",
+    image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/e99d2ad3-0f83-4959-aba2-1155eac9854f.jpg",
+  },
+  // Концепция 4
+  {
+    id: 7,
     type: "concept4",
     bg: "#2C3A2A",
     accentBg: "#3D5038",
@@ -85,7 +125,19 @@ const slides: Slide[] = [
     image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/bucket/7aa235f8-930c-4cc9-b3af-ed2bb9cab603.jpg",
   },
   {
-    id: 5,
+    id: 8,
+    type: "concept4B",
+    bg: "#2C3A2A",
+    accentBg: "#3D5038",
+    accent: "#C8A96E",
+    tag: "Вариант 4 · продолжение",
+    title: "Зов Алтая",
+    body: "Священный огонь, круг у костра под звёздным небом, горы на горизонте. Шаманские практики и алтайские ретриты открывают то, что невозможно найти в городе — тишину внутри себя. Этот день рождения станет точкой отсчёта нового этапа.",
+    image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/73f83ec2-a8ed-4b6f-90d5-90819d7adc56.jpg",
+  },
+  // Концепция 5
+  {
+    id: 9,
     type: "concept5",
     bg: "#1A1410",
     accentBg: "#2E2018",
@@ -93,11 +145,23 @@ const slides: Slide[] = [
     title: "Режиссёрская\nверсия",
     tag: "Вариант 5",
     para1: "Этот день рождения — не просто праздник, а режиссёрская версия жизни, где именинница становится главной героиней собственной истории. Вместо привычного застолья — съёмочная площадка: каждый член семьи получает роль (близкие становятся партнёрами по кадру, второстепенными персонажами или антагонистами, которых нужно «переиграть»).",
-    para2: "Смысл не в том, чтобы изобразить чужую жизнь, а чтобы заново прожить свою: взять в руки воображаемый режиссёрский хлопок, сказать «Мотор!» и впустить родных в ту внутреннюю вселенную, где она всегда была главной героиней. Кульминацией становится финальный кадр — общая семейная сцена, которая больше не выглядит как постановка, потому что в ней впервые все играют не роли, а настоящие чувства.",
+    para2: "Смысл не в том, чтобы изобразить чужую жизнь, а чтобы заново прожить свою: взять в руки воображаемый режиссёрский хлопок, сказать «Мотор!» и впустить родных в ту внутреннюю вселенную, где она всегда была главной героиней.",
     image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/bucket/0c639da5-89e4-418d-8a5c-f9eb93f51da1.jpg",
   },
   {
-    id: 6,
+    id: 10,
+    type: "concept5B",
+    bg: "#1A1410",
+    accentBg: "#2E2018",
+    accent: "#D4A85A",
+    tag: "Вариант 5 · продолжение",
+    title: "Режиссёрская\nверсия",
+    body: "Кульминацией становится финальный кадр — общая семейная сцена, которая больше не выглядит как постановка, потому что в ней впервые все играют не роли, а настоящие чувства. Свет гаснет. Аплодисменты. Занавес.",
+    image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/9a0c3122-ec58-4ebc-9100-a175a851777e.jpg",
+  },
+  // Финал
+  {
+    id: 11,
     type: "final",
     bg: "#F2EDE6",
     accentBg: "#E0D5C5",
@@ -172,9 +236,9 @@ export default function Index() {
             return (
               <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "2% 10%" }}>
                 <div style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(8px, 1vw, 12px)", letterSpacing: "0.35em", textTransform: "uppercase", color: s.accent, opacity: 0.5, marginBottom: "clamp(12px, 2vw, 26px)" }}>
-                  Варианты концепций
+                  {s.subtitle}
                 </div>
-                <h1 style={{ fontFamily: "Cormorant, serif", fontStyle: "italic", fontWeight: 300, fontSize: "clamp(42px, 9vw, 112px)", lineHeight: 1.0, color: s.accent, whiteSpace: "pre-line", margin: 0, textAlign: "center", marginBottom: "clamp(12px, 2.5vw, 32px)" }}>
+                <h1 style={{ fontFamily: "Cormorant, serif", fontStyle: "italic", fontWeight: 300, fontSize: "clamp(30px, 6.5vw, 84px)", lineHeight: 1.1, color: s.accent, whiteSpace: "pre-line", margin: 0, textAlign: "center", marginBottom: "clamp(12px, 2.5vw, 32px)" }}>
                   {s.title}
                 </h1>
                 <div style={{ width: "clamp(30px, 5vw, 60px)", height: 1, background: `${s.accent}44` }} />
@@ -182,7 +246,7 @@ export default function Index() {
             );
           })()}
 
-          {/* CONCEPT (варианты 1 и 2) */}
+          {/* CONCEPT (варианты 1 и 2 — первый слайд) */}
           {slide.type === "concept" && (() => {
             const s = slide as ConceptSlide;
             return (
@@ -195,12 +259,12 @@ export default function Index() {
                   <h2 style={{ fontFamily: "Cormorant, serif", fontStyle: "italic", fontWeight: 300, fontSize: "clamp(28px, 5vw, 64px)", lineHeight: 1.0, color: s.accent, margin: 0 }}>
                     {s.title}
                   </h2>
-                  <p style={{ fontFamily: "Cormorant, serif", fontStyle: "italic", fontSize: s.id === 2 ? "clamp(11px, 1.5vw, 18px)" : "clamp(13px, 1.8vw, 22px)", color: s.accent, opacity: 0.85, lineHeight: 1.4, margin: 0 }}>
+                  <p style={{ fontFamily: "Cormorant, serif", fontStyle: "italic", fontSize: "clamp(12px, 1.6vw, 20px)", color: s.accent, opacity: 0.85, lineHeight: 1.4, margin: 0 }}>
                     {s.lead}
                   </p>
                   <div style={{ display: "flex", flexDirection: "column", gap: "clamp(5px, 0.9vw, 11px)" }}>
                     {s.paragraphs.map((p, i) => (
-                      <p key={i} style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: s.id === 2 ? "clamp(9px, 1.1vw, 13px)" : "clamp(11px, 1.35vw, 16px)", lineHeight: 1.65, color: "#4A3F3A", margin: 0 }}>
+                      <p key={i} style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(10px, 1.25vw, 15px)", lineHeight: 1.65, color: "#4A3F3A", margin: 0 }}>
                         {p}
                       </p>
                     ))}
@@ -217,6 +281,33 @@ export default function Index() {
                     <div style={{ position: "absolute", inset: 0, background: `linear-gradient(to right, ${s.bg} 0%, transparent 25%)` }} />
                   </div>
                 )}
+              </div>
+            );
+          })()}
+
+          {/* CONCEPT B — вторые слайды концепций 1 и 2 */}
+          {slide.type === "conceptB" && (() => {
+            const s = slide as ConceptB;
+            return (
+              <div style={{ flex: 1, position: "relative", overflow: "hidden" }}>
+                <img src={s.image} alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center", filter: "brightness(1.05)" }} />
+                <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(253,243,238,0.97) 0%, rgba(253,243,238,0.88) 42%, rgba(253,243,238,0.25) 65%, transparent 100%)" }} />
+                <div style={{ position: "relative", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", padding: "5% 52% 5% 6%", gap: "clamp(12px, 2vw, 24px)" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "clamp(4px, 0.6vw, 8px)" }}>
+                    <div style={{ width: "clamp(14px, 1.8vw, 22px)", height: 1, background: s.accent, opacity: 0.45 }} />
+                    <span style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(8px, 0.9vw, 11px)", letterSpacing: "0.3em", textTransform: "uppercase", color: s.accent, opacity: 0.6 }}>{s.tag}</span>
+                  </div>
+                  <h2 style={{ fontFamily: "Cormorant, serif", fontStyle: "italic", fontWeight: 300, fontSize: "clamp(26px, 4.5vw, 58px)", lineHeight: 1.0, color: s.accent, margin: 0 }}>
+                    {s.title}
+                  </h2>
+                  <p style={{ fontFamily: "Cormorant, serif", fontStyle: "italic", fontSize: "clamp(13px, 1.7vw, 21px)", color: s.accent, opacity: 0.75, lineHeight: 1.35, margin: 0 }}>
+                    «{s.quote}»
+                  </p>
+                  <div style={{ width: "clamp(24px, 3.5vw, 44px)", height: 1, background: `${s.accent}44` }} />
+                  <p style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(11px, 1.3vw, 15px)", lineHeight: 1.75, color: "#3A2E24", margin: 0 }}>
+                    {s.body}
+                  </p>
+                </div>
               </div>
             );
           })()}
@@ -251,16 +342,40 @@ export default function Index() {
                     </span>
                     {s.rooms.map((r, i) => (
                       <div key={i} style={{ display: "flex", alignItems: "center", gap: "clamp(6px, 0.8vw, 10px)" }}>
-                        <div style={{ width: "clamp(4px, 0.45vw, 6px)", height: "clamp(4px, 0.45vw, 6px)", borderRadius: "50%", background: s.accent, opacity: 0.45, flexShrink: 0 }} />
-                        <span style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(11px, 1.25vw, 15px)", color: "#4A3F3A" }}>{r}</span>
+                        <div style={{ width: "clamp(4px, 0.5vw, 6px)", height: "clamp(4px, 0.5vw, 6px)", borderRadius: "50%", background: s.accent, opacity: 0.4, flexShrink: 0 }} />
+                        <span style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(10px, 1.25vw, 15px)", color: "#4A3F3A" }}>{r}</span>
                       </div>
                     ))}
                   </div>
-                  <div style={{ marginTop: "auto", paddingTop: "clamp(5px, 0.7vw, 9px)", borderTop: `1px solid ${s.accent}18` }}>
-                    <span style={{ fontFamily: "Golos Text, sans-serif", fontStyle: "italic", fontWeight: 300, fontSize: "clamp(10px, 1.1vw, 13px)", color: s.accent, opacity: 0.65 }}>
+                  <div style={{ display: "flex", alignItems: "center", paddingTop: "clamp(6px, 0.8vw, 10px)", borderTop: `1px solid ${s.accent}18`, marginTop: "auto" }}>
+                    <span style={{ fontFamily: "Golos Text, sans-serif", fontStyle: "italic", fontWeight: 300, fontSize: "clamp(10px, 1.2vw, 14px)", color: s.accent, opacity: 0.7 }}>
                       {s.footer}
                     </span>
                   </div>
+                </div>
+              </div>
+            );
+          })()}
+
+          {/* CONCEPT 3B — второй слайд Машины времени */}
+          {slide.type === "concept3B" && (() => {
+            const s = slide as Concept3B;
+            return (
+              <div style={{ flex: 1, position: "relative", overflow: "hidden" }}>
+                <img src={s.image} alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center", filter: "brightness(1.05)" }} />
+                <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(245,238,230,0.97) 0%, rgba(245,238,230,0.88) 40%, rgba(245,238,230,0.2) 62%, transparent 100%)" }} />
+                <div style={{ position: "relative", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", padding: "5% 52% 5% 6%", gap: "clamp(12px, 2vw, 24px)" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "clamp(4px, 0.6vw, 8px)" }}>
+                    <div style={{ width: "clamp(14px, 1.8vw, 22px)", height: 1, background: s.accent, opacity: 0.45 }} />
+                    <span style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(8px, 0.9vw, 11px)", letterSpacing: "0.3em", textTransform: "uppercase", color: s.accent, opacity: 0.6 }}>{s.tag}</span>
+                  </div>
+                  <h2 style={{ fontFamily: "Cormorant, serif", fontStyle: "italic", fontWeight: 300, fontSize: "clamp(26px, 4.5vw, 58px)", lineHeight: 1.0, color: s.accent, margin: 0 }}>
+                    {s.title}
+                  </h2>
+                  <div style={{ width: "clamp(24px, 3.5vw, 44px)", height: 1, background: `${s.accent}44` }} />
+                  <p style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(11px, 1.35vw, 16px)", lineHeight: 1.75, color: "#3A2E24", margin: 0 }}>
+                    {s.body}
+                  </p>
                 </div>
               </div>
             );
@@ -271,43 +386,55 @@ export default function Index() {
             const s = slide as Concept4Slide;
             return (
               <div style={{ flex: 1, position: "relative", overflow: "hidden" }}>
-                {/* Full-bleed image background */}
-                <img
-                  src={s.image}
-                  alt=""
-                  style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center" }}
-                />
-                {/* Overlay */}
-                <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(30,50,35,0.88) 0%, rgba(30,50,35,0.6) 55%, rgba(30,50,35,0.15) 100%)" }} />
-
-                {/* Text — левая половина */}
-                <div style={{ position: "relative", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", padding: "6% 50% 6% 6%", gap: "clamp(10px, 1.6vw, 20px)" }}>
-                  {/* Tag */}
-                  <div style={{ display: "flex", alignItems: "center", gap: "clamp(4px, 0.6vw, 8px)" }}>
-                    <div style={{ width: "clamp(14px, 1.8vw, 22px)", height: 1, background: s.accent, opacity: 0.6 }} />
-                    <span style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(9px, 1vw, 13px)", letterSpacing: "0.3em", textTransform: "uppercase", color: s.accent, opacity: 0.8 }}>{s.tag}</span>
+                <img src={s.image} alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center" }} />
+                <div style={{ position: "absolute", inset: 0, background: "linear-gradient(160deg, rgba(20,28,18,0.82) 0%, rgba(20,28,18,0.6) 45%, rgba(20,28,18,0.1) 100%)" }} />
+                <div style={{ position: "relative", height: "100%", display: "flex" }}>
+                  <div style={{ width: "55%", display: "flex", flexDirection: "column", justifyContent: "center", padding: "5% 4% 5% 6%", gap: "clamp(10px, 1.6vw, 20px)" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: "clamp(4px, 0.6vw, 8px)" }}>
+                      <div style={{ width: "clamp(14px, 1.8vw, 22px)", height: 1, background: s.accent, opacity: 0.6 }} />
+                      <span style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(9px, 1vw, 13px)", letterSpacing: "0.3em", textTransform: "uppercase", color: s.accent, opacity: 0.8 }}>{s.tag}</span>
+                    </div>
+                    <h2 style={{ fontFamily: "Cormorant, serif", fontStyle: "italic", fontWeight: 300, fontSize: "clamp(32px, 5.5vw, 70px)", lineHeight: 1.0, color: s.accent, margin: 0 }}>
+                      {s.title}
+                    </h2>
+                    <div style={{ width: "clamp(24px, 3.5vw, 44px)", height: 1, background: `${s.accent}55` }} />
+                    <p style={{ fontFamily: "Cormorant, serif", fontStyle: "italic", fontSize: "clamp(13px, 1.7vw, 21px)", color: s.accent, opacity: 0.8, lineHeight: 1.4, margin: 0 }}>
+                      {s.lead}
+                    </p>
+                    <p style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(11px, 1.3vw, 16px)", lineHeight: 1.7, color: "#D0C8B8", margin: 0 }}>
+                      {s.body}
+                    </p>
+                    <div style={{ display: "flex", alignItems: "center", paddingTop: "clamp(6px, 0.8vw, 10px)", borderTop: "1px solid rgba(200,169,110,0.2)", marginTop: "auto" }}>
+                      <span style={{ fontFamily: "Golos Text, sans-serif", fontStyle: "italic", fontWeight: 300, fontSize: "clamp(10px, 1.2vw, 14px)", color: s.accent, opacity: 0.65 }}>
+                        {s.footer}
+                      </span>
+                    </div>
                   </div>
+                </div>
+              </div>
+            );
+          })()}
 
-                  {/* Title */}
-                  <h2 style={{ fontFamily: "Cormorant, serif", fontStyle: "italic", fontWeight: 300, fontSize: "clamp(32px, 5.5vw, 70px)", lineHeight: 1.0, color: s.accent, margin: 0 }}>
-                    {s.title}
-                  </h2>
-
-                  {/* Lead */}
-                  <p style={{ fontFamily: "Cormorant, serif", fontStyle: "italic", fontSize: "clamp(14px, 2vw, 26px)", color: "#F0E8D8", opacity: 0.9, lineHeight: 1.45, margin: 0 }}>
-                    {s.lead}
-                  </p>
-
-                  {/* Body */}
-                  <p style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(12px, 1.5vw, 18px)", lineHeight: 1.7, color: "#C8BBA8", margin: 0 }}>
-                    {s.body}
-                  </p>
-
-                  {/* Footer */}
-                  <div style={{ marginTop: "auto", paddingTop: "clamp(8px, 1vw, 12px)", borderTop: "1px solid rgba(200,169,110,0.2)" }}>
-                    <span style={{ fontFamily: "Golos Text, sans-serif", fontStyle: "italic", fontWeight: 300, fontSize: "clamp(10px, 1.2vw, 14px)", color: s.accent, opacity: 0.65 }}>
-                      {s.footer}
-                    </span>
+          {/* CONCEPT 4B — второй слайд Зова Алтая */}
+          {slide.type === "concept4B" && (() => {
+            const s = slide as Concept4B;
+            return (
+              <div style={{ flex: 1, position: "relative", overflow: "hidden" }}>
+                <img src={s.image} alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center", filter: "brightness(1.05)" }} />
+                <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to left, rgba(44,58,42,0.97) 0%, rgba(44,58,42,0.88) 38%, rgba(44,58,42,0.25) 62%, transparent 100%)" }} />
+                <div style={{ position: "relative", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "flex-end", padding: "5% 6% 5% 52%" }}>
+                  <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: "clamp(12px, 2vw, 24px)" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: "clamp(4px, 0.6vw, 8px)" }}>
+                      <div style={{ width: "clamp(14px, 1.8vw, 22px)", height: 1, background: s.accent, opacity: 0.5 }} />
+                      <span style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(8px, 0.9vw, 11px)", letterSpacing: "0.3em", textTransform: "uppercase", color: s.accent, opacity: 0.7 }}>{s.tag}</span>
+                    </div>
+                    <h2 style={{ fontFamily: "Cormorant, serif", fontStyle: "italic", fontWeight: 300, fontSize: "clamp(26px, 4.5vw, 58px)", lineHeight: 1.0, color: s.accent, margin: 0, whiteSpace: "pre-line" }}>
+                      {s.title}
+                    </h2>
+                    <div style={{ width: "clamp(24px, 3.5vw, 44px)", height: 1, background: `${s.accent}44` }} />
+                    <p style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(11px, 1.35vw, 16px)", lineHeight: 1.75, color: "#D8CEB8", margin: 0 }}>
+                      {s.body}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -319,43 +446,54 @@ export default function Index() {
             const s = slide as Concept5Slide;
             return (
               <div style={{ flex: 1, display: "flex", overflow: "hidden" }}>
-                {/* Left — текст на светлом фоне */}
                 <div style={{ flex: "0 0 52%", display: "flex", flexDirection: "column", justifyContent: "center", padding: "4% 5% 4% 6%", gap: "clamp(10px, 1.5vw, 18px)", background: "#FAF6F0" }}>
-                  {/* Tag */}
                   <div style={{ display: "flex", alignItems: "center", gap: "clamp(4px, 0.6vw, 8px)" }}>
                     <div style={{ width: "clamp(14px, 1.8vw, 22px)", height: 1, background: "#8B6840", opacity: 0.5 }} />
                     <span style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(9px, 1vw, 13px)", letterSpacing: "0.3em", textTransform: "uppercase", color: "#8B6840", opacity: 0.7 }}>{s.tag}</span>
                   </div>
-
-                  {/* Title */}
                   <h2 style={{ fontFamily: "Cormorant, serif", fontStyle: "italic", fontWeight: 300, fontSize: "clamp(28px, 4.8vw, 62px)", lineHeight: 1.0, color: "#6B4A28", margin: 0, whiteSpace: "pre-line" }}>
                     {s.title}
                   </h2>
-
                   <div style={{ width: "clamp(24px, 3.5vw, 44px)", height: 1, background: "#8B684066" }} />
-
-                  {/* Para 1 */}
                   <p style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(10px, 1.2vw, 14px)", lineHeight: 1.7, color: "#4A3A2A", margin: 0 }}>
                     {s.para1}
                   </p>
-
-                  {/* Para 2 */}
                   <p style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(10px, 1.2vw, 14px)", lineHeight: 1.7, color: "#4A3A2A", margin: 0 }}>
                     {s.para2}
                   </p>
-
-                  {/* Декоративная деталь */}
                   <div style={{ display: "flex", alignItems: "center", gap: "clamp(5px, 0.7vw, 9px)", marginTop: "auto", paddingTop: "clamp(5px, 0.7vw, 9px)", borderTop: "1px solid #8B684022" }}>
                     <div style={{ width: "clamp(16px, 2vw, 24px)", height: 2, background: "#8B6840", opacity: 0.4 }} />
                     <span style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(8px, 0.85vw, 11px)", letterSpacing: "0.3em", textTransform: "uppercase", color: "#8B6840", opacity: 0.5 }}>Мотор!</span>
                     <div style={{ width: "clamp(16px, 2vw, 24px)", height: 2, background: "#8B6840", opacity: 0.4 }} />
                   </div>
                 </div>
-
-                {/* Right — картинка светлая */}
                 <div style={{ flex: 1, position: "relative", overflow: "hidden" }}>
                   <img src={s.image} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 30%", filter: "brightness(1.1)" }} />
                   <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, #FAF6F0 0%, transparent 15%)" }} />
+                </div>
+              </div>
+            );
+          })()}
+
+          {/* CONCEPT 5B — второй слайд Режиссёрской версии */}
+          {slide.type === "concept5B" && (() => {
+            const s = slide as Concept5B;
+            return (
+              <div style={{ flex: 1, position: "relative", overflow: "hidden" }}>
+                <img src={s.image} alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center", filter: "brightness(0.9)" }} />
+                <div style={{ position: "absolute", inset: 0, background: "linear-gradient(160deg, rgba(18,14,10,0.88) 0%, rgba(18,14,10,0.65) 45%, rgba(18,14,10,0.15) 100%)" }} />
+                <div style={{ position: "relative", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", padding: "5% 50% 5% 6%", gap: "clamp(12px, 2vw, 24px)" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "clamp(4px, 0.6vw, 8px)" }}>
+                    <div style={{ width: "clamp(14px, 1.8vw, 22px)", height: 1, background: "#D4A85A", opacity: 0.6 }} />
+                    <span style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(8px, 0.9vw, 11px)", letterSpacing: "0.3em", textTransform: "uppercase", color: "#D4A85A", opacity: 0.75 }}>{s.tag}</span>
+                  </div>
+                  <h2 style={{ fontFamily: "Cormorant, serif", fontStyle: "italic", fontWeight: 300, fontSize: "clamp(26px, 4.5vw, 58px)", lineHeight: 1.0, color: "#D4A85A", margin: 0, whiteSpace: "pre-line" }}>
+                    {s.title}
+                  </h2>
+                  <div style={{ width: "clamp(24px, 3.5vw, 44px)", height: 1, background: "#D4A85A44" }} />
+                  <p style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(11px, 1.35vw, 16px)", lineHeight: 1.75, color: "#E8DDD0", margin: 0 }}>
+                    {s.body}
+                  </p>
                 </div>
               </div>
             );
@@ -366,27 +504,19 @@ export default function Index() {
             const s = slide as FinalSlide;
             return (
               <div style={{ flex: 1, position: "relative", overflow: "hidden" }}>
-                {/* Фото на весь фон */}
                 {s.image && (
                   <img src={s.image} alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center", filter: "brightness(1.15)" }} />
                 )}
-                {/* Лёгкий оверлей только слева под текст */}
                 <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(242,237,230,0.96) 0%, rgba(242,237,230,0.85) 38%, rgba(242,237,230,0.3) 62%, transparent 100%)" }} />
-
-                {/* Текст — левая треть */}
                 <div style={{ position: "relative", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", padding: "6% 52% 6% 7%", gap: "clamp(12px, 2vw, 26px)" }}>
-                  {/* Tag */}
                   <div style={{ display: "flex", alignItems: "center", gap: "clamp(4px, 0.6vw, 8px)" }}>
                     <div style={{ width: "clamp(14px, 1.8vw, 22px)", height: 1, background: s.accent, opacity: 0.5 }} />
                     <span style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(9px, 1vw, 13px)", letterSpacing: "0.3em", textTransform: "uppercase", color: s.accent, opacity: 0.65 }}>{s.tagline}</span>
                   </div>
-
                   <h2 style={{ fontFamily: "Cormorant, serif", fontStyle: "italic", fontWeight: 300, fontSize: "clamp(32px, 5.8vw, 74px)", lineHeight: 1.0, color: s.accent, margin: 0, whiteSpace: "pre-line" }}>
                     {s.title}
                   </h2>
-
                   <div style={{ width: "clamp(28px, 4vw, 50px)", height: 1, background: `${s.accent}55` }} />
-
                   <p style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(12px, 1.45vw, 17px)", lineHeight: 1.75, color: "#3A2E24", margin: 0 }}>
                     {s.body}
                   </p>
@@ -396,6 +526,50 @@ export default function Index() {
           })()}
 
         </div>
+
+        {/* Navigation */}
+        <div style={{ position: "absolute", bottom: "clamp(10px, 2.2vh, 20px)", left: "50%", transform: "translateX(-50%)", display: "flex", alignItems: "center", gap: "clamp(6px, 1.2vw, 14px)", zIndex: 10 }}>
+          {slides.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => goTo(i)}
+              style={{
+                width: i === current ? "clamp(18px, 2.5vw, 30px)" : "clamp(5px, 0.7vw, 8px)",
+                height: "clamp(5px, 0.7vw, 8px)",
+                borderRadius: "clamp(3px, 0.4vw, 4px)",
+                background: i === current ? slide.accent : `${slide.accent}44`,
+                border: "none",
+                cursor: "pointer",
+                padding: 0,
+                transition: "all 0.3s ease",
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Arrow buttons */}
+        {current > 0 && (
+          <button
+            onClick={() => goTo(current - 1)}
+            style={{ position: "absolute", left: "clamp(8px, 1.5vw, 18px)", top: "50%", transform: "translateY(-50%)", background: `${slide.accent}18`, border: "none", borderRadius: "50%", width: "clamp(28px, 4vw, 48px)", height: "clamp(28px, 4vw, 48px)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: slide.accent, fontSize: "clamp(12px, 1.8vw, 22px)", transition: "background 0.2s", zIndex: 10 }}
+          >
+            ‹
+          </button>
+        )}
+        {current < slides.length - 1 && (
+          <button
+            onClick={() => goTo(current + 1)}
+            style={{ position: "absolute", right: "clamp(8px, 1.5vw, 18px)", top: "50%", transform: "translateY(-50%)", background: `${slide.accent}18`, border: "none", borderRadius: "50%", width: "clamp(28px, 4vw, 48px)", height: "clamp(28px, 4vw, 48px)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: slide.accent, fontSize: "clamp(12px, 1.8vw, 22px)", transition: "background 0.2s", zIndex: 10 }}
+          >
+            ›
+          </button>
+        )}
+
+        {/* Slide counter */}
+        <div style={{ position: "absolute", top: "clamp(10px, 2vh, 18px)", right: "clamp(12px, 2vw, 22px)", fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(8px, 0.9vw, 11px)", letterSpacing: "0.2em", color: slide.accent, opacity: 0.4, zIndex: 10 }}>
+          {String(current + 1).padStart(2, "0")} / {String(slides.length).padStart(2, "0")}
+        </div>
+
       </div>
     </div>
   );
