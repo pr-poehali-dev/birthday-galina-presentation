@@ -104,7 +104,7 @@ const slides: Slide[] = [
     accent: "#6B5740",
     title: "Дома на колёсах",
     tagline: "Общее предложение для всех концепций",
-    body: "Путешествие в домах на колёсах позволит посетить несколько уникальных локаций и не быть привязанными к одному месту. Это добавит приключения и живых впечатлений в каждый сценарий праздника.",
+    body: "Путешествие в домах на колёсах позволит посетить несколько уникальных локаций и не быть привязанными к одному месту. Это добавит приключения и живых впечатлений в сценарий праздника.",
     image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/87e4e508-d6a4-49c5-b8cc-a4e49ad7cfcc.jpg",
   },
 ];
@@ -318,41 +318,44 @@ export default function Index() {
           {slide.type === "concept5" && (() => {
             const s = slide as Concept5Slide;
             return (
-              <div style={{ flex: 1, position: "relative", overflow: "hidden" }}>
-                {/* Full-bleed image */}
-                <img src={s.image} alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 30%" }} />
-                {/* Overlay */}
-                <div style={{ position: "absolute", inset: 0, background: "linear-gradient(160deg, rgba(10,8,6,0.78) 0%, rgba(10,8,6,0.55) 40%, rgba(10,8,6,0.08) 100%)" }} />
-
-                {/* Clapperboard accent — декоративная деталь */}
-                <div style={{ position: "absolute", top: "6%", right: "5%", display: "flex", alignItems: "center", gap: "clamp(5px, 0.7vw, 9px)", opacity: 0.45 }}>
-                  <div style={{ width: "clamp(20px, 2.5vw, 32px)", height: 2, background: "#D4A85A" }} />
-                  <span style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(7px, 0.8vw, 10px)", letterSpacing: "0.35em", textTransform: "uppercase", color: "#D4A85A" }}>Мотор!</span>
-                  <div style={{ width: "clamp(20px, 2.5vw, 32px)", height: 2, background: "#D4A85A" }} />
-                </div>
-
-                {/* Text — поверх картинки */}
-                <div style={{ position: "relative", height: "100%", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "5% 5% 6% 6%", gap: "clamp(10px, 1.6vw, 20px)" }}>
+              <div style={{ flex: 1, display: "flex", overflow: "hidden" }}>
+                {/* Left — текст на светлом фоне */}
+                <div style={{ flex: "0 0 52%", display: "flex", flexDirection: "column", justifyContent: "center", padding: "4% 5% 4% 6%", gap: "clamp(10px, 1.5vw, 18px)", background: "#FAF6F0" }}>
                   {/* Tag */}
                   <div style={{ display: "flex", alignItems: "center", gap: "clamp(4px, 0.6vw, 8px)" }}>
-                    <div style={{ width: "clamp(14px, 1.8vw, 22px)", height: 1, background: s.accent, opacity: 0.7 }} />
-                    <span style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(9px, 1vw, 13px)", letterSpacing: "0.3em", textTransform: "uppercase", color: s.accent, opacity: 0.85 }}>{s.tag}</span>
+                    <div style={{ width: "clamp(14px, 1.8vw, 22px)", height: 1, background: "#8B6840", opacity: 0.5 }} />
+                    <span style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(9px, 1vw, 13px)", letterSpacing: "0.3em", textTransform: "uppercase", color: "#8B6840", opacity: 0.7 }}>{s.tag}</span>
                   </div>
 
                   {/* Title */}
-                  <h2 style={{ fontFamily: "Cormorant, serif", fontStyle: "italic", fontWeight: 300, fontSize: "clamp(32px, 5.5vw, 70px)", lineHeight: 1.0, color: s.accent, margin: 0, whiteSpace: "pre-line" }}>
+                  <h2 style={{ fontFamily: "Cormorant, serif", fontStyle: "italic", fontWeight: 300, fontSize: "clamp(28px, 4.8vw, 62px)", lineHeight: 1.0, color: "#6B4A28", margin: 0, whiteSpace: "pre-line" }}>
                     {s.title}
                   </h2>
 
-                  {/* Two columns of text */}
-                  <div style={{ display: "flex", gap: "clamp(16px, 3vw, 40px)" }}>
-                    <p style={{ flex: 1, fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(11px, 1.35vw, 17px)", lineHeight: 1.7, color: "#E8DDD0", margin: 0, opacity: 0.92 }}>
-                      {s.para1}
-                    </p>
-                    <p style={{ flex: 1, fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(11px, 1.35vw, 17px)", lineHeight: 1.7, color: "#E8DDD0", margin: 0, opacity: 0.92 }}>
-                      {s.para2}
-                    </p>
+                  <div style={{ width: "clamp(24px, 3.5vw, 44px)", height: 1, background: "#8B684066" }} />
+
+                  {/* Para 1 */}
+                  <p style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(10px, 1.2vw, 14px)", lineHeight: 1.7, color: "#4A3A2A", margin: 0 }}>
+                    {s.para1}
+                  </p>
+
+                  {/* Para 2 */}
+                  <p style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(10px, 1.2vw, 14px)", lineHeight: 1.7, color: "#4A3A2A", margin: 0 }}>
+                    {s.para2}
+                  </p>
+
+                  {/* Декоративная деталь */}
+                  <div style={{ display: "flex", alignItems: "center", gap: "clamp(5px, 0.7vw, 9px)", marginTop: "auto", paddingTop: "clamp(5px, 0.7vw, 9px)", borderTop: "1px solid #8B684022" }}>
+                    <div style={{ width: "clamp(16px, 2vw, 24px)", height: 2, background: "#8B6840", opacity: 0.4 }} />
+                    <span style={{ fontFamily: "Golos Text, sans-serif", fontWeight: 300, fontSize: "clamp(8px, 0.85vw, 11px)", letterSpacing: "0.3em", textTransform: "uppercase", color: "#8B6840", opacity: 0.5 }}>Мотор!</span>
+                    <div style={{ width: "clamp(16px, 2vw, 24px)", height: 2, background: "#8B6840", opacity: 0.4 }} />
                   </div>
+                </div>
+
+                {/* Right — картинка светлая */}
+                <div style={{ flex: 1, position: "relative", overflow: "hidden" }}>
+                  <img src={s.image} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 30%", filter: "brightness(1.1)" }} />
+                  <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, #FAF6F0 0%, transparent 15%)" }} />
                 </div>
               </div>
             );
