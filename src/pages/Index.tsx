@@ -113,18 +113,18 @@ const slides: Slide[] = [
     gradient: "linear-gradient(135deg, #EDEAF6 0%, #E8ECF6 50%, #E6EFF4 100%)",
     accent: "#EDE8F6",
     tag: "Вариант 6 · Пролог",
-    title: "Кинолента длиною\nв несколько дней",
+    title: "Ход действия",
     lead: "Праздник как сериал — серия за серией, день за днём.",
     paragraphs: [
       "В вечер прилёта каждому гостю вручается особый образ — наряд для путешествия следующего дня.",
     ],
-    image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/79fbefd5-54ca-42b2-ac6c-a850a5f0b6b8.jpg",
+    image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/fe2828db-7a64-4adb-a103-622e2779b9f4.jpg",
   },
   {
     id: 7, side: "left", plainTitle: true, fullPhoto: true, align: "left",
     gradient: "linear-gradient(135deg, #E6EFF4 0%, #E8ECF6 50%, #EDEAF6 100%)",
     accent: "#E5EEF6",
-    tag: "Серия первая",
+    tag: "Серия первая · Архетип первый",
     title: "У подножия гор",
     lead: "Место такой красоты, что захватывает дыхание.",
     paragraphs: [
@@ -137,9 +137,9 @@ const slides: Slide[] = [
     id: 8, side: "left", plainTitle: true, fullPhoto: true, align: "center",
     gradient: "linear-gradient(135deg, #F6EAF0 0%, #F2E9F2 50%, #ECEAF6 100%)",
     accent: "#F6E8F0",
-    tag: "Серия вторая",
+    tag: "Серия вторая · Архетип второй",
     title: "Ужин на розовом озере",
-    lead: "Там, где вода окрашена в нежно-розовый.",
+    lead: "Там, где вода окрашена в нежно-розовый",
     paragraphs: [
       "Изысканный ужин на берегу — стол среди отражений закатного неба. Только эксклюзивные, люксовые локации.",
     ],
@@ -149,13 +149,13 @@ const slides: Slide[] = [
     id: 9, side: "left", plainTitle: true, fullPhoto: true, align: "left",
     gradient: "linear-gradient(135deg, #ECEAF6 0%, #F2E9F2 50%, #F6EAF0 100%)",
     accent: "#F4E6EE",
-    tag: "Финал",
-    title: "Живой перформанс",
+    tag: "Серия вторая · Архетип второй",
+    title: "Ужин на берегу\nрозового озера",
     lead: "Искусство становится частью трапезы.",
     paragraphs: [
       "Артисты, музыка и движение окружают гостей. Народный артист связывает все серии в единую историю.",
     ],
-    image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/7279db8d-b447-4862-806c-1d666dcaba0e.jpg",
+    image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/cf1daa0e-e628-44d2-afc5-d98fa00158bb.jpg",
   },
 ];
 
@@ -248,7 +248,7 @@ export default function Index() {
         </div>
         <h1 style={{ fontFamily: SANS, fontWeight: 600, fontSize: "clamp(32px,5vw,72px)", lineHeight: 1.04, color: "#fff", margin: 0, letterSpacing: "-0.025em", whiteSpace: "pre-line", textShadow: "0 2px 30px rgba(20,16,30,0.45)", maxWidth: "16ch" }}>{s.title}</h1>
         {s.lead && (
-          <p style={{ fontFamily: SANS, fontWeight: 400, fontSize: "clamp(14px,1.7vw,22px)", lineHeight: 1.4, color: "rgba(255,255,255,0.94)", margin: "clamp(18px,2.4vw,32px) 0 0", maxWidth: "26ch", textShadow: "0 2px 20px rgba(20,16,30,0.4)" }}>{s.lead}</p>
+          <p style={{ fontFamily: SANS, fontWeight: 400, fontSize: "clamp(14px,1.7vw,22px)", lineHeight: 1.4, color: "rgba(255,255,255,0.94)", margin: "clamp(18px,2.4vw,32px) 0 0", maxWidth: centered ? "none" : "26ch", whiteSpace: centered ? "nowrap" : "normal", textShadow: "0 2px 20px rgba(20,16,30,0.4)" }}>{s.lead}</p>
         )}
         <div style={{ marginTop: "clamp(18px,2.4vw,32px)", maxWidth: "40ch" }}>
           {s.paragraphs.map((p, i) => (
