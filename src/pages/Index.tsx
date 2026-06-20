@@ -12,6 +12,7 @@ type Slide = {
   footer?: string;
   image: string;
   imagePos?: string;
+  plainTitle?: boolean;
 };
 
 const SERIF = "Cormorant, serif";
@@ -106,32 +107,56 @@ const slides: Slide[] = [
     image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/bucket/0c639da5-89e4-418d-8a5c-f9eb93f51da1.jpg",
   },
   {
-    id: 6, side: "left",
+    id: 6, side: "left", plainTitle: true,
     gradient: "linear-gradient(135deg, #EDEAF6 0%, #E8ECF6 50%, #E6EFF4 100%)",
     accent: "#7E6FB5",
-    tag: "Вариант 6 · Серия первая",
+    tag: "Вариант 6 · Пролог",
     title: "Кинолента длиною\nв несколько дней",
     lead: "Праздник, который разворачивается как сериал — серия за серией, день за днём.",
     paragraphs: [
-      "В вечер прилёта каждому гостю торжественно вручается особый образ — наряд, выбранный специально для путешествия следующего дня. Так начинается история, в которой все становятся её героями.",
-      "Первая серия раскрывается у подножия гор — в месте такой красоты, что захватывает дыхание. На склоны и вековой лес ложатся живые проекции, превращая природу в огромный экран. Сквозь все дни гостей сопровождает народный артист — ведущий и проводник этой кинематографичной истории.",
+      "В вечер прилёта каждому гостю торжественно вручается особый образ — наряд, выбранный для путешествия следующего дня. Так начинается история, в которой все становятся её героями.",
     ],
-    footer: "Серия I · У подножия гор",
+    footer: "Формат · Сериал",
+    image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/87e4e508-d6a4-49c5-b8cc-a4e49ad7cfcc.jpg",
+  },
+  {
+    id: 7, side: "right", plainTitle: true,
+    gradient: "linear-gradient(135deg, #E6EFF4 0%, #E8ECF6 50%, #EDEAF6 100%)",
+    accent: "#5E7C9B",
+    tag: "Серия первая",
+    title: "У подножия гор",
+    lead: "Место такой красоты, что захватывает дыхание.",
+    paragraphs: [
+      "На склоны и вековой лес ложатся живые проекции, превращая природу в огромный экран. Сквозь все дни гостей сопровождает народный артист — ведущий и проводник этой кинематографичной истории.",
+    ],
+    footer: "Серия I · Горы и проекции",
     image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/250d70e5-0075-4264-b550-df2d6bbb5870.jpg",
   },
   {
-    id: 7, side: "right",
+    id: 8, side: "left", plainTitle: true,
     gradient: "linear-gradient(135deg, #F6EAF0 0%, #F2E9F2 50%, #ECEAF6 100%)",
     accent: "#C46E96",
     tag: "Серия вторая",
     title: "Ужин на розовом\nозере",
     lead: "Вторая серия раскрывается там, где вода окрашена в нежно-розовый.",
     paragraphs: [
-      "Гостей встречает изысканный ужин на берегу розового озера — стол среди отражений закатного неба, свечи и цветы, плывущие в зеркале воды. Всё действие происходит в эксклюзивных, по-настоящему люксовых локациях.",
-      "Прямо вокруг гостей разворачивается живой перформанс: артисты, музыка и движение становятся частью трапезы. А народный артист, как и в первый день, ведёт повествование — связывая серии в единую красивую историю.",
+      "Гостей встречает изысканный ужин на берегу розового озера — стол среди отражений закатного неба, свечи и цветы в зеркале воды. Всё действие происходит в эксклюзивных, по-настоящему люксовых локациях.",
     ],
     footer: "Серия II · Розовое озеро",
     image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/f10d44e4-1133-4adc-a65f-120ecd6011c6.jpg",
+  },
+  {
+    id: 9, side: "right", plainTitle: true,
+    gradient: "linear-gradient(135deg, #ECEAF6 0%, #F2E9F2 50%, #F6EAF0 100%)",
+    accent: "#B0608A",
+    tag: "Серия вторая · Перформанс",
+    title: "Живой перформанс\nвокруг стола",
+    lead: "Искусство становится частью трапезы.",
+    paragraphs: [
+      "Прямо вокруг гостей разворачивается живой перформанс: артисты, музыка и движение становятся частью ужина. А народный артист, как и в первый день, ведёт повествование — связывая серии в единую красивую историю.",
+    ],
+    footer: "Финал · Единая история",
+    image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/bucket/b7f8b29b-b200-4c80-8164-8e5c5b63a557.jpg",
   },
 ];
 
@@ -166,10 +191,14 @@ export default function Index() {
         <span style={{ fontFamily: SANS, fontWeight: 500, fontSize: "clamp(8px,0.85vw,11px)", letterSpacing: "0.3em", textTransform: "uppercase", color: s.accent, opacity: 0.85 }}>{s.tag}</span>
       </div>
       {/* title */}
-      <h1 style={{ fontFamily: SERIF, fontStyle: "italic", fontWeight: 500, fontSize: "clamp(34px,5.2vw,72px)", lineHeight: 1.0, color: INK, margin: 0, letterSpacing: "-0.01em", whiteSpace: "pre-line" }}>{s.title}</h1>
+      <h1 style={s.plainTitle
+        ? { fontFamily: SANS, fontWeight: 600, fontSize: "clamp(28px,4.2vw,58px)", lineHeight: 1.05, color: INK, margin: 0, letterSpacing: "-0.02em", whiteSpace: "pre-line" }
+        : { fontFamily: SERIF, fontStyle: "italic", fontWeight: 500, fontSize: "clamp(34px,5.2vw,72px)", lineHeight: 1.0, color: INK, margin: 0, letterSpacing: "-0.01em", whiteSpace: "pre-line" }}>{s.title}</h1>
       {/* lead */}
       {s.lead && (
-        <p style={{ fontFamily: SERIF, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(14px,1.7vw,22px)", lineHeight: 1.4, color: s.accent, margin: "clamp(14px,2vw,26px) 0 0", opacity: 0.9 }}>{s.lead}</p>
+        <p style={s.plainTitle
+          ? { fontFamily: SANS, fontWeight: 500, fontSize: "clamp(12px,1.4vw,18px)", lineHeight: 1.45, color: s.accent, margin: "clamp(14px,2vw,26px) 0 0", opacity: 0.95 }
+          : { fontFamily: SERIF, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(14px,1.7vw,22px)", lineHeight: 1.4, color: s.accent, margin: "clamp(14px,2vw,26px) 0 0", opacity: 0.9 }}>{s.lead}</p>
       )}
       {/* paragraphs */}
       <div style={{ display: "flex", flexDirection: "column", gap: "clamp(8px,1.2vw,16px)", marginTop: "clamp(16px,2.2vw,30px)", maxWidth: "94%" }}>
