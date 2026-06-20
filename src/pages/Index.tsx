@@ -298,20 +298,6 @@ export default function Index() {
           </div>
         )}
 
-        {/* навигация — точки */}
-        <div style={{ position: "absolute", bottom: "clamp(18px,2.4vw,30px)", left: 0, right: 0, display: "flex", justifyContent: "center", alignItems: "center", gap: 8, zIndex: 6 }}>
-          {slides.map((sl, i) => (
-            <button key={i} onClick={() => goTo(i)} style={{ width: i === current ? 26 : 7, height: 7, borderRadius: 6, background: i === current ? (s.fullPhoto ? "rgba(255,255,255,0.95)" : s.accent) : (s.fullPhoto ? "rgba(255,255,255,0.4)" : "rgba(86,78,102,0.22)"), border: "none", padding: 0, cursor: "pointer", transition: "all 0.3s ease" }} />
-          ))}
-        </div>
-
-        {/* стрелки */}
-        {current > 0 && (
-          <button onClick={() => goTo(current - 1)} aria-label="prev" style={{ position: "absolute", left: "clamp(10px,1.5vw,20px)", top: "50%", transform: "translateY(-50%)", width: "clamp(30px,3.4vw,42px)", height: "clamp(30px,3.4vw,42px)", borderRadius: "50%", background: "rgba(255,255,255,0.4)", backdropFilter: "blur(6px)", border: "1px solid rgba(86,78,102,0.12)", cursor: "pointer", color: INK, fontSize: "clamp(14px,1.6vw,20px)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 7 }}>‹</button>
-        )}
-        {current < slides.length - 1 && (
-          <button onClick={() => goTo(current + 1)} aria-label="next" style={{ position: "absolute", right: "clamp(10px,1.5vw,20px)", top: "50%", transform: "translateY(-50%)", width: "clamp(30px,3.4vw,42px)", height: "clamp(30px,3.4vw,42px)", borderRadius: "50%", background: "rgba(255,255,255,0.4)", backdropFilter: "blur(6px)", border: "1px solid rgba(86,78,102,0.12)", cursor: "pointer", color: INK, fontSize: "clamp(14px,1.6vw,20px)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 7 }}>›</button>
-        )}
       </div>
     </div>
   );
