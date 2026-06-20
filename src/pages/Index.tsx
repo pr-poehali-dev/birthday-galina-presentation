@@ -13,6 +13,8 @@ type Slide = {
   image: string;
   imagePos?: string;
   plainTitle?: boolean;
+  fullPhoto?: boolean;
+  align?: "left" | "center";
 };
 
 const SERIF = "Cormorant, serif";
@@ -107,56 +109,53 @@ const slides: Slide[] = [
     image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/bucket/0c639da5-89e4-418d-8a5c-f9eb93f51da1.jpg",
   },
   {
-    id: 6, side: "left", plainTitle: true,
+    id: 6, side: "left", plainTitle: true, fullPhoto: true, align: "left",
     gradient: "linear-gradient(135deg, #EDEAF6 0%, #E8ECF6 50%, #E6EFF4 100%)",
-    accent: "#7E6FB5",
+    accent: "#EDE8F6",
     tag: "Вариант 6 · Пролог",
     title: "Кинолента длиною\nв несколько дней",
-    lead: "Праздник, который разворачивается как сериал — серия за серией, день за днём.",
+    lead: "Праздник как сериал — серия за серией, день за днём.",
     paragraphs: [
-      "В вечер прилёта каждому гостю торжественно вручается особый образ — наряд, выбранный для путешествия следующего дня. Так начинается история, в которой все становятся её героями.",
+      "В вечер прилёта каждому гостю вручается особый образ — наряд для путешествия следующего дня.",
     ],
-    footer: "Формат · Сериал",
-    image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/87e4e508-d6a4-49c5-b8cc-a4e49ad7cfcc.jpg",
+    image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/79fbefd5-54ca-42b2-ac6c-a850a5f0b6b8.jpg",
   },
   {
-    id: 7, side: "right", plainTitle: true,
+    id: 7, side: "left", plainTitle: true, fullPhoto: true, align: "left",
     gradient: "linear-gradient(135deg, #E6EFF4 0%, #E8ECF6 50%, #EDEAF6 100%)",
-    accent: "#5E7C9B",
+    accent: "#E5EEF6",
     tag: "Серия первая",
     title: "У подножия гор",
     lead: "Место такой красоты, что захватывает дыхание.",
     paragraphs: [
-      "На склоны и вековой лес ложатся живые проекции, превращая природу в огромный экран. Сквозь все дни гостей сопровождает народный артист — ведущий и проводник этой кинематографичной истории.",
+      "Живые проекции ложатся на лес и склоны, превращая природу в огромный экран. Гостей сопровождает народный артист.",
     ],
-    footer: "Серия I · Горы и проекции",
-    image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/250d70e5-0075-4264-b550-df2d6bbb5870.jpg",
+    image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/46bf17ae-1468-4e09-9c0a-13b44afc629b.jpg",
+    imagePos: "center 60%",
   },
   {
-    id: 8, side: "left", plainTitle: true,
+    id: 8, side: "left", plainTitle: true, fullPhoto: true, align: "center",
     gradient: "linear-gradient(135deg, #F6EAF0 0%, #F2E9F2 50%, #ECEAF6 100%)",
-    accent: "#C46E96",
+    accent: "#F6E8F0",
     tag: "Серия вторая",
-    title: "Ужин на розовом\nозере",
-    lead: "Вторая серия раскрывается там, где вода окрашена в нежно-розовый.",
+    title: "Ужин на розовом озере",
+    lead: "Там, где вода окрашена в нежно-розовый.",
     paragraphs: [
-      "Гостей встречает изысканный ужин на берегу розового озера — стол среди отражений закатного неба, свечи и цветы в зеркале воды. Всё действие происходит в эксклюзивных, по-настоящему люксовых локациях.",
+      "Изысканный ужин на берегу — стол среди отражений закатного неба. Только эксклюзивные, люксовые локации.",
     ],
-    footer: "Серия II · Розовое озеро",
-    image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/f10d44e4-1133-4adc-a65f-120ecd6011c6.jpg",
+    image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/34bbe8c2-402e-4657-8f11-669909c5fad3.jpg",
   },
   {
-    id: 9, side: "right", plainTitle: true,
+    id: 9, side: "left", plainTitle: true, fullPhoto: true, align: "left",
     gradient: "linear-gradient(135deg, #ECEAF6 0%, #F2E9F2 50%, #F6EAF0 100%)",
-    accent: "#B0608A",
-    tag: "Серия вторая · Перформанс",
-    title: "Живой перформанс\nвокруг стола",
+    accent: "#F4E6EE",
+    tag: "Финал",
+    title: "Живой перформанс",
     lead: "Искусство становится частью трапезы.",
     paragraphs: [
-      "Прямо вокруг гостей разворачивается живой перформанс: артисты, музыка и движение становятся частью ужина. А народный артист, как и в первый день, ведёт повествование — связывая серии в единую красивую историю.",
+      "Артисты, музыка и движение окружают гостей. Народный артист связывает все серии в единую историю.",
     ],
-    footer: "Финал · Единая история",
-    image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/bucket/b7f8b29b-b200-4c80-8164-8e5c5b63a557.jpg",
+    image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/7279db8d-b447-4862-806c-1d666dcaba0e.jpg",
   },
 ];
 
@@ -226,6 +225,40 @@ export default function Index() {
     </div>
   );
 
+  const centered = s.align === "center";
+  const FullPhotoBlock = (
+    <div style={{ position: "relative", height: "100%", width: "100%", overflow: "hidden" }}>
+      <img src={s.image} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: s.imagePos || "center" }} />
+      {/* затемнение для читаемости */}
+      <div style={{ position: "absolute", inset: 0, background: centered
+        ? "linear-gradient(to bottom, rgba(28,24,40,0.15) 0%, rgba(28,24,40,0.05) 40%, rgba(28,24,40,0.55) 100%)"
+        : "linear-gradient(to right, rgba(28,24,40,0.62) 0%, rgba(28,24,40,0.32) 42%, transparent 72%)" }} />
+      <div style={{
+        position: "absolute", inset: 0, display: "flex", flexDirection: "column",
+        justifyContent: centered ? "flex-end" : "center",
+        alignItems: centered ? "center" : "flex-start",
+        textAlign: centered ? "center" : "left",
+        padding: centered
+          ? "0 clamp(60px,12vw,180px) clamp(70px,9vw,120px)"
+          : "0 clamp(50px,10vw,150px) 0 clamp(60px,8vw,110px)",
+      }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: "clamp(18px,2.6vw,34px)", justifyContent: centered ? "center" : "flex-start" }}>
+          <span style={{ width: "clamp(22px,3vw,40px)", height: 1, background: "rgba(255,255,255,0.7)" }} />
+          <span style={{ fontFamily: SANS, fontWeight: 500, fontSize: "clamp(8px,0.85vw,11px)", letterSpacing: "0.34em", textTransform: "uppercase", color: "rgba(255,255,255,0.92)" }}>{s.tag}</span>
+        </div>
+        <h1 style={{ fontFamily: SANS, fontWeight: 600, fontSize: "clamp(32px,5vw,72px)", lineHeight: 1.04, color: "#fff", margin: 0, letterSpacing: "-0.025em", whiteSpace: "pre-line", textShadow: "0 2px 30px rgba(20,16,30,0.45)", maxWidth: "16ch" }}>{s.title}</h1>
+        {s.lead && (
+          <p style={{ fontFamily: SANS, fontWeight: 400, fontSize: "clamp(14px,1.7vw,22px)", lineHeight: 1.4, color: "rgba(255,255,255,0.94)", margin: "clamp(18px,2.4vw,32px) 0 0", maxWidth: "26ch", textShadow: "0 2px 20px rgba(20,16,30,0.4)" }}>{s.lead}</p>
+        )}
+        <div style={{ marginTop: "clamp(18px,2.4vw,32px)", maxWidth: "40ch" }}>
+          {s.paragraphs.map((p, i) => (
+            <p key={i} style={{ fontFamily: SANS, fontWeight: 300, fontSize: "clamp(11px,1.25vw,16px)", lineHeight: 1.8, color: "rgba(255,255,255,0.82)", margin: 0, textShadow: "0 1px 16px rgba(20,16,30,0.4)" }}>{p}</p>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <div className="w-screen h-screen overflow-hidden flex items-center justify-center" style={{ background: "#D9D5E2" }}>
       <div
@@ -239,22 +272,35 @@ export default function Index() {
           transition: "background 0.5s ease",
         }}
       >
-        <div
-          className="grid h-full"
-          style={{
-            gridTemplateColumns: s.side === "right" ? "1.1fr 1fr" : "1fr 1.1fr",
-            opacity: animating ? 0 : 1,
-            transform: animating ? `translateX(${dir === "next" ? "16px" : "-16px"})` : "translateX(0)",
-            transition: "opacity 0.32s ease, transform 0.32s ease",
-          }}
-        >
-          {s.side === "right" ? (<>{TextBlock}{ImageBlock}</>) : (<>{ImageBlock}{TextBlock}</>)}
-        </div>
+        {s.fullPhoto ? (
+          <div
+            className="h-full w-full"
+            style={{
+              opacity: animating ? 0 : 1,
+              transform: animating ? `translateX(${dir === "next" ? "16px" : "-16px"})` : "translateX(0)",
+              transition: "opacity 0.32s ease, transform 0.32s ease",
+            }}
+          >
+            {FullPhotoBlock}
+          </div>
+        ) : (
+          <div
+            className="grid h-full"
+            style={{
+              gridTemplateColumns: s.side === "right" ? "1.1fr 1fr" : "1fr 1.1fr",
+              opacity: animating ? 0 : 1,
+              transform: animating ? `translateX(${dir === "next" ? "16px" : "-16px"})` : "translateX(0)",
+              transition: "opacity 0.32s ease, transform 0.32s ease",
+            }}
+          >
+            {s.side === "right" ? (<>{TextBlock}{ImageBlock}</>) : (<>{ImageBlock}{TextBlock}</>)}
+          </div>
+        )}
 
         {/* навигация — точки */}
         <div style={{ position: "absolute", bottom: "clamp(18px,2.4vw,30px)", left: 0, right: 0, display: "flex", justifyContent: "center", alignItems: "center", gap: 8, zIndex: 6 }}>
           {slides.map((sl, i) => (
-            <button key={i} onClick={() => goTo(i)} style={{ width: i === current ? 26 : 7, height: 7, borderRadius: 6, background: i === current ? s.accent : "rgba(86,78,102,0.22)", border: "none", padding: 0, cursor: "pointer", transition: "all 0.3s ease" }} />
+            <button key={i} onClick={() => goTo(i)} style={{ width: i === current ? 26 : 7, height: 7, borderRadius: 6, background: i === current ? (s.fullPhoto ? "rgba(255,255,255,0.95)" : s.accent) : (s.fullPhoto ? "rgba(255,255,255,0.4)" : "rgba(86,78,102,0.22)"), border: "none", padding: 0, cursor: "pointer", transition: "all 0.3s ease" }} />
           ))}
         </div>
 
