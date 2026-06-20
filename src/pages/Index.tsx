@@ -1,106 +1,137 @@
 import { useState, useEffect } from "react";
 
-type SlideBase = { id: number; type: string; accent: string; title: string };
-type TitleSlide = SlideBase & { type: "title" };
-type ConceptSlide = SlideBase & { type: "concept"; tag: string; num: string; lead: string; paragraphs: string[]; footer: string; image?: string };
-type ConceptB = SlideBase & { type: "conceptB"; tag: string; num: string; body: string; image: string };
-type Concept3Slide = SlideBase & { type: "concept3"; tag: string; num: string; lead: string; rooms: string[]; footer: string; image: string };
-type Concept3B = SlideBase & { type: "concept3B"; tag: string; num: string; body: string; image: string };
-type Concept4Slide = SlideBase & { type: "concept4"; tag: string; num: string; lead: string; body: string; footer: string; image: string };
-type Concept4B = SlideBase & { type: "concept4B"; tag: string; num: string; body: string; image: string };
-type Concept5Slide = SlideBase & { type: "concept5"; tag: string; num: string; para1: string; para2: string; image: string };
-type Concept5B = SlideBase & { type: "concept5B"; tag: string; num: string; body: string; image: string };
-type FinalSlide = SlideBase & { type: "final"; tagline: string; body: string; image?: string };
-type Slide = TitleSlide | ConceptSlide | ConceptB | Concept3Slide | Concept3B | Concept4Slide | Concept4B | Concept5Slide | Concept5B | FinalSlide;
+type Slide = {
+  id: number;
+  side: "left" | "right";
+  gradient: string;
+  accent: string;
+  tag: string;
+  title: string;
+  lead?: string;
+  paragraphs: string[];
+  footer?: string;
+  image: string;
+  imagePos?: string;
+};
 
-const F = "Manrope, sans-serif";
-const PAGE = "#F4F1EC";
-const INK = "#1A1815";
-const MUTED = "#6E6A62";
+const SERIF = "Cormorant, serif";
+const SANS = "Manrope, sans-serif";
+const INK = "#3A3550";
+const BODY = "#564E66";
+const SOFT = "rgba(86,78,102,0.5)";
 
 const slides: Slide[] = [
-  { id: 0, type: "title", accent: "#1A1815", title: "Предложение по концепциям\nДня рождения для Галины" },
   {
-    id: 1, type: "concept", accent: "#BF6D5A", num: "01",
-    tag: "Вариант 1", title: "Эффект присутствия",
+    id: 0, side: "right",
+    gradient: "linear-gradient(135deg, #F3EEF8 0%, #ECE9F6 45%, #E6EEF6 100%)",
+    accent: "#1A1815",
+    tag: "День рождения Галины",
+    title: "Предложение\nпо концепциям",
+    lead: "Несколько вариантов праздника — каждый со своим характером и настроением.",
+    paragraphs: [
+      "Мы собрали идеи, в которых главное — не масштаб, а ощущение. Каждая концепция превращает день рождения в путешествие сквозь эмоции, воспоминания и красоту.",
+    ],
+    footer: "Шесть концепций · одна героиня",
+    image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/87e4e508-d6a4-49c5-b8cc-a4e49ad7cfcc.jpg",
+  },
+  {
+    id: 1, side: "right",
+    gradient: "linear-gradient(135deg, #F6EEEC 0%, #F2EAEA 50%, #ECE9F4 100%)",
+    accent: "#BF6D5A",
+    tag: "Вариант 1",
+    title: "Эффект присутствия",
     lead: "Именинница будет знать, что её ждёт сюрприз, но каким именно он будет — нет.",
     paragraphs: [
-      "Проживаем заново ключевые события жизни Галины — первая любовь, расставание, победа, первый заработок, потеря — как перформансы.",
-      "Каждый вечер завершается ужином, который является «вкусом» того времени. Для проведения используются природные локации невероятной красоты, которые будут только усиливать восприятие.",
+      "Мы проживаем заново ключевые события её жизни — первую любовь и расставание, победу и потерю, первый заработок — превращая каждое в отдельный перформанс.",
+      "Каждый вечер завершается ужином, который становится «вкусом» того времени. А природные локации невероятной красоты лишь усиливают каждое переживание.",
     ],
     footer: "Необходимо провести интервью с именинницей",
     image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/bucket/9ceb4b5c-ba80-4ffb-8667-e358b43422d7.jpg",
   },
   {
-    id: 2, type: "conceptB", accent: "#BF6D5A", num: "01",
-    tag: "Вариант 1", title: "Эффект присутствия",
-    body: "Природные локации становятся декорацией для каждого перформанса. Каждое место подобрано под эмоцию той истории, которую предстоит прожить заново. Воссозданные детали, запахи, музыка — всё работает на один образ: здесь и сейчас, снова.",
-    image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/28aa57f0-a78c-4556-b9a1-a6b83823d58e.jpg",
-  },
-  {
-    id: 3, type: "concept", accent: "#8A65B5", num: "02",
-    tag: "Вариант 2", title: "Архетипы женщины",
+    id: 2, side: "left",
+    gradient: "linear-gradient(135deg, #ECE9F4 0%, #F2EAEA 50%, #F6EEEC 100%)",
+    accent: "#9B6FA8",
+    tag: "Вариант 2",
+    title: "Архетипы женщины",
     lead: "Мама. Женщина. Вселенная. Муза.",
     paragraphs: [
-      "Уютное пространство, нежный свет заката, длинный единый стол. На нём — рулон жатой бумаги с фразами и словами именинницы: мыслями, мечтами, воспоминаниями.",
-      "Рулон уходит в сценическое пространство, где сидит рассказчик — известный актёр. Пространство дополняется летящими тканевыми полотнами.",
+      "Представьте уютное пространство, где нежный свет заката окутывает атмосферу теплом. В центре — длинный единый стол, словно приглашение к единству.",
+      "На столе расстелен рулон жатой бумаги с фразами и словами именинницы — её мыслями, мечтами, воспоминаниями. Рулон уходит за пределы стола, в сценическое пространство, где сидит рассказчик — известный актёр. Воздух наполняют летящие тканевые полотна.",
+      "Вокруг стола собирается семья — каждый описывает именинницу как мать, музу, наставника. Они прикасаются к рулону, добавляют свои слова — и это становится настоящим творческим актом совместного создания.",
     ],
     footer: "Необходимо провести интервью с каждым членом семьи",
-    image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/bucket/b7f8b29b-b200-4c80-8164-8e5c5b63a557.jpg",
+    image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/bucket/a4547770-e134-4001-be63-c01730da9bca.png",
   },
   {
-    id: 4, type: "conceptB", accent: "#8A65B5", num: "02",
-    tag: "Вариант 2", title: "Архетипы женщины",
-    body: "Вокруг стола собирается семья, каждый человек из которой приносит свою историю и свои чувства — каждый описывает именинницу с одной или нескольких граней её личности: как мать, как музу / возлюбленную, наставника и т.д. Они могут прикоснуться к рулону бумаги, добавить свои слова или просто насладиться атмосферой единства и любви. Этот момент становится не только праздником дня рождения именинницы, но и настоящим творческим актом совместного создания.",
-    image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/86f13260-c497-4761-a705-148d089f1d56.jpg",
-  },
-  {
-    id: 5, type: "concept3", accent: "#8B6340", num: "03",
-    tag: "Вариант 3", title: "Машина времени",
+    id: 3, side: "right",
+    gradient: "linear-gradient(135deg, #F4EFE6 0%, #EFEAEA 50%, #E9EAF2 100%)",
+    accent: "#A8824A",
+    tag: "Вариант 3",
+    title: "Машина времени",
     lead: "Каждый из нас хоть раз мечтал пережить счастливые мгновения снова.",
-    rooms: ["День знакомства пары", "День из жизни каждой из дочерей", "Общий семейный день"],
+    paragraphs: [
+      "Кажется, что такое бывает только в фильмах. Но мы воссоздаём все тонкости прекрасных мгновений — день знакомства пары, день из жизни каждой из дочерей, общий семейный день — чтобы участники вновь почувствовали трепет тех событий.",
+      "Каждое пространство воссоздаётся в деталях: музыка, запахи, реквизит. Участники не наблюдают — они проживают момент заново. Это не реконструкция прошлого, а подарок из него.",
+    ],
     footer: "Важно провести интервью, чтобы узнать все детали событий",
     image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/bucket/1b1ab2b5-1f0a-4b49-b2af-81b49ad3bfe4.jpg",
   },
   {
-    id: 6, type: "concept3B", accent: "#8B6340", num: "03",
-    tag: "Вариант 3", title: "Машина времени",
-    body: "Каждое пространство воссоздаётся в деталях: музыка, запахи, реквизит. Участники не просто наблюдают — они проживают момент: снова слышат те слова, снова чувствуют то тепло. Это не реконструкция прошлого — это подарок из него.",
-    image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/1b8b6b7c-4812-4ae4-8a71-6bd69549a4d0.jpg",
-  },
-  {
-    id: 7, type: "concept4", accent: "#5E7355", num: "04",
-    tag: "Вариант 4", title: "Зов Алтая",
-    lead: "В современном мире для людей доступны разные способы познания себя, истин, открытия нового и неизведанного.",
-    body: "Мы предлагаем пережить эмоции нового опыта через погружение в легенды и обряды / ретриты, на которые богат Алтайский край.",
+    id: 4, side: "left",
+    gradient: "linear-gradient(135deg, #E9F0EA 0%, #E9EDF2 50%, #EFEAF2 100%)",
+    accent: "#5E7355",
+    tag: "Вариант 4",
+    title: "Зов Алтая",
+    lead: "Есть способы познания себя, доступные лишь там, где замолкает город.",
+    paragraphs: [
+      "Мы предлагаем пережить эмоции нового опыта через погружение в легенды, обряды и ретриты, которыми так богат Алтайский край.",
+      "Священный огонь, круг у костра под звёздным небом, горы на горизонте. Шаманские практики открывают то, что невозможно найти в суете — тишину внутри себя. Этот день рождения станет точкой отсчёта нового этапа.",
+    ],
     footer: "Уникальный опыт, который останется в памяти навсегда",
     image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/bucket/7aa235f8-930c-4cc9-b3af-ed2bb9cab603.jpg",
   },
   {
-    id: 8, type: "concept4B", accent: "#5E7355", num: "04",
-    tag: "Вариант 4", title: "Зов Алтая",
-    body: "Священный огонь, круг у костра под звёздным небом, горы на горизонте. Шаманские практики и алтайские ретриты открывают то, что невозможно найти в городе — тишину внутри себя. Этот день рождения станет точкой отсчёта нового этапа.",
-    image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/73f83ec2-a8ed-4b6f-90d5-90819d7adc56.jpg",
-  },
-  {
-    id: 9, type: "concept5", accent: "#B5893F", num: "05",
-    tag: "Вариант 5", title: "Режиссёрская версия",
-    para1: "Этот день рождения — не просто праздник, а режиссёрская версия жизни, где именинница становится главной героиней собственной истории. Вместо привычного застолья — съёмочная площадка: каждый член семьи получает роль (близкие становятся партнёрами по кадру, второстепенными персонажами или антагонистами, которых нужно «переиграть»).",
-    para2: "Смысл не в том, чтобы изобразить чужую жизнь, а чтобы заново прожить свою: взять в руки воображаемый режиссёрский хлопок, сказать «Мотор!» и впустить родных в ту внутреннюю вселенную, где она всегда была главной героиней.",
+    id: 5, side: "right",
+    gradient: "linear-gradient(135deg, #F4EEE4 0%, #F0EAEA 50%, #EAEAF4 100%)",
+    accent: "#C08A3E",
+    tag: "Вариант 5",
+    title: "Режиссёрская версия",
+    lead: "День рождения как режиссёрская версия жизни, где она — главная героиня.",
+    paragraphs: [
+      "Вместо привычного застолья — съёмочная площадка. Каждый член семьи получает роль: близкие становятся партнёрами по кадру, второстепенными персонажами или антагонистами, которых нужно «переиграть».",
+      "Смысл — не изобразить чужую жизнь, а заново прожить свою. Взять воображаемый хлопок, сказать «Мотор!» и впустить родных в ту вселенную, где она всегда была главной героиней. Кульминация — финальный кадр, где впервые все играют не роли, а настоящие чувства. Свет гаснет. Аплодисменты. Занавес.",
+    ],
+    footer: "Мотор!",
     image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/bucket/0c639da5-89e4-418d-8a5c-f9eb93f51da1.jpg",
   },
   {
-    id: 10, type: "concept5B", accent: "#B5893F", num: "05",
-    tag: "Вариант 5", title: "Режиссёрская версия",
-    body: "Кульминацией становится финальный кадр — общая семейная сцена, которая больше не выглядит как постановка, потому что в ней впервые все играют не роли, а настоящие чувства. Свет гаснет. Аплодисменты. Занавес.",
-    image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/48a538c2-dd58-4811-9fca-f9b800be9336.jpg",
+    id: 6, side: "left",
+    gradient: "linear-gradient(135deg, #EDEAF6 0%, #E8ECF6 50%, #E6EFF4 100%)",
+    accent: "#7E6FB5",
+    tag: "Вариант 6 · Серия первая",
+    title: "Кинолента длиною\nв несколько дней",
+    lead: "Праздник, который разворачивается как сериал — серия за серией, день за днём.",
+    paragraphs: [
+      "В вечер прилёта каждому гостю торжественно вручается особый образ — наряд, выбранный специально для путешествия следующего дня. Так начинается история, в которой все становятся её героями.",
+      "Первая серия раскрывается у подножия гор — в месте такой красоты, что захватывает дыхание. На склоны и вековой лес ложатся живые проекции, превращая природу в огромный экран. Сквозь все дни гостей сопровождает народный артист — ведущий и проводник этой кинематографичной истории.",
+    ],
+    footer: "Серия I · У подножия гор",
+    image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/250d70e5-0075-4264-b550-df2d6bbb5870.jpg",
   },
   {
-    id: 11, type: "final", accent: "#1A1815",
-    title: "Дома на колёсах",
-    tagline: "Общее предложение для всех концепций",
-    body: "Путешествие в домах на колёсах позволит посетить несколько уникальных локаций и не быть привязанными к одному месту. Это добавит приключения и живых впечатлений в сценарий праздника.",
-    image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/87e4e508-d6a4-49c5-b8cc-a4e49ad7cfcc.jpg",
+    id: 7, side: "right",
+    gradient: "linear-gradient(135deg, #F6EAF0 0%, #F2E9F2 50%, #ECEAF6 100%)",
+    accent: "#C46E96",
+    tag: "Серия вторая",
+    title: "Ужин на розовом\nозере",
+    lead: "Вторая серия раскрывается там, где вода окрашена в нежно-розовый.",
+    paragraphs: [
+      "Гостей встречает изысканный ужин на берегу розового озера — стол среди отражений закатного неба, свечи и цветы, плывущие в зеркале воды. Всё действие происходит в эксклюзивных, по-настоящему люксовых локациях.",
+      "Прямо вокруг гостей разворачивается живой перформанс: артисты, музыка и движение становятся частью трапезы. А народный артист, как и в первый день, ведёт повествование — связывая серии в единую красивую историю.",
+    ],
+    footer: "Серия II · Розовое озеро",
+    image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/f10d44e4-1133-4adc-a65f-120ecd6011c6.jpg",
   },
 ];
 
@@ -113,7 +144,7 @@ export default function Index() {
     if (animating || idx === current || idx < 0 || idx >= slides.length) return;
     setDir(idx > current ? "next" : "prev");
     setAnimating(true);
-    setTimeout(() => { setCurrent(idx); setAnimating(false); }, 300);
+    setTimeout(() => { setCurrent(idx); setAnimating(false); }, 320);
   };
 
   useEffect(() => {
@@ -125,271 +156,86 @@ export default function Index() {
     return () => window.removeEventListener("keydown", h);
   }, [current, animating]);
 
-  const slide = slides[current];
+  const s = slides[current];
 
-  const Kicker = ({ label, accent }: { label: string; accent: string }) => (
-    <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-      <span style={{ width: 6, height: 6, borderRadius: "50%", background: accent }} />
-      <span style={{ fontFamily: F, fontWeight: 500, fontSize: "clamp(8px, 0.85vw, 11px)", letterSpacing: "0.32em", textTransform: "uppercase", color: accent }}>{label}</span>
+  const TextBlock = (
+    <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", height: "100%", padding: "clamp(40px,6vw,80px) clamp(40px,5vw,72px)", position: "relative" }}>
+      {/* tag */}
+      <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: "clamp(14px,2vw,26px)" }}>
+        <span style={{ width: "clamp(20px,3vw,38px)", height: 1, background: s.accent, opacity: 0.55 }} />
+        <span style={{ fontFamily: SANS, fontWeight: 500, fontSize: "clamp(8px,0.85vw,11px)", letterSpacing: "0.3em", textTransform: "uppercase", color: s.accent, opacity: 0.85 }}>{s.tag}</span>
+      </div>
+      {/* title */}
+      <h1 style={{ fontFamily: SERIF, fontStyle: "italic", fontWeight: 500, fontSize: "clamp(34px,5.2vw,72px)", lineHeight: 1.0, color: INK, margin: 0, letterSpacing: "-0.01em", whiteSpace: "pre-line" }}>{s.title}</h1>
+      {/* lead */}
+      {s.lead && (
+        <p style={{ fontFamily: SERIF, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(14px,1.7vw,22px)", lineHeight: 1.4, color: s.accent, margin: "clamp(14px,2vw,26px) 0 0", opacity: 0.9 }}>{s.lead}</p>
+      )}
+      {/* paragraphs */}
+      <div style={{ display: "flex", flexDirection: "column", gap: "clamp(8px,1.2vw,16px)", marginTop: "clamp(16px,2.2vw,30px)", maxWidth: "94%" }}>
+        {s.paragraphs.map((p, i) => (
+          <p key={i} style={{ fontFamily: SANS, fontWeight: 400, fontSize: "clamp(10px,1.15vw,14px)", lineHeight: 1.75, color: BODY, margin: 0 }}>{p}</p>
+        ))}
+      </div>
+      {/* footer */}
+      {s.footer && (
+        <div style={{ position: "absolute", bottom: "clamp(34px,5vw,72px)", left: "clamp(40px,5vw,72px)", right: "clamp(40px,5vw,72px)", display: "flex", alignItems: "center", gap: 14 }}>
+          <span style={{ width: "clamp(16px,2.5vw,30px)", height: 1, background: SOFT }} />
+          <span style={{ fontFamily: SERIF, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(11px,1.25vw,16px)", color: SOFT }}>{s.footer}</span>
+        </div>
+      )}
     </div>
   );
 
-  const Title = ({ text, size }: { text: string; size?: string }) => (
-    <h2 style={{ fontFamily: F, fontWeight: 600, fontSize: size || "clamp(26px, 4.4vw, 56px)", lineHeight: 1.0, color: INK, margin: 0, letterSpacing: "-0.025em", whiteSpace: "pre-line" }}>{text}</h2>
-  );
-
-  const Frame = ({ src, accent, edge = "bottom", pos }: { src: string; accent: string; edge?: "top" | "bottom"; pos?: string }) => (
-    <div style={{ width: "100%", height: "100%", overflow: "hidden", position: "relative" }}>
-      <img src={src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: pos || "center" }} />
-      <div style={{ position: "absolute", [edge]: 0, left: 0, right: 0, height: 4, background: accent } as React.CSSProperties} />
+  const ImageBlock = (
+    <div style={{ position: "relative", height: "100%", overflow: "hidden" }}>
+      <img src={s.image} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: s.imagePos || "center" }} />
+      {/* мягкая растушёвка к фону */}
+      <div style={{ position: "absolute", inset: 0, background: s.side === "right"
+        ? "linear-gradient(to right, rgba(243,238,248,0.55) 0%, transparent 22%)"
+        : "linear-gradient(to left, rgba(243,238,248,0.55) 0%, transparent 22%)" }} />
     </div>
   );
-
-  const padImg = "clamp(40px,5.5vw,72px)";
 
   return (
-    <div className="w-screen h-screen overflow-hidden flex items-center justify-center" style={{ background: "#DCD8D0" }}>
+    <div className="w-screen h-screen overflow-hidden flex items-center justify-center" style={{ background: "#D9D5E2" }}>
       <div
         className="relative overflow-hidden"
         style={{
           width: "min(100vw, calc(100vh * 16 / 9))",
           height: "min(100vh, calc(100vw * 9 / 16))",
           maxWidth: 1280, maxHeight: 720,
-          background: PAGE,
-          boxShadow: "0 30px 80px rgba(0,0,0,0.25)",
+          background: s.gradient,
+          boxShadow: "0 30px 90px rgba(58,53,80,0.28)",
+          transition: "background 0.5s ease",
         }}
       >
-        <div style={{ position: "absolute", inset: "clamp(14px, 2vw, 26px)", border: "1px solid rgba(26,24,21,0.1)", pointerEvents: "none", zIndex: 5 }} />
-
-        <div style={{ position: "absolute", top: "clamp(22px, 3vw, 40px)", left: "clamp(26px, 3.6vw, 50px)", right: "clamp(26px, 3.6vw, 50px)", display: "flex", justifyContent: "space-between", alignItems: "center", zIndex: 6 }}>
-          <span style={{ fontFamily: F, fontWeight: 500, fontSize: "clamp(7px, 0.75vw, 10px)", letterSpacing: "0.25em", textTransform: "uppercase", color: MUTED }}>Галина · День рождения</span>
-          <span style={{ fontFamily: F, fontWeight: 500, fontSize: "clamp(7px, 0.75vw, 10px)", letterSpacing: "0.25em", color: MUTED }}>{String(current + 1).padStart(2, "0")} — {String(slides.length).padStart(2, "0")}</span>
-        </div>
-
         <div
-          className="relative h-full"
+          className="grid h-full"
           style={{
+            gridTemplateColumns: s.side === "right" ? "1.1fr 1fr" : "1fr 1.1fr",
             opacity: animating ? 0 : 1,
-            transform: animating ? `translateY(${dir === "next" ? "10px" : "-10px"})` : "translateY(0)",
-            transition: "opacity 0.3s ease, transform 0.3s ease",
+            transform: animating ? `translateX(${dir === "next" ? "16px" : "-16px"})` : "translateX(0)",
+            transition: "opacity 0.32s ease, transform 0.32s ease",
           }}
         >
-
-          {/* TITLE */}
-          {slide.type === "title" && (() => {
-            const s = slide as TitleSlide;
-            return (
-              <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", padding: "0 clamp(50px, 9vw, 130px)" }}>
-                <h1 style={{ fontFamily: F, fontWeight: 600, fontSize: "clamp(26px, 5vw, 70px)", lineHeight: 1.05, color: INK, whiteSpace: "pre-line", margin: 0, letterSpacing: "-0.03em" }}>{s.title}</h1>
-                <div style={{ display: "flex", alignItems: "center", gap: 14, marginTop: "clamp(24px, 3.5vw, 46px)" }}>
-                  <div style={{ width: "clamp(40px, 7vw, 90px)", height: 2, background: INK }} />
-                  <span style={{ fontFamily: F, fontWeight: 500, fontSize: "clamp(8px, 0.85vw, 11px)", letterSpacing: "0.2em", textTransform: "uppercase", color: MUTED }}>5 концепций</span>
-                </div>
-              </div>
-            );
-          })()}
-
-          {/* CONCEPT */}
-          {slide.type === "concept" && (() => {
-            const s = slide as ConceptSlide;
-            return (
-              <div style={{ width: "100%", height: "100%", display: "grid", gridTemplateColumns: "1fr 0.85fr" }}>
-                <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "clamp(50px,7vw,90px) clamp(30px,4vw,55px) clamp(50px,7vw,90px) clamp(50px,8vw,110px)", gap: "clamp(10px, 1.4vw, 16px)" }}>
-                  <Kicker label={s.tag} accent={s.accent} />
-                  <Title text={s.title} />
-                  <p style={{ fontFamily: F, fontWeight: 500, fontSize: "clamp(12px, 1.5vw, 19px)", color: INK, lineHeight: 1.4, margin: "clamp(4px,0.6vw,8px) 0 0" }}>{s.lead}</p>
-                  <div style={{ width: 34, height: 2, background: s.accent, margin: "clamp(4px,0.6vw,8px) 0" }} />
-                  <div style={{ display: "flex", flexDirection: "column", gap: "clamp(7px, 1vw, 12px)" }}>
-                    {s.paragraphs.map((p, i) => (
-                      <p key={i} style={{ fontFamily: F, fontWeight: 400, fontSize: "clamp(10px, 1.2vw, 14px)", lineHeight: 1.65, color: MUTED, margin: 0 }}>{p}</p>
-                    ))}
-                  </div>
-                  <span style={{ fontFamily: F, fontWeight: 500, fontSize: "clamp(8px, 0.9vw, 11px)", color: s.accent, marginTop: "clamp(6px,1vw,12px)" }}>↳ {s.footer}</span>
-                </div>
-                <div style={{ padding: `${padImg} ${padImg} ${padImg} 0` }}>
-                  {s.image && <Frame src={s.image} accent={s.accent} />}
-                </div>
-              </div>
-            );
-          })()}
-
-          {/* CONCEPT B */}
-          {slide.type === "conceptB" && (() => {
-            const s = slide as ConceptB;
-            return (
-              <div style={{ width: "100%", height: "100%", display: "grid", gridTemplateColumns: "0.85fr 1fr" }}>
-                <div style={{ padding: `${padImg} 0 ${padImg} ${padImg}` }}>
-                  <Frame src={s.image} accent={s.accent} edge="top" />
-                </div>
-                <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "clamp(50px,7vw,90px) clamp(50px,8vw,110px) clamp(50px,7vw,90px) clamp(30px,4vw,55px)", gap: "clamp(14px, 2vw, 22px)" }}>
-                  <Kicker label={s.tag} accent={s.accent} />
-                  <Title text={s.title} size="clamp(24px, 4vw, 48px)" />
-                  <div style={{ width: 34, height: 2, background: s.accent }} />
-                  <p style={{ fontFamily: F, fontWeight: 400, fontSize: "clamp(11px, 1.35vw, 16px)", lineHeight: 1.75, color: MUTED, margin: 0, maxWidth: "92%" }}>{s.body}</p>
-                </div>
-              </div>
-            );
-          })()}
-
-          {/* CONCEPT 3 */}
-          {slide.type === "concept3" && (() => {
-            const s = slide as Concept3Slide;
-            return (
-              <div style={{ width: "100%", height: "100%", display: "grid", gridTemplateColumns: "0.8fr 1fr" }}>
-                <div style={{ padding: `${padImg} 0 ${padImg} ${padImg}` }}>
-                  <Frame src={s.image} accent={s.accent} />
-                </div>
-                <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "clamp(46px,6vw,82px) clamp(50px,8vw,110px) clamp(46px,6vw,82px) clamp(30px,4vw,55px)", gap: "clamp(8px, 1.2vw, 14px)" }}>
-                  <Kicker label={s.tag} accent={s.accent} />
-                  <Title text={s.title} size="clamp(24px, 4vw, 48px)" />
-                  <p style={{ fontFamily: F, fontWeight: 500, fontSize: "clamp(11px, 1.4vw, 17px)", color: INK, lineHeight: 1.4, margin: 0 }}>{s.lead}</p>
-                  <div style={{ width: 34, height: 2, background: s.accent }} />
-                  <p style={{ fontFamily: F, fontWeight: 400, fontSize: "clamp(10px, 1.15vw, 13px)", lineHeight: 1.65, color: MUTED, margin: 0 }}>
-                    Кажется, что такое бывает только в фильмах, но мы постараемся воспроизвести все тонкости этих прекрасных мгновений, чтобы участникам удалось почувствовать трепет и эмоции тех событий.
-                  </p>
-                  <div style={{ display: "flex", flexDirection: "column", gap: "clamp(5px,0.7vw,8px)", marginTop: 4 }}>
-                    {s.rooms.map((r, i) => (
-                      <div key={i} style={{ display: "flex", alignItems: "baseline", gap: 10 }}>
-                        <span style={{ fontFamily: F, fontWeight: 600, fontSize: "clamp(8px,0.85vw,11px)", color: s.accent }}>{String(i + 1).padStart(2, "0")}</span>
-                        <span style={{ fontFamily: F, fontWeight: 400, fontSize: "clamp(10px, 1.2vw, 14px)", color: INK }}>{r}</span>
-                      </div>
-                    ))}
-                  </div>
-                  <span style={{ fontFamily: F, fontWeight: 500, fontSize: "clamp(8px, 0.9vw, 11px)", color: s.accent, marginTop: "clamp(6px,1vw,12px)" }}>↳ {s.footer}</span>
-                </div>
-              </div>
-            );
-          })()}
-
-          {/* CONCEPT 3B */}
-          {slide.type === "concept3B" && (() => {
-            const s = slide as Concept3B;
-            return (
-              <div style={{ width: "100%", height: "100%", display: "grid", gridTemplateColumns: "1fr 0.85fr" }}>
-                <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "clamp(50px,7vw,90px) clamp(30px,4vw,55px) clamp(50px,7vw,90px) clamp(50px,8vw,110px)", gap: "clamp(14px, 2vw, 22px)" }}>
-                  <Kicker label={s.tag} accent={s.accent} />
-                  <Title text={s.title} size="clamp(24px, 4vw, 48px)" />
-                  <div style={{ width: 34, height: 2, background: s.accent }} />
-                  <p style={{ fontFamily: F, fontWeight: 400, fontSize: "clamp(11px, 1.35vw, 16px)", lineHeight: 1.75, color: MUTED, margin: 0 }}>{s.body}</p>
-                </div>
-                <div style={{ padding: `${padImg} ${padImg} ${padImg} 0` }}>
-                  <Frame src={s.image} accent={s.accent} />
-                </div>
-              </div>
-            );
-          })()}
-
-          {/* CONCEPT 4 */}
-          {slide.type === "concept4" && (() => {
-            const s = slide as Concept4Slide;
-            return (
-              <div style={{ width: "100%", height: "100%", display: "grid", gridTemplateColumns: "1fr 0.9fr" }}>
-                <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "clamp(50px,7vw,90px) clamp(30px,4vw,55px) clamp(50px,7vw,90px) clamp(50px,8vw,110px)", gap: "clamp(10px, 1.4vw, 16px)" }}>
-                  <Kicker label={s.tag} accent={s.accent} />
-                  <Title text={s.title} />
-                  <p style={{ fontFamily: F, fontWeight: 500, fontSize: "clamp(12px, 1.5vw, 18px)", color: INK, lineHeight: 1.4, margin: "clamp(4px,0.6vw,8px) 0 0" }}>{s.lead}</p>
-                  <div style={{ width: 34, height: 2, background: s.accent, margin: "clamp(4px,0.6vw,8px) 0" }} />
-                  <p style={{ fontFamily: F, fontWeight: 400, fontSize: "clamp(10px, 1.2vw, 14px)", lineHeight: 1.65, color: MUTED, margin: 0 }}>{s.body}</p>
-                  <span style={{ fontFamily: F, fontWeight: 500, fontSize: "clamp(8px, 0.9vw, 11px)", color: s.accent, marginTop: "clamp(6px,1vw,12px)" }}>↳ {s.footer}</span>
-                </div>
-                <div style={{ padding: `${padImg} ${padImg} ${padImg} 0` }}>
-                  <Frame src={s.image} accent={s.accent} />
-                </div>
-              </div>
-            );
-          })()}
-
-          {/* CONCEPT 4B */}
-          {slide.type === "concept4B" && (() => {
-            const s = slide as Concept4B;
-            return (
-              <div style={{ width: "100%", height: "100%", display: "grid", gridTemplateColumns: "0.9fr 1fr" }}>
-                <div style={{ padding: `${padImg} 0 ${padImg} ${padImg}` }}>
-                  <Frame src={s.image} accent={s.accent} edge="top" />
-                </div>
-                <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "clamp(50px,7vw,90px) clamp(50px,8vw,110px) clamp(50px,7vw,90px) clamp(30px,4vw,55px)", gap: "clamp(14px, 2vw, 22px)" }}>
-                  <Kicker label={s.tag} accent={s.accent} />
-                  <Title text={s.title} size="clamp(24px, 4vw, 48px)" />
-                  <div style={{ width: 34, height: 2, background: s.accent }} />
-                  <p style={{ fontFamily: F, fontWeight: 400, fontSize: "clamp(11px, 1.35vw, 16px)", lineHeight: 1.75, color: MUTED, margin: 0 }}>{s.body}</p>
-                </div>
-              </div>
-            );
-          })()}
-
-          {/* CONCEPT 5 */}
-          {slide.type === "concept5" && (() => {
-            const s = slide as Concept5Slide;
-            return (
-              <div style={{ width: "100%", height: "100%", display: "grid", gridTemplateColumns: "1fr 0.85fr" }}>
-                <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "clamp(50px,7vw,90px) clamp(30px,4vw,55px) clamp(50px,7vw,90px) clamp(50px,8vw,110px)", gap: "clamp(10px, 1.3vw, 15px)" }}>
-                  <Kicker label={s.tag} accent={s.accent} />
-                  <Title text={s.title} size="clamp(24px, 4vw, 50px)" />
-                  <div style={{ width: 34, height: 2, background: s.accent }} />
-                  <p style={{ fontFamily: F, fontWeight: 400, fontSize: "clamp(10px, 1.15vw, 14px)", lineHeight: 1.65, color: MUTED, margin: 0 }}>{s.para1}</p>
-                  <p style={{ fontFamily: F, fontWeight: 400, fontSize: "clamp(10px, 1.15vw, 14px)", lineHeight: 1.65, color: MUTED, margin: 0 }}>{s.para2}</p>
-                  <span style={{ fontFamily: F, fontWeight: 600, fontSize: "clamp(8px, 0.9vw, 11px)", letterSpacing: "0.3em", textTransform: "uppercase", color: s.accent, marginTop: "clamp(4px,0.6vw,8px)" }}>Мотор!</span>
-                </div>
-                <div style={{ padding: `${padImg} ${padImg} ${padImg} 0` }}>
-                  <Frame src={s.image} accent={s.accent} pos="center 30%" />
-                </div>
-              </div>
-            );
-          })()}
-
-          {/* CONCEPT 5B */}
-          {slide.type === "concept5B" && (() => {
-            const s = slide as Concept5B;
-            return (
-              <div style={{ width: "100%", height: "100%", display: "grid", gridTemplateColumns: "0.85fr 1fr" }}>
-                <div style={{ padding: `${padImg} 0 ${padImg} ${padImg}` }}>
-                  <Frame src={s.image} accent={s.accent} edge="top" />
-                </div>
-                <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "clamp(50px,7vw,90px) clamp(50px,8vw,110px) clamp(50px,7vw,90px) clamp(30px,4vw,55px)", gap: "clamp(14px, 2vw, 22px)" }}>
-                  <Kicker label={s.tag} accent={s.accent} />
-                  <Title text={s.title} size="clamp(24px, 4vw, 48px)" />
-                  <div style={{ width: 34, height: 2, background: s.accent }} />
-                  <p style={{ fontFamily: F, fontWeight: 400, fontSize: "clamp(11px, 1.35vw, 16px)", lineHeight: 1.75, color: MUTED, margin: 0 }}>{s.body}</p>
-                </div>
-              </div>
-            );
-          })()}
-
-          {/* FINAL */}
-          {slide.type === "final" && (() => {
-            const s = slide as FinalSlide;
-            return (
-              <div style={{ width: "100%", height: "100%", display: "grid", gridTemplateColumns: "1fr 1fr" }}>
-                <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "clamp(50px,7vw,90px) clamp(30px,4vw,55px) clamp(50px,7vw,90px) clamp(50px,8vw,110px)", gap: "clamp(14px, 2vw, 22px)" }}>
-                  <Kicker label={s.tagline} accent={s.accent} />
-                  <h2 style={{ fontFamily: F, fontWeight: 600, fontSize: "clamp(30px, 5vw, 62px)", lineHeight: 1.0, color: INK, margin: 0, letterSpacing: "-0.03em" }}>{s.title}</h2>
-                  <div style={{ width: 34, height: 2, background: INK }} />
-                  <p style={{ fontFamily: F, fontWeight: 400, fontSize: "clamp(11px, 1.35vw, 16px)", lineHeight: 1.75, color: MUTED, margin: 0 }}>{s.body}</p>
-                </div>
-                <div style={{ padding: `${padImg} ${padImg} ${padImg} 0` }}>
-                  {s.image && <Frame src={s.image} accent={INK} />}
-                </div>
-              </div>
-            );
-          })()}
-
+          {s.side === "right" ? (<>{TextBlock}{ImageBlock}</>) : (<>{ImageBlock}{TextBlock}</>)}
         </div>
 
-        {/* Нижняя навигация */}
-        <div style={{ position: "absolute", bottom: "clamp(20px, 2.8vw, 38px)", left: "clamp(26px, 3.6vw, 50px)", right: "clamp(26px, 3.6vw, 50px)", display: "flex", alignItems: "center", justifyContent: "space-between", zIndex: 6 }}>
-          {current > 0 ? (
-            <button onClick={() => goTo(current - 1)} style={{ background: "none", border: "none", cursor: "pointer", fontFamily: F, fontWeight: 500, fontSize: "clamp(8px, 0.85vw, 11px)", letterSpacing: "0.15em", textTransform: "uppercase", color: MUTED, padding: 0 }}>← Назад</button>
-          ) : <span />}
-          <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-            {slides.map((_, i) => (
-              <button key={i} onClick={() => goTo(i)} style={{ width: i === current ? 22 : 8, height: 2, background: i === current ? slide.accent : "rgba(26,24,21,0.2)", border: "none", padding: 0, cursor: "pointer", transition: "all 0.3s ease" }} />
-            ))}
-          </div>
-          {current < slides.length - 1 ? (
-            <button onClick={() => goTo(current + 1)} style={{ background: "none", border: "none", cursor: "pointer", fontFamily: F, fontWeight: 500, fontSize: "clamp(8px, 0.85vw, 11px)", letterSpacing: "0.15em", textTransform: "uppercase", color: INK, padding: 0 }}>Далее →</button>
-          ) : <span />}
+        {/* навигация — точки */}
+        <div style={{ position: "absolute", bottom: "clamp(18px,2.4vw,30px)", left: 0, right: 0, display: "flex", justifyContent: "center", alignItems: "center", gap: 8, zIndex: 6 }}>
+          {slides.map((sl, i) => (
+            <button key={i} onClick={() => goTo(i)} style={{ width: i === current ? 26 : 7, height: 7, borderRadius: 6, background: i === current ? s.accent : "rgba(86,78,102,0.22)", border: "none", padding: 0, cursor: "pointer", transition: "all 0.3s ease" }} />
+          ))}
         </div>
 
+        {/* стрелки */}
+        {current > 0 && (
+          <button onClick={() => goTo(current - 1)} aria-label="prev" style={{ position: "absolute", left: "clamp(10px,1.5vw,20px)", top: "50%", transform: "translateY(-50%)", width: "clamp(30px,3.4vw,42px)", height: "clamp(30px,3.4vw,42px)", borderRadius: "50%", background: "rgba(255,255,255,0.4)", backdropFilter: "blur(6px)", border: "1px solid rgba(86,78,102,0.12)", cursor: "pointer", color: INK, fontSize: "clamp(14px,1.6vw,20px)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 7 }}>‹</button>
+        )}
+        {current < slides.length - 1 && (
+          <button onClick={() => goTo(current + 1)} aria-label="next" style={{ position: "absolute", right: "clamp(10px,1.5vw,20px)", top: "50%", transform: "translateY(-50%)", width: "clamp(30px,3.4vw,42px)", height: "clamp(30px,3.4vw,42px)", borderRadius: "50%", background: "rgba(255,255,255,0.4)", backdropFilter: "blur(6px)", border: "1px solid rgba(86,78,102,0.12)", cursor: "pointer", color: INK, fontSize: "clamp(14px,1.6vw,20px)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 7 }}>›</button>
+        )}
       </div>
     </div>
   );
