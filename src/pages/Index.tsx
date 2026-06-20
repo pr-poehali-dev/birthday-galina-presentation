@@ -112,11 +112,12 @@ const slides: Slide[] = [
     id: 6, side: "left", plainTitle: true, fullPhoto: true, align: "left",
     gradient: "linear-gradient(135deg, #EDEAF6 0%, #E8ECF6 50%, #E6EFF4 100%)",
     accent: "#EDE8F6",
-    tag: "Вариант 6 · Пролог",
+    tag: "Серия за серией",
     title: "Ход действия",
     lead: "Праздник как сериал — серия за серией, день за днём.",
     paragraphs: [
       "В вечер прилёта каждому гостю вручается особый образ — наряд для путешествия следующего дня.",
+      "На протяжении нескольких дней гости перемещаются по разным локациям. Только эксклюзивные, люксовые локации.",
     ],
     image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/fe2828db-7a64-4adb-a103-622e2779b9f4.jpg",
   },
@@ -141,7 +142,7 @@ const slides: Slide[] = [
     title: "Ужин на розовом озере",
     lead: "Там, где вода окрашена в нежно-розовый",
     paragraphs: [
-      "Изысканный ужин на берегу — стол среди отражений закатного неба. Только эксклюзивные, люксовые локации.",
+      "Изысканный ужин на берегу — стол среди отражений закатного неба.",
     ],
     image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/34bbe8c2-402e-4657-8f11-669909c5fad3.jpg",
   },
@@ -155,7 +156,7 @@ const slides: Slide[] = [
     paragraphs: [
       "Артисты, музыка и движение окружают гостей. Народный артист связывает все серии в единую историю.",
     ],
-    image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/cf1daa0e-e628-44d2-afc5-d98fa00158bb.jpg",
+    image: "https://cdn.poehali.dev/projects/a3376ae3-8f62-47f8-b79c-e02f1acc0f7e/files/e477e25a-b17b-4734-b18e-e8befffb8b0a.jpg",
   },
 ];
 
